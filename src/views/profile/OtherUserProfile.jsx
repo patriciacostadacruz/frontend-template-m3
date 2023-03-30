@@ -1,5 +1,5 @@
 function OtherUserProfile({ children }) {
-  return <></>;
+  return <>Other user profile</>;
 }
 
 export default OtherUserProfile;

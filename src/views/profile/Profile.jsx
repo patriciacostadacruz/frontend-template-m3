@@ -1,5 +1,5 @@
 function Profile({ children }) {
-  return <></>;
+  return <>My profile</>;
 }
 
 export default Profile;

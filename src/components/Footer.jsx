@@ -1,6 +1,7 @@
 function Footer({ children }) {
   return (
     <>
+    <p>Footer</p>
     </>
   )
 }
