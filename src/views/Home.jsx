@@ -8,17 +8,18 @@ export default function Home() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
   const [projects, setProjects] = useState(null);
   
-  const getProjects = async () => {
+  const getRandomProjects = async () => {
     try {
       const response = await projectService.getProjects();
-      setProjects(response);
+      const randomProjects = response.sort(() => 0.5 - Math.random()).slice(0, 3);
+      setProjects(randomProjects);
     } catch (error) {
       console.error(error);
     }
   }
 
   useEffect(() => {
-    getProjects();
+    getRandomProjects();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
