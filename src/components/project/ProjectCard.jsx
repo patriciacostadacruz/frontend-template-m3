@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function projectData({ project }) {
   return (
     <div className="project-card">
@@ -18,8 +20,7 @@ function projectData({ project }) {
         <strong>Funding needed: </strong>
         {project.fundingNeeded}
       </p>
-      <p><strong>Project description: </strong>{project.description}</p>
-      <p>Investors: {project.investors.length}</p>
+      <Link to={`/projects/${project._id}`}>See project's description</Link>
     </div>
   );
 }
