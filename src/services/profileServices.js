@@ -32,7 +32,7 @@ class ProfileService {
   }
 
   editProfile(body) {
-    return this.api.put("/edit", body).then(({ data }) => data);
+    return this.api.put("/", body).then(({ data }) => data);
   }
 }
 

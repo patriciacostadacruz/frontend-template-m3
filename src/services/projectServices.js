@@ -20,7 +20,7 @@ class ProjectService {
   }
 
   createProject(body) {
-    return this.api.post("/new", body).then(({ data }) => data);
+    return this.api.post("/", body).then(({ data }) => data);
   }
 
   getProject(projectId) {
