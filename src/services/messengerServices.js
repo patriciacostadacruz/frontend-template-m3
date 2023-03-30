@@ -31,6 +31,17 @@ class MessengerService {
     return this.api.post(`/${conversationId}`, body).then(({ data }) => data);
   }
 
+  editMessage(messageId, body) {
+    return this.api.put(`/${messageId}`, body).then(({ data }) => data);
+  }
+
+  deleteMessage(messageId) {
+    return this.api.delete(`/${messageId}`).then(({ data }) => data);
+  }
+
+  deleteConversation(conversationId) {
+    return this.api.delete(`/${conversationId}`).then(({ data }) => data);
+  }
 }
 
 const messengerService = new MessengerService();
