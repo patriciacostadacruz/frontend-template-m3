@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import projectService from "../services/projectServices";
 import ProjectCard from "../components/project/ProjectCard";
+import SearchBar from "../components/search/SearchBar";
 
 export default function Home() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
@@ -27,6 +28,12 @@ export default function Home() {
     <div>
       <h1>Home</h1>
       {user && <p>Hello {user.firstName}</p>}
+      {isLoggedIn && <SearchBar />}
+      {!isLoggedIn && (
+        <div>
+          <p>Place to put images and graphs/metrics for non logged in users.</p>
+        </div>
+      )}
       {projects
         ? projects.map((project) => {
             return <ProjectCard project={project} key={project._id} />;

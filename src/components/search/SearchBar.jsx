@@ -1,5 +1,9 @@
 function SearchBar({ children }) {
-  return <></>;
+  return (
+    <>
+      <h4>Search bar location</h4>
+    </>
+  );
 }
 
 export default SearchBar;
