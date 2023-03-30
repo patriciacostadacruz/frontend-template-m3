@@ -1,6 +1,6 @@
 function projectData({ project }) {
   return (
-    <div classname="project-card">
+    <div className="project-card">
       <h2>{project.title}</h2>
       <p>
         <strong>Status: </strong>
