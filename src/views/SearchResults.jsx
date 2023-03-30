@@ -2,8 +2,9 @@ import projectService from "../services/projectServices";
 import { useState, useEffect } from "react";
 import ProjectCard from "../components/project/ProjectCard";
 
-function SearchResults({ children }) {
+function SearchResults() {
   const [projects, setProjects] = useState(null);
+  const [users, setUsers] = useState(null);
 
   const getProjects = async () => {
     try {
@@ -20,10 +21,14 @@ function SearchResults({ children }) {
 
   return (
     <>
-      {projects ? (projects.map((project) => {
-        return <ProjectCard project={project} key={project._id} />;
-        })
-      ) : null}
+      {projects && <h1>Projects</h1>}
+      {users && <h1>Users</h1>}
+      {projects && users && <h1>Projects and users</h1>}
+      {projects
+        ? projects.map((project) => {
+            return <ProjectCard project={project} key={project._id} />;
+          })
+        : null}
     </>
   );
 }
