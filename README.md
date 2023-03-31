@@ -70,7 +70,7 @@ npm run start
 
 ## Useful links
 
-- [Presentation slides]()
+- [Presentation slides](https://www.canva.com/design/DAFeylawQWU/-ei28prkA9Y9uMjN0S89og/view?utm_content=DAFeylawQWU&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)
 - [Backend repository](https://github.com/patriciacostadacruz/backend-template-m3)
 - [Backend deploy](https://investmate.fly.dev/)
 - [Deployed app](https://investmate-pro.netlify.app/)
