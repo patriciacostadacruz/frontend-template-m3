@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function ProjectCard({ project }) {
   return (
     <div className="project-card">
-      <h2>{project.title}</h2>
+      <h4>{project.title}</h4>
       <p>
         <strong>Status: </strong>
         {project.status}
