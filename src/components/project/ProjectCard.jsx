@@ -5,22 +5,20 @@ function ProjectCard({ project }) {
     <div className="project-card">
       <h4>{project.title}</h4>
       <p>
-        <strong>Status: </strong>
-        {project.status}
-      </p>
-      <p>
         <strong>Location: </strong>
         {project.location}
       </p>
       <p>
         <strong>Industry: </strong>
-        {project.industry}
+        {project.industry.map((elem) => {
+          return <span key={project.industry.indexOf(elem)}>{elem}</span>
+        })}
       </p>
       <p>
         <strong>Funding needed: </strong>
         {project.fundingNeeded}
       </p>
-      <Link to={`/projects/${project._id}`}>See project's description</Link>
+      <Link to={`/projects/${project._id}`}>See project</Link>
     </div>
   );
 }

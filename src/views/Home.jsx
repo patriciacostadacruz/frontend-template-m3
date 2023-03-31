@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+// import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import projectService from "../services/projectServices";
 import ProjectCard from "../components/project/ProjectCard";
@@ -57,7 +57,7 @@ export default function Home() {
       <h3>Projects</h3>
       {projects
         ? projects.map((project) => {
-            return <ProjectCard project={project} key={project._id} />;
+            return <ProjectCard key={project._id} project={project} />;
           })
         : null}
     </div>
