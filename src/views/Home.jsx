@@ -6,7 +6,7 @@ import ProjectCard from "../components/project/ProjectCard";
 import SearchBar from "../components/search/SearchBar";
 
 export default function Home() {
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+  const { isLoggedIn, user } = useContext(AuthContext);
   const [projects, setProjects] = useState(null);
   
   const getRandomProjects = async () => {

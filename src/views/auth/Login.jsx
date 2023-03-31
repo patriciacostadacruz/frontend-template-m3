@@ -32,15 +32,14 @@ export default function Login() {
         navigate("/");
         toast.success("Welcome back!");
       } else {
-        setErrorMessage("Unable to authenticate user");
+        setErrorMessage("Unable to authenticate user.");
       }
     } catch (error) {
-      setErrorMessage("Unable to authenticate user");
+      setErrorMessage("Unable to authenticate user.");
     }
   };
 
   useEffect(() => {
-    // When the component first renders, check if user is already logged in and redirects
     if (isLoggedIn) {
       navigate("/");
     }
@@ -49,6 +48,7 @@ export default function Login() {
 
   return (
     <div>
+      <h2>Log in</h2>
       <form onSubmit={handleSubmit}>
         <label>Email</label>
         <input

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import toast from "react-hot-toast";
 import { useNavigate } from 'react-router-dom';
 import authService from '../../services/authService';
 
@@ -56,6 +57,7 @@ export default function Signup() {
         status: user.status
        });
       navigate('/login');
+      toast.success("Account created successfully, youc an now log in.");
     } catch (error) {
       console.error(error)
       setErrorMessage('Unable to create user account.')
@@ -64,9 +66,11 @@ export default function Signup() {
 
   return (
     <div className="form-container">
+      <h2>Create your account to enjoy investMate's features!</h2>
+      <p>It's completely free!</p>
       <form onSubmit={handleSubmit}>
         <>
-          <h2>Personal data:</h2>
+          <h3>Personal data:</h3>
           <div>
             <label>First name</label>
             <input
@@ -119,7 +123,7 @@ export default function Signup() {
         </>
         <>
           <div>
-            <h2>Professional data:</h2>
+            <h3>Professional data:</h3>
             <div>
               <label>Role</label>
               <select required>
@@ -173,7 +177,7 @@ export default function Signup() {
                 type="text"
                 name="bio"
                 value={user.bio}
-                placeholder="Write about yourself."
+                placeholder="Write something about yourself"
                 column="30"
                 rows="10"
                 onChange={handleChange}
