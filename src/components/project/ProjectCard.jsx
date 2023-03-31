@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function projectData({ project }) {
+function ProjectCard({ project }) {
   return (
     <div className="project-card">
       <h2>{project.title}</h2>
@@ -25,4 +25,4 @@ function projectData({ project }) {
   );
 }
 
-export default projectData;
+export default ProjectCard;

@@ -12,7 +12,10 @@ import Profile from "./views/profile/Profile";
 import OtherUserProfile from "./views/profile/OtherUserProfile";
 import Project from "./views/projects/Project";
 import AddProject from "./views/projects/AddProject";
-import SearchResults from "./views/SearchResults";
+import Projects from "./views/projects/Projects";
+import Users from "./views/Users";
+import Conversations from "./views/messenger/Conversations";
+import ConvMessages from "./views/messenger/ConvMessages";
 
 function App() {
   return (
@@ -21,13 +24,16 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/projects/:projectId" element={<Project />} />
+        <Route path="/projects/new" element={<AddProject />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/profile/:userId" element={<OtherUserProfile />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/projects" element={<SearchResults />} />
-        <Route path="/projects/new" element={<AddProject />} />
-        <Route path="/projects/:projectId" element={<Project />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/profile/:userId" element={<OtherUserProfile />} />
+        <Route path="/conversations" element={<Conversations />} />
+        <Route path="/messages/:conversationId" element={<ConvMessages />} />
         <Route path="/error" element={<ErrorContent />} />
         <Route path="*" element={<ErrorPath />} />
       </Routes>

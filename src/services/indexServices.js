@@ -18,6 +18,10 @@ class IndexService {
   getRandomProjects() {
     return this.api.get("/").then(({ data }) => data);
   }
+
+  getUsers() {
+    return this.api.get("/users").then(({ data }) => data);
+  }
 }
 
 const indexService = new IndexService();
