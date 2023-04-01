@@ -24,10 +24,14 @@ function OtherUserProfile() {
     <>
       {otherUser && (
         <div>
-          <p>
+          <h2>
             {otherUser.firstName} {otherUser.lastName}
+          </h2>
+          <p>
+            <strong>Role:</strong> {otherUser.role}
           </p>
-          <img src={otherUser.image} alt="Avatar"/>
+          <img src={otherUser.image} alt="Avatar" />
+          <p>{otherUser.bio}</p>
         </div>
       )}
     </>
