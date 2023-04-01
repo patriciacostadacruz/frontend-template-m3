@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
 import profileService from "../../services/profileServices";
 import ProfileData from "../../components/profile/ProfileData";
 
@@ -14,7 +12,7 @@ function Profile() {
       const response = await profileService.getProfile();
       setUser(response.user)
     } catch (error) {
-      setErrorMessage("Sorry, we couldn't retrieve your profile data. Please try again");
+      setErrorMessage("Sorry, we couldn't retrieve your profile data. Please try again.");
     }
   }
 
