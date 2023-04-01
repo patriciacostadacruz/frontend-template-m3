@@ -8,7 +8,7 @@ export default function Signup() {
     firstName: "",
     lastName: "",
     image:
-      "https://www.atomos.co.uk/getmedia/ec2d2ef0-71ea-40b8-a76c-6eb00c0cc210/portrait_placeholder_6.png?width=600&height=600&ext=.png",
+      "",
     email: "",
     role: "",
     linkedIn: "",
@@ -43,21 +43,21 @@ export default function Signup() {
     e.preventDefault();
     try {
       await authService.signup({
-        firstName: user.firstName,
-        lastName: user.lastName,
-        image: user.image,
-        email: user.email,
-        password,
-        passwordConfirmation,
-        role: user.role,
-        linkedIn: user.linkedIn,
-        company: user.company,
-        industry: user.industry,
-        bio: user.bio,
-        status: user.status
-       });
+      firstName: user.firstName,
+      lastName: user.lastName,
+      image: user.image,
+      email: user.email,
+      password,
+      passwordConfirmation,
+      role: user.role,
+      linkedIn: user.linkedIn,
+      company: user.company,
+      industry: user.industry,
+      bio: user.bio,
+      status: user.status
+    });
       navigate('/login');
-      toast.success("Account created successfully, youc an now log in.");
+      toast.success("Account created successfully!");
     } catch (error) {
       console.error(error)
       setErrorMessage('Unable to create user account.')

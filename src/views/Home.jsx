@@ -54,7 +54,7 @@ export default function Home() {
           </article>
         </div>
       )}
-      <h3>Projects</h3>
+      <h3>Active projects</h3>
       {projects
         ? projects.map((project) => {
             return <ProjectCard key={project._id} project={project} />;
