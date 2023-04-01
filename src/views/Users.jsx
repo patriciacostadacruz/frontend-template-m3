@@ -8,7 +8,6 @@ function Users() {
   const getUsers = async () => {
     try {
       const response = await indexService.getUsers();
-      console.log(response.users)
       setUsers(response.users);
     } catch (error) {
       console.error(error);
@@ -21,11 +20,10 @@ function Users() {
   return (
     <>
       <h1>Users</h1>
-      {users && <p>users</p>}
-      {users &&
-        users.map((user) => {
-          return <UserCard user={user} key={user._id} />;
-        })}
+      {users && users.map((user) => {
+        return <UserCard user={user} key={user._id} />;
+      })
+      }
     </>
   );
 }

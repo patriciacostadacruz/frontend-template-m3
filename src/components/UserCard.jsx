@@ -7,6 +7,7 @@ function UserCard({ user }) {
       <Link to={`/profile/${user._id}`}>
         {user.firstName} {user.lastName}
       </Link>
+      <p><strong>Role: </strong>{user.role}</p>
     </div>
   );
 }
