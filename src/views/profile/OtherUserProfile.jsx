@@ -33,7 +33,16 @@ function OtherUserProfile() {
           </p>
           <img src={otherUser.image} alt="Avatar" />
           <p>{otherUser.bio}</p>
-          {otherUser.userReviews && <p>reviews</p>}
+          {otherUser.userProjects ? (
+            <p>projects</p>
+          ) : (
+            "This user has no active projects."
+          )}
+          {otherUser.userReviews ? (
+            <p>reviews</p>
+          ) : (
+            "This user hasn't been reviewed by other users yet."
+          )}
         </div>
       )}
     </>
