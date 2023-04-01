@@ -10,6 +10,7 @@ function OtherUserProfile() {
     try {
       const response = await profileServices.getOtherUser(userId);
       setOtherUser(response.otherUser);
+      console.log(otherUser)
     } catch (error) {
       console.error(error);
     }
@@ -32,6 +33,7 @@ function OtherUserProfile() {
           </p>
           <img src={otherUser.image} alt="Avatar" />
           <p>{otherUser.bio}</p>
+          {otherUser.userReviews && <p>reviews</p>}
         </div>
       )}
     </>
