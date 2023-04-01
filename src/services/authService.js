@@ -16,15 +16,24 @@ class AuthService {
   }
 
   signup(body) {
-    return this.api.post('/signup', body).then(({ data }) => data);
+    return this.api
+      .post("/signup", body)
+      .then(({ data }) => data)
+      .catch(({ error }) => error);
   }
 
   login(user) {
-    return this.api.post('/login', user).then(({ data }) => data);
+    return this.api
+      .post("/login", user)
+      .then(({ data }) => data)
+      .catch(({ error }) => error);
   }
 
   me() {
-    return this.api.get('/me').then((response) => response.data);
+    return this.api
+      .get("/me")
+      .then((response) => response.data)
+      .catch(({ error }) => error);
   }
 }
 

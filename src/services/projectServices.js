@@ -16,23 +16,38 @@ class ProjectService {
   }
 
   getProjects() {
-    return this.api.get("/").then(({ data }) => data);
+    return this.api
+      .get("/")
+      .then(({ data }) => data)
+      .catch(({ error }) => error);
   }
 
   createProject(body) {
-    return this.api.post("/", body).then(({ data }) => data);
+    return this.api
+      .post("/", body)
+      .then(({ data }) => data)
+      .catch(({ error }) => error);
   }
 
   getProject(projectId) {
-    return this.api.get(`/${projectId}`).then(({ data }) => data);
+    return this.api
+      .get(`/${projectId}`)
+      .then(({ data }) => data)
+      .catch(({ error }) => error);
   }
 
   deleteProject(projectId) {
-    return this.api.delete(`/${projectId}`).then(({ data }) => data);
+    return this.api
+      .delete(`/${projectId}`)
+      .then(({ data }) => data)
+      .catch(({ error }) => error);
   }
 
   editProject(projectId, body) {
-    return this.api.put(`/${projectId}`, body).then(({ data }) => data);
+    return this.api
+      .put(`/${projectId}`, body)
+      .then(({ data }) => data)
+      .catch(({ error }) => error);
   }
 }
 

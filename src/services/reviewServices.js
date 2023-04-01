@@ -16,7 +16,10 @@ class ReviewService {
   }
 
   addReview(body) {
-    return this.api.post("/new", body).then(({ data }) => data);
+    return this.api
+      .post("/new", body)
+      .then(({ data }) => data)
+      .catch(({ error }) => error);
   }
 }
 

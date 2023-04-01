@@ -16,31 +16,52 @@ class MessengerService {
   }
 
   getConversations() {
-    return this.api.get("/").then(({ data }) => data);
+    return this.api
+      .get("/")
+      .then(({ data }) => data)
+      .catch(({ error }) => error);
   }
 
   createConversation(body) {
-    return this.api.post("/", body).then(({ data }) => data);
+    return this.api
+      .post("/", body)
+      .then(({ data }) => data)
+      .catch(({ error }) => error);
   }
 
   getConversation(conversationId) {
-    return this.api.get(`/${conversationId}`).then(({ data }) => data);
+    return this.api
+      .get(`/${conversationId}`)
+      .then(({ data }) => data)
+      .catch(({ error }) => error);
   }
 
   sendMessage(conversationId, body) {
-    return this.api.post(`/${conversationId}`, body).then(({ data }) => data);
+    return this.api
+      .post(`/${conversationId}`, body)
+      .then(({ data }) => data)
+      .catch(({ error }) => error);
   }
 
   editMessage(messageId, body) {
-    return this.api.put(`/${messageId}`, body).then(({ data }) => data);
+    return this.api
+      .put(`/${messageId}`, body)
+      .then(({ data }) => data)
+      .catch(({ error }) => error);
   }
 
   deleteMessage(messageId) {
-    return this.api.delete(`/${messageId}`).then(({ data }) => data);
+    return this.api
+      .delete(`/${messageId}`)
+      .then(({ data }) => data)
+      .catch(({ error }) => error);
   }
 
   deleteConversation(conversationId) {
-    return this.api.delete(`/${conversationId}`).then(({ data }) => data);
+    return this.api
+      .delete(`/${conversationId}`)
+      .then(({ data }) => data)
+      .catch(({ error }) => error);
   }
 }
 

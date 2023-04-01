@@ -16,11 +16,17 @@ class IndexService {
   }
 
   getRandomProjects() {
-    return this.api.get("/").then(({ data }) => data);
+    return this.api
+      .get("/")
+      .then(({ data }) => data)
+      .catch(({ error }) => error);
   }
 
   getUsers() {
-    return this.api.get("/users").then(({ data }) => data);
+    return this.api
+      .get("/users")
+      .then(({ data }) => data)
+      .catch(({ error }) => error);
   }
 }
 

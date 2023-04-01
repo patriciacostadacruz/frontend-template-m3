@@ -16,23 +16,38 @@ class ProfileService {
   }
 
   getProfile() {
-    return this.api.get("/").then(({ data }) => data);
+    return this.api
+      .get("/")
+      .then(({ data }) => data)
+      .catch(({ error }) => error);
   }
 
   editPassword(body) {
-    return this.api.put("/password-edit", body).then(({ data }) => data);
+    return this.api
+      .put("/password-edit", body)
+      .then(({ data }) => data)
+      .catch(({ error }) => error);
   }
 
   editStatus(body) {
-    return this.api.put("/status-update", body).then(({ data }) => data);
+    return this.api
+      .put("/status-update", body)
+      .then(({ data }) => data)
+      .catch(({ error }) => error);
   }
 
   getOtherUser(userId) {
-    return this.api.get(`/${userId}`).then(({ data }) => data);
+    return this.api
+      .get(`/${userId}`)
+      .then(({ data }) => data)
+      .catch(({ error }) => error);
   }
 
   editProfile(body) {
-    return this.api.put("/", body).then(({ data }) => data);
+    return this.api
+      .put("/", body)
+      .then(({ data }) => data)
+      .catch(({ error }) => error);
   }
 }
 
