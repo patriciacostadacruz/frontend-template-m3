@@ -1,7 +1,28 @@
-function SearchBar({ children }) {
+import { useState, useEffect } from "react";
+
+function SearchBar() {
+  const [searchValue, setSearchValue] = useState("");
+
+  const handleChange = (e) => {
+    setSearchValue((prev) => {
+      return {
+        ...prev,
+        [e.target.name]: e.target.value,
+      };
+    });
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    //
+  }
+
   return (
     <>
-      <h4>Search bar location</h4>
+      <form onSubmit={handleSubmit}>
+        <input value={searchValue} onChange={handleChange} />
+        <button type="button">Search</button>
+      </form>
     </>
   );
 }
