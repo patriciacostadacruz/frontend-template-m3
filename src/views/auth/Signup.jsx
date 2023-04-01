@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import toast from "react-hot-toast";
 import { useNavigate } from 'react-router-dom';
-import authService from '../../services/authService';
+import authService from "../../services/authService";
 
 export default function Signup() {
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
-    image:
-      "",
+    image: "",
     email: "",
     role: "",
     linkedIn: "",
