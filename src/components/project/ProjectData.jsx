@@ -12,10 +12,10 @@ function ProjectData({ project }) {
         <div>
           <div>
             <h3>{project.title}</h3>
-            <p>
+            {/* <p>
               <strong>Added by:</strong> {project.owner.firstName}{" "}
               {project.owner.lastName}
-            </p>
+            </p> */}
           </div>
           <p>
             <strong>Status:</strong> {project.status}
