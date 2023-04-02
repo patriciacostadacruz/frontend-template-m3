@@ -40,6 +40,7 @@ function SearchBar() {
         <label>
           Search for:
           <select value={searchType} onChange={handleSearchTypeChange}>
+            <option value="">-- Select an option</option>
             <option value="projects">Projects</option>
             <option value="users">Users</option>
           </select>
@@ -48,11 +49,6 @@ function SearchBar() {
           type="text"
           value={searchValue}
           onChange={handleChange}
-          placeholder={
-            searchType === "users"
-              ? "Search users by first name or last name."
-              : "Search projects by title or description."
-          }
         />
         <label>
           Industry:

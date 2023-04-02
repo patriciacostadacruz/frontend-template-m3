@@ -3,7 +3,6 @@ import { useContext } from "react";
 import { useState, useEffect } from "react";
 import projectService from "../../services/projectServices";
 import { AuthContext } from "../../context/AuthContext";
-// import peopleCount from "https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg";
 
 function Project() {
   const { projectId } = useParams();
@@ -23,7 +22,7 @@ function Project() {
   useEffect(() => {
     getProject();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [projectId]);
+  }, []);
 
   return (
     <div className="project-detail">
@@ -60,9 +59,9 @@ function Project() {
       ) : (
         "No project to show"
       )}
-      {user._id !== project.owner._id && (
+      {/* {user._id !== project.owner._id && (
         <Link to ={``}>Contact {project.owner.firstName}</Link>
-      )}
+      )} */}
     </div>
   );
 }  
