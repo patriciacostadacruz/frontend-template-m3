@@ -27,7 +27,7 @@ function SearchBar() {
       navigate(
         `/projects?search=${searchValue}&industry=${searchIndustry.join(",")}`
       );
-    } else {
+    } else if (searchType === "users") {
       navigate(
         `/users?search=${searchValue}&industry=${searchIndustry.join(",")}`
       );
