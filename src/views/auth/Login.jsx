@@ -10,7 +10,6 @@ export default function Login() {
     email: "",
     password: "",
   });
-  const [errorMessage, setErrorMessage] = useState(undefined);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -32,10 +31,10 @@ export default function Login() {
         navigate("/");
         toast.success("Welcome back!");
       } else {
-        setErrorMessage("Unable to authenticate user.");
+        toast.error("Unable to authenticate user.");
       }
     } catch (error) {
-      setErrorMessage("Unable to authenticate user.");
+      toast.error(error);
     }
   };
 
@@ -66,7 +65,6 @@ export default function Login() {
           value={user.password}
           onChange={handleChange}
         />
-        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
         <button type="submit">Log in </button>
       </form>
     </div>

@@ -1,4 +1,4 @@
-function Loading({ children }) {
+function Loading() {
   return (
     <>
       <p>Loading...</p>

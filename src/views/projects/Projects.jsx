@@ -1,6 +1,7 @@
 import projectService from "../../services/projectServices";
 import { useState, useEffect } from "react";
 import ProjectCard from "../../components/project/ProjectCard";
+import toast from "react-hot-toast";
 
 function Projects() {
   const [projects, setProjects] = useState(null);
@@ -10,7 +11,7 @@ function Projects() {
       const response = await projectService.getProjects();
       setProjects(response);
     } catch (error) {
-      console.error(error);
+      toast.error(error);
     }
   };
 

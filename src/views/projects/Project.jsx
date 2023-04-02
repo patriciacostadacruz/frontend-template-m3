@@ -3,11 +3,12 @@ import { useContext } from "react";
 import { useState, useEffect } from "react";
 import projectService from "../../services/projectServices";
 import { AuthContext } from "../../context/AuthContext";
+import toast from "react-hot-toast";
 
 function Project() {
   const { projectId } = useParams();
   const [project, setProject] = useState(null);
-  const { isLoggedIn, user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const getProject = async () => {
     try {
@@ -15,7 +16,7 @@ function Project() {
       setProject(oneProject);
       console.log(oneProject)
     } catch (error) {
-      console.error(error);
+      toast.error(error);
     }
   }
 
@@ -59,9 +60,9 @@ function Project() {
       ) : (
         "No project to show"
       )}
-      {/* {user._id !== project.owner._id && (
+      {user._id !== project.owner._id && (
         <Link to ={``}>Contact {project.owner.firstName}</Link>
-      )} */}
+      )}
     </div>
   );
 }  

@@ -32,7 +32,7 @@ export default function Signup() {
 
   useEffect(() => {
     if (password !== passwordConfirmation) {
-      setErrorMessage("Passwords don't match");
+      setErrorMessage("Passwords don't match.");
     } else {
       setErrorMessage(undefined);
     }
@@ -59,7 +59,7 @@ export default function Signup() {
       toast.success("Account created successfully!");
     } catch (error) {
       console.error(error)
-      setErrorMessage('Unable to create user account.')
+      toast.error('Unable to create user account.')
     }
   }
 
