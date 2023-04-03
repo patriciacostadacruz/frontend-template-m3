@@ -2,18 +2,22 @@ import projectService from "../../services/projectServices";
 import { useState, useEffect } from "react";
 import ProjectCard from "../../components/project/ProjectCard";
 import toast from "react-hot-toast";
+import Loading from "../../components/Loading";
 
 function Projects() {
   const [projects, setProjects] = useState(null);
   const [sortBy, setSortBy] = useState("title");
   const [sortDirection, setSortDirection] = useState("title");
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const getProjects = async () => {
+    setLoading(true);
     try {
       const response = await projectService.getProjects();
       setProjects(response);
-    } catch (error) {
-      toast.error(error);
+      setLoading(false);
+    } catch (error) {setErrorMessage(error);
     }
   };
 
@@ -63,20 +67,25 @@ function Projects() {
   return (
     <>
       <h1>Projects</h1>
+      {loading && <Loading />}
       <div>
-      <label>Sort by:</label>
-      <select onChange={handleSortChange} value={`${sortBy}_${sortDirection}`}>
-        <option value="title_asc">Title (A-Z)</option>
-        <option value="title_desc">Title (Z-A)</option>
-        <option value="date_asc">Creation date (oldest first)</option>
-        <option value="date_desc">Creation date (newest first)</option>
-      </select>
-    </div>
+        <label>Sort by:</label>
+        <select
+          onChange={handleSortChange}
+          value={`${sortBy}_${sortDirection}`}
+        >
+          <option value="title_asc">Title (A-Z)</option>
+          <option value="title_desc">Title (Z-A)</option>
+          <option value="date_asc">Creation date (oldest first)</option>
+          <option value="date_desc">Creation date (newest first)</option>
+        </select>
+      </div>
       {projects
         ? sortProjects(projects).map((project) => {
             return <ProjectCard project={project} key={project._id} />;
           })
-        : "There are no projects to be displayed."}
+        : null}
+      {errorMessage ? <p>{errorMessage}</p> : null}
     </>
   );
 }

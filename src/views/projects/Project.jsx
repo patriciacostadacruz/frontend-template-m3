@@ -5,21 +5,25 @@ import toast from "react-hot-toast";
 import ProjectData from "../../components/project/ProjectData";
 import EditProjectData from "../../components/project/EditProjectData";
 import { AuthContext } from "../../context/AuthContext";
+import Loading from "../../components/Loading";
 
 function Project() {
   const { projectId } = useParams();
   const [project, setProject] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   // only allows project owner to see the edit button
   const isOwner = user && project && user._id === project.owner._id;
 
   const getProject = async () => {
+    setLoading(true);
     try {
       const oneProject = await projectService.getProject(projectId);
       setProject(oneProject);
+      setLoading(false);
     } catch (error) {
       setErrorMessage(error);
     }
@@ -69,18 +73,21 @@ function Project() {
 
   return (
     <>
+      {loading && <Loading />}
       {!isEditing && (
         <>
           <ProjectData project={project} />
-          {isOwner && 
-          <div>
-            <button onClick={handleEdit}>Edit project</button>
-            <button onClick={handleDelete}>Delete project</button>
-          </div>}
-          {!isOwner && 
-          <div>
-            <button onClick={handleMessage}>Send message</button>
-          </div>}
+          {isOwner && (
+            <div>
+              <button onClick={handleEdit}>Edit project</button>
+              <button onClick={handleDelete}>Delete project</button>
+            </div>
+          )}
+          {!isOwner && (
+            <div>
+              <button onClick={handleMessage}>Send message</button>
+            </div>
+          )}
         </>
       )}
       {isEditing && (
