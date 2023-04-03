@@ -195,6 +195,8 @@ function EditProjectData({ project, onUpdate, onCancel }) {
       <div>
         <label>Description:</label>
         <textarea
+          column="30"
+          rows="10"
           name="description"
           value={formState.description}
           onChange={handleInputChange}

@@ -7,6 +7,7 @@ import projectService from "../../services/projectServices";
 function AddProject() {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
+  const [showFunding, setShowFunding] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     status: "",
@@ -59,6 +60,10 @@ function AddProject() {
     }
   };
 
+  const handleToggleFunding = () => {
+    setShowFunding(!showFunding);
+  };
+
   return (
     <div>
       <h2>Create a new project</h2>
@@ -96,7 +101,14 @@ function AddProject() {
         </div>
         <div>
           <label>Description</label>
-          <textarea name="description" value={formData.description} onChange={handleInputChange} />
+          <textarea
+            name="description"
+            column="30"
+            rows="10"
+            value={formData.description}
+            onChange={handleInputChange}
+            placeholder="Add your project description with as many details as you wish to share with potential investors."
+          />
         </div>
         <div>
           <label>Industry</label>
@@ -144,6 +156,45 @@ function AddProject() {
               <option value="serie A, B or C">Serie A, B or C</option>
               <option value="none">None</option>
             </select>
+            {!showFunding && (
+              <button onClick={handleToggleFunding}>
+                Read more about funding
+              </button>
+            )}
+            {showFunding && (
+              <>
+                <button onClick={handleToggleFunding}>
+                  Hide funding section
+                </button>
+                <p>
+                  In the context of startups and entrepreneurship, funding refers to
+                  the process of raising money to finance a new business or project.
+                  <br />
+                  Pre-seed funding typically involves small amounts of capital
+                  raised from friends and family, or from the founders' own savings.
+                  This funding is usually used to develop an idea into a viable
+                  business plan and prototype. <br />
+                  Angel funding is usually the first external funding raised by a
+                  startup, and comes from individual investors, or groups of
+                  investors, who believe in the potential of the business. This
+                  funding can range from tens of thousands to a few hundred thousand
+                  dollars, and is usually used to build out a product and start
+                  generating revenue. <br />
+                  Seed funding is the next stage of funding, and typically comes
+                  from venture capital firms or angel investors. Seed funding can
+                  range from a few hundred thousand dollars to a few million
+                  dollars, and is usually used to scale the business and grow the
+                  team. <br />
+                  Series A, B, and C funding rounds are later-stage funding rounds
+                  for startups that have already achieved significant growth and
+                  revenue. Series A funding usually ranges from $2-15 million,
+                  Series B from $10-60 million, and Series C from $30-100 million or
+                  more. These funding rounds are used to fuel continued growth,
+                  expand into new markets, and potentially prepare for an IPO or
+                  acquisition.
+                </p>
+              </>
+            )}
           </div>
         </div>
         <button type="submit">Create project</button>
