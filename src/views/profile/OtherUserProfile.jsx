@@ -2,19 +2,23 @@ import { useParams } from "react-router-dom";
 import profileServices from "../../services/profileServices";
 import { useState, useEffect } from "react";
 import linkedin from "../../images/linkedin.png";
+import Loading from "../../components/Loading";
 
 function OtherUserProfile() {
   const { userId } = useParams();
   const [otherUser, setOtherUser] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const getUser = async () => {
+    setLoading(true);
     try {
       const response = await profileServices.getOtherUser(userId);
       setOtherUser(response.otherUser);
       setErrorMessage(null);
+      setLoading(false);
     } catch (error) {
-      setErrorMessage(error);
+      setErrorMessage("Sorry, we couldn't get this user's profile.");
     }
   }
 
@@ -25,6 +29,7 @@ function OtherUserProfile() {
   
   return (
     <>
+      {loading && <Loading />}
       <div className="profile-data">
         <img height="250" src={otherUser.image} alt="Avatar" />
         <div className="profile-data-personal">

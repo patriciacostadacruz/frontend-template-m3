@@ -1,7 +1,7 @@
 import indexService from "../services/indexServices";
 import { useState, useEffect } from "react";
 import UserCard from "../components/UserCard";
-import Loading from "../../components/Loading";
+import Loading from "../components/Loading";
 
 function Users() {
   const [users, setUsers] = useState([]);
