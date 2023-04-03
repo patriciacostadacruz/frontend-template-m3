@@ -38,9 +38,19 @@ function Project() {
     setIsEditing(false);
   };
 
-  const handleDelete = () => {
-    // redirect to confirmation page + then delete project
+  const handleDelete = async () => {
+    const confirmation = window.confirm("Are you sure you want to delete this project?");
+    if (confirmation) {
+      try {
+        const deletedProject = await projectService.deleteProject(projectId);
+        toast.success(`Project named "${deletedProject.title}" deleted successfully.`);
+        navigate("/");
+      } catch (error) {
+        toast.error(error);
+      }
+    }
   };
+
 
   const handleMessage = () => {
     // redirect to create conv + message
@@ -52,7 +62,6 @@ function Project() {
       setProject(updatedProject);
       setIsEditing(false);
       toast.success("Project data updated successfully.");
-      // navigate(`/projects/${updatedProject._id}`);
     } catch (error) {
       toast.error(error);
     }
