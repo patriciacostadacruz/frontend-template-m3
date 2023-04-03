@@ -36,6 +36,13 @@ class ProfileService {
       .catch(({ error }) => error);
   }
 
+  editPicture(file) {
+    return this.api
+      .put("/edit-picture", file)
+      .then(({ data }) => data)
+      .catch(({ error }) => error);
+  }
+
   getOtherUser(userId) {
     return this.api
       .get(`/${userId}`)

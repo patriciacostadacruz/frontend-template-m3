@@ -21,6 +21,20 @@ class ReviewService {
       .then(({ data }) => data)
       .catch(({ error }) => error);
   }
+
+  getAllReviews() {
+    return this.api
+      .get("/all")
+      .then(({ data }) => data)
+      .catch(({ error }) => error);
+  }
+
+  deleteReview(reviewId) {
+    return this.api
+      .delete(`/${reviewId}`)
+      .then(({ data }) => data)
+      .catch(({ error }) => error);
+  }
 }
 
 const reviewService = new ReviewService();
