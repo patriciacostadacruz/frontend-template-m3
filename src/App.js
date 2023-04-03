@@ -15,6 +15,7 @@ import Projects from "./views/projects/Projects";
 import Users from "./views/Users";
 import Conversations from "./views/messenger/Conversations";
 import ConvMessages from "./views/messenger/ConvMessages";
+import AllReviews from "./views/AllReviews";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/users" element={<Users />} />
         <Route path="/profile/:userId" element={<OtherUserProfile />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/reviews/all" element={<AllReviews />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/conversations" element={<Conversations />} />
