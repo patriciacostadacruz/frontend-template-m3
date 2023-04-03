@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import projectService from "../../services/projectServices";
 import toast from "react-hot-toast";
@@ -12,6 +12,7 @@ function Project() {
   const [isEditing, setIsEditing] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   // only allows project owner to see the edit button
   const isOwner = user && project && user._id === project.owner._id;
 
@@ -51,6 +52,7 @@ function Project() {
       setProject(updatedProject);
       setIsEditing(false);
       toast.success("Project data updated successfully.");
+      // navigate(`/projects/${updatedProject._id}`);
     } catch (error) {
       toast.error(error);
     }
