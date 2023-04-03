@@ -1,31 +1,31 @@
 import { Link } from "react-router-dom";
-import linkedin from "../../images/linkedin.png"
+import linkedin from "../../images/linkedin.png";
 
 function ProfileData({ user }) {
-  const handleLinkedIn = () => {
-    window.location.href = `${user.linkedIn}`;
-  }
 
   return (
     <>
-      <div>
+      <div className="profile-data">
         <img height="250" src={user.image} alt="Avatar" />
-        <div>
-          <h2>
-            {user.firstName} {user.lastName}
-          </h2>
-          <p>
-            <strong>Role: </strong>
+        <div className="profile-data-personal">
+          <div className="profile-name-linkedin">
+            <h2>
+              {user.firstName} {user.lastName}
+            </h2>
+            {user.linkedIn && (
+              // using anchor to open page in new tab with blank target
+              <a href={user.linkedIn} target="_blank" rel="noreferrer">
+                <img width="30" src={linkedin} alt="Linkedin profile" />
+              </a>
+            )}
+          </div>
+          <p><strong>Email: </strong>{user.email}</p>
+          <p><strong>Password: </strong>********</p>
+          <p><strong>Role: </strong>
             {user.role}
           </p>
-          {user.linkedIn && (
-            // using anchor to open page in new tab with blank target
-            <a href={user.linkedIn} target="_blank" rel="noreferrer">
-              <img width="30" src={linkedin} alt="Linkedin profile" />
-            </a>
-          )}
         </div>
-        <div>
+        <div className="profile-data-professional">
           <p>
             <strong>Company: </strong>
             {user.company}
@@ -39,16 +39,23 @@ function ProfileData({ user }) {
           <p>{user.bio}</p>
         </div>
       </div>
-      {user.userProjects ? (
-        <p>projects</p>
-      ) : (
-        "You havent added any project yet."
-      )}
-      {user.userReviews ? (
-        <p>reviews</p>
-      ) : (
-        "You haven't been reviewed by other users yet."
-      )}
+      <button>Edit profile</button>
+      <div className="profile-projects">
+        <h3>Projects</h3>
+        {user.userProjects ? (
+          <p>projects</p>
+        ) : (
+          "You havent added any project yet."
+        )}
+      </div>
+      <div className="profile-reviews">
+        <h3>Reviews</h3>
+        {user.userReviews ? (
+          <p>reviews</p>
+        ) : (
+          "You haven't been reviewed by other users yet."
+        )}
+      </div>
     </>
   );
 }
