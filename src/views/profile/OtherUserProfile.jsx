@@ -69,7 +69,7 @@ function OtherUserProfile() {
         {otherUser.userProjects ? (
           <p>projects</p>
         ) : (
-          "You havent added any project yet."
+          "This user didn't add any project yet."
         )}
       </div>
       <div className="profile-reviews">
@@ -77,7 +77,7 @@ function OtherUserProfile() {
         {otherUser.userReviews ? (
           <p>reviews</p>
         ) : (
-          "You haven't been reviewed by other users yet."
+          "This user has no ratings no far."
         )}
       </div>
       {errorMessage && <p>{errorMessage}</p>}
