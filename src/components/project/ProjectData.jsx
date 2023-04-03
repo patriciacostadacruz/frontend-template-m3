@@ -1,6 +1,7 @@
 import { AuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
+import peopleCount from "../../images/peopleCount.png";
 
 function ProjectData({ project }) {
   const { user } = useContext(AuthContext);
@@ -14,9 +15,8 @@ function ProjectData({ project }) {
             <h3>{project.title}</h3>
             <p>
               <strong>Added by:</strong>{" "}
-              <Link to ={`/profile/${project.owner._id}`}>
-                {project.owner.firstName}{" "}
-                {project.owner.lastName}
+              <Link to={`/profile/${project.owner._id}`}>
+                {project.owner.firstName} {project.owner.lastName}
               </Link>
             </p>
           </div>
@@ -37,7 +37,19 @@ function ProjectData({ project }) {
           </p>
           <p>{project.description}</p>
           <p>
-            <strong>Investors:</strong> {project.investors.length}
+            <strong>Investors:</strong>
+            {project.investors.length === 0
+              ? "No investors yet."
+              : project.investors.map((person) => {
+                  return (
+                    <img
+                      key={`${project._id}${project.investors.length}`}
+                      height="40"
+                      src={peopleCount}
+                      alt="Investors count"
+                    />
+                  );
+                })}
           </p>
         </div>
       ) : (
