@@ -3,7 +3,6 @@ import { Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Home from './views/Home';
 import Navbar from './components/Navbar';
-import ErrorContent from "./views/ErrorContent";
 import ErrorPath from "./views/ErrorPath";
 import Signup from './views/auth/Signup';
 import Login from "./views/auth/Login";
@@ -34,7 +33,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/conversations" element={<Conversations />} />
         <Route path="/messages/:conversationId" element={<ConvMessages />} />
-        <Route path="/error" element={<ErrorContent />} />
         <Route path="*" element={<ErrorPath />} />
       </Routes>
       <Footer />
