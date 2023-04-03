@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import linkedin from "../../images/linkedin.png";
 
 function ProfileData({ user }) {

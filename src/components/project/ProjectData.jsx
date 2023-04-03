@@ -4,6 +4,7 @@ import { useContext } from "react";
 import peopleCount from "../../images/peopleCount.png";
 
 function ProjectData({ project }) {
+  // eslint-disable-next-line no-unused-vars
   const { user } = useContext(AuthContext);
 
   return (

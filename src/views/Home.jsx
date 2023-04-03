@@ -4,7 +4,6 @@ import { AuthContext } from "../context/AuthContext";
 import projectService from "../services/projectServices";
 import ProjectCard from "../components/project/ProjectCard";
 import SearchBar from "../components/search/SearchBar";
-import toast from "react-hot-toast";
 const landingImage =
   "https://cloudinary.hbs.edu/hbsit/image/upload/s--EmT0lNtW--/f_auto,c_fill,h_375,w_750,/v20200101/6978C1C20B650473DD135E5352D37D55.jpg";
 
