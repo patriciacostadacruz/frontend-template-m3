@@ -12,10 +12,13 @@ function ProjectData({ project }) {
         <div>
           <div>
             <h3>{project.title}</h3>
-            {/* <p>
-              <strong>Added by:</strong> {project.owner.firstName}{" "}
-              {project.owner.lastName}
-            </p> */}
+            <p>
+              <strong>Added by:</strong>{" "}
+              <Link to ={`/profile/${project.owner._id}`}>
+                {project.owner.firstName}{" "}
+                {project.owner.lastName}
+              </Link>
+            </p>
           </div>
           <p>
             <strong>Status:</strong> {project.status}
@@ -40,9 +43,6 @@ function ProjectData({ project }) {
       ) : (
         "No project to show"
       )}
-      {/* {user._id !== project.owner._id && (
-        <Link to={``}>Contact {project.owner.firstName}</Link>
-      )} */}
     </div>
   );
 }

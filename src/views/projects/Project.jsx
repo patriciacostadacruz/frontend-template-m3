@@ -13,7 +13,7 @@ function Project() {
   const [errorMessage, setErrorMessage] = useState(null);
   const { user } = useContext(AuthContext);
   // only allows project owner to see the edit button
-  const canEdit = user && project && user._id === project.owner._id;
+  const isOwner = user && project && user._id === project.owner._id;
 
   const getProject = async () => {
     try {
@@ -37,6 +37,14 @@ function Project() {
     setIsEditing(false);
   };
 
+  const handleDelete = () => {
+    // redirect to confirmation page + then delete project
+  };
+
+  const handleMessage = () => {
+    // redirect to create conv + message
+  };
+
   const handleUpdate = async (updatedProject) => {
     try {
       await projectService.editProject(projectId, updatedProject);
@@ -53,7 +61,15 @@ function Project() {
       {!isEditing && (
         <>
           <ProjectData project={project} />
-          {canEdit && <button onClick={handleEdit}>Edit project</button>}
+          {isOwner && 
+          <div>
+            <button onClick={handleEdit}>Edit project</button>
+            <button onClick={handleDelete}>Delete project</button>
+          </div>}
+          {!isOwner && 
+          <div>
+            <button onClick={handleMessage}>Send message</button>
+          </div>}
         </>
       )}
       {isEditing && (

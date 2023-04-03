@@ -43,6 +43,8 @@ function OtherUserProfile() {
           ) : (
             "This user hasn't been reviewed by other users yet."
           )}
+          <button>Send message</button>
+          <button>Rate user</button>
         </div>
       )}
     </>
