@@ -16,9 +16,15 @@ function ProjectData({ project }) {
             <h3>{project.title}</h3>
             <p>
               <strong>Added by:</strong>{" "}
-              <Link to={`/profile/${project.owner._id}`}>
-                {project.owner.firstName} {project.owner.lastName}
-              </Link>
+              {user._id === project.owner._id ? (
+                <Link to="/profile">
+                  {project.owner.firstName} {project.owner.lastName}
+                </Link>
+              ) : (
+                <Link to={`/profile/${project.owner._id}`}>
+                  {project.owner.firstName} {project.owner.lastName}
+                </Link>
+              )}
             </p>
           </div>
           <p>
