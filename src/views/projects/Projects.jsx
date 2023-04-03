@@ -1,7 +1,6 @@
 import projectService from "../../services/projectServices";
 import { useState, useEffect } from "react";
 import ProjectCard from "../../components/project/ProjectCard";
-import toast from "react-hot-toast";
 import Loading from "../../components/Loading";
 
 function Projects() {
@@ -17,7 +16,8 @@ function Projects() {
       const response = await projectService.getProjects();
       setProjects(response);
       setLoading(false);
-    } catch (error) {setErrorMessage(error);
+    } catch (error) {
+      setErrorMessage("Sorry we couldn't retrieve any project.");
     }
   };
 
