@@ -5,7 +5,7 @@ function ProfileData({ user }) {
   return (
     <>
       <div className="profile-data">
-        <img height="250" src={user.image} alt="Avatar" />
+        <img height="300" src={user.image} alt="Avatar" />
         <div className="profile-data-personal">
           <div className="profile-name-linkedin">
             <h2>
