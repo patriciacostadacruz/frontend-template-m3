@@ -75,7 +75,7 @@ function Project() {
   return (
     <>
       {loading && <Loading />}
-      {!isEditing && (
+      {!isEditing && project && (
         <>
           <ProjectData project={project} />
           {isOwner && (
@@ -91,7 +91,7 @@ function Project() {
           )}
         </>
       )}
-      {isEditing && (
+      {isEditing && project && (
         <EditProjectData
           project={project}
           onUpdate={handleUpdate}
