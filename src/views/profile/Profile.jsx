@@ -65,7 +65,14 @@ function Profile() {
       {/* <div className="profile-projects">
         <h3>Projects</h3>
         {user.userProjects ? (
-          <p>projects</p>
+          user.userProjects.map((project) => {
+            return (
+              <ProjectCard
+                    project={project}
+                    key={`${project._id}1`}
+                  />
+            )
+          })
         ) : (
           "You havent added any project yet."
         )}
@@ -73,7 +80,14 @@ function Profile() {
       <div className="profile-reviews">
         <h3>Reviews</h3>
         {user.userReviews ? (
-          <p>reviews</p>
+          user.userReviews.map((review) => {
+            return (
+              <ReviewCard
+              review={review}
+              key={`${review._id}1`}
+              />
+            )
+          })
         ) : (
           "You haven't been reviewed by other users yet."
         )}

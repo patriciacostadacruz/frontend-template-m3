@@ -6,6 +6,8 @@ import linkedin from "../../images/linkedin.png";
 import Loading from "../../components/Loading";
 import AddReview from "../../components/profile/AddReview";
 import { toast } from "react-hot-toast";
+import ReviewCard from "../../components/ReviewCard";
+import ProjectCard from "../../components/project/ProjectCard";
 
 function OtherUserProfile() {
   const { userId } = useParams();
@@ -108,7 +110,14 @@ function OtherUserProfile() {
           <div className="profile-projects">
             <h3>Projects</h3>
             {otherUser.userProjects ? (
-              <p>projects</p>
+              otherUser.userProjects.map((project) => {
+                return (
+                  <ProjectCard
+                    project={project}
+                    key={`${project._id}1`}
+                  />
+                );
+              })
             ) : (
               "This user has no active projects."
             )}
@@ -116,7 +125,13 @@ function OtherUserProfile() {
           <div className="profile-reviews">
             <h3>Reviews</h3>
             {otherUser.userReviews ? (
-              <p>reviews</p>
+              otherUser.userReviews.map((review) => {
+                return (
+                  <ReviewCard
+                  review={review}
+                  key={`${review._id}1`}
+                />
+                )})
             ) : (
               "This user has no ratings."
             )}
