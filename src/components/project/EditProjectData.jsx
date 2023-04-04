@@ -17,6 +17,20 @@ function EditProjectData({ project, onUpdate, onCancel }) {
     }));
   };
 
+  const handleSelectChange = (e) => {
+    const options = e.target.options;
+    const values = [];
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].selected) {
+        values.push(options[i].value);
+      }
+    }
+    setFormState((prev) => ({
+      ...prev,
+      industry: values,
+    }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onUpdate(formState);
@@ -83,7 +97,7 @@ function EditProjectData({ project, onUpdate, onCancel }) {
           name="industry"
           required
           value={formState.industry}
-          onChange={handleInputChange}
+          onChange={handleSelectChange}
           multiple
         >
           <option value="">-- Select an option --</option>

@@ -13,7 +13,6 @@ function EditProfileData({ user, onUpdate, onCancel }) {
   });
 
   const handleInputChange = (e) => {
-    console.log(formState.industry);
     setFormState((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
