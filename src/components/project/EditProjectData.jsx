@@ -24,11 +24,12 @@ function EditProjectData({ project, onUpdate, onCancel }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Edit project</h2>
+      <h2>Project detail - edit</h2>
       <div>
         <label>Title</label>
         <input
           type="text"
+          required
           name="title"
           value={formState.title}
           onChange={handleInputChange}
@@ -38,6 +39,7 @@ function EditProjectData({ project, onUpdate, onCancel }) {
         <label>Status</label>
         <select
           name="status"
+          required
           value={formState.status}
           onChange={handleInputChange}
         >
@@ -54,6 +56,7 @@ function EditProjectData({ project, onUpdate, onCancel }) {
         <label>Location</label>
         <input
           type="text"
+          required
           name="location"
           value={formState.location}
           onChange={handleInputChange}
@@ -63,6 +66,7 @@ function EditProjectData({ project, onUpdate, onCancel }) {
         <label>Funding needed</label>
         <select
           name="fundingNeeded"
+          required
           value={formState.fundingNeeded}
           onChange={handleInputChange}
         >
@@ -77,6 +81,7 @@ function EditProjectData({ project, onUpdate, onCancel }) {
         <label>Industry</label>
         <select
           name="industry"
+          required
           value={formState.industry}
           onChange={handleInputChange}
           multiple
@@ -197,6 +202,7 @@ function EditProjectData({ project, onUpdate, onCancel }) {
         <textarea
           column="30"
           rows="10"
+          required
           name="description"
           value={formState.description}
           onChange={handleInputChange}
