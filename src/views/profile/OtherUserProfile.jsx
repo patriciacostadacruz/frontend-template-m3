@@ -24,7 +24,6 @@ function OtherUserProfile() {
     try {
       const response = await profileServices.getOtherUser(userId);
       setOtherUser(response.otherUser);
-      console.log(response)
       setErrorMessage(null);
       setOtherUserProjects(response.userProjects);
       setOtherUserReviews(response.userReviews);
