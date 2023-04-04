@@ -96,6 +96,7 @@ function AddProject() {
           <input
             type="text"
             name="location"
+            placeholder="Paris, France"
             value={formData.location}
             onChange={handleInputChange}
           />
