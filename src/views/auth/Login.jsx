@@ -45,26 +45,6 @@ export default function Login() {
     }
   };
 
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await authService.login(user);
-  //     if (response.authToken) {
-  //       storeToken(response.authToken);
-  //       authenticateUser();
-  //       const currentUser = await authService.me();
-
-  //       navigate("/");
-  //       toast.success("Welcome back!");
-  //     } else {
-  //       toast.error("Unable to authenticate user.");
-  //     }
-  //   } catch (error) {
-  //     toast.error(error);
-  //   }
-  // };
-
   useEffect(() => {
     if (isLoggedIn) {
       navigate("/");

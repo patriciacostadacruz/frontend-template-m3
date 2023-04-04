@@ -44,7 +44,7 @@ function Profile() {
       setIsEditing(false);
       toast.success("Profile updated successfully.");
     } catch (error) {
-      toast.error(error);
+      toast.error("Couldn't update your data. Try again later.");
     }
   };
 
@@ -54,15 +54,18 @@ function Profile() {
     );
     if (confirmation) {
       try {
-        await profileService.editStatus({status: "inactive"});
-        toast.success("Account successfully disabled!");
-        authService.logout();
-        navigate("/");
+        const disabledAccount = await profileService.editStatus({ status: "inactive" });
+        if (disabledAccount) {
+          authService.logout();
+          navigate("/");
+          toast.success("Account successfully disabled!");
+        }
       } catch (error) {
-        toast.error(error);
+        toast.error("We could not disable your account, try again later.");
       }
     }
   };
+
 
   return (
     <div>

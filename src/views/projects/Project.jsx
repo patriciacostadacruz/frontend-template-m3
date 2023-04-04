@@ -52,7 +52,7 @@ function Project() {
         toast.success(`Project named "${deletedProject.title}" deleted successfully.`);
         navigate("/");
       } catch (error) {
-        toast.error(error);
+        toast.error("We could not deete this project, sorry. Try again later.");
       }
     }
   };
@@ -68,7 +68,7 @@ function Project() {
       setIsEditing(false);
       toast.success("Project data updated successfully.");
     } catch (error) {
-      toast.error(error);
+      toast.error("We could not update this project's data, try again later.");
     }
   };
 
