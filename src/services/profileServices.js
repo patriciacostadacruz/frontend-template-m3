@@ -36,9 +36,9 @@ class ProfileService {
       .catch(({ error }) => error);
   }
 
-  editPicture(file) {
+  editPicture(body) {
     return this.api
-      .put("/edit-picture", file)
+      .put("/edit-picture", body)
       .then(({ data }) => data)
       .catch(({ error }) => error);
   }

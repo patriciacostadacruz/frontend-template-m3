@@ -26,7 +26,7 @@ function Project() {
       setProject(oneProject);
       setLoading(false);
     } catch (error) {
-      setErrorMessage(error);
+      setErrorMessage("Sorry, we couldn't find this project.");
     }
   };
 
