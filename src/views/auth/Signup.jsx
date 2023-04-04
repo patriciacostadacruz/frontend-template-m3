@@ -22,13 +22,17 @@ export default function Signup() {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setUser(prev => {
+    setUser((prev) => {
       return {
         ...prev,
-        [e.target.name]: e.target.value
-      }
-    })
-  }
+        [e.target.name]:
+        // need to use this Array.from as industries must be an array so the data pulled from the form must be sent as such
+          e.target.name === "industry"
+            ? Array.from(e.target.selectedOptions, (option) => option.value)
+            : e.target.value,
+      };
+    });
+  };
 
   useEffect(() => {
     if (password !== passwordConfirmation) {
@@ -36,6 +40,7 @@ export default function Signup() {
     } else {
       setErrorMessage(undefined);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [passwordConfirmation, password]);
 
   const handleSubmit = async (e) => {
@@ -125,7 +130,12 @@ export default function Signup() {
             <h3>Professional data:</h3>
             <div>
               <label>Role</label>
-              <select required>
+              <select
+                required
+                name="role"
+                value={user.role}
+                onChange={handleChange}
+              >
                 <option value="investee">
                   Investee (the person looking for inversions)
                 </option>
@@ -148,7 +158,13 @@ export default function Signup() {
                 onChange={handleChange}
               />
               <label>Industry</label>
-              <select required multiple>
+              <select
+                required
+                multiple
+                name="industry"
+                value={user.industry}
+                onChange={handleChange}
+              >
                 <option value="All">All</option>
                 <option value="Agriculture">Agriculture</option>
                 <option value="Chems and materials">Chems and materials</option>
