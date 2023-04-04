@@ -2,17 +2,24 @@ import indexService from "../services/indexServices";
 import { useState, useEffect } from "react";
 import UserCard from "../components/UserCard";
 import Loading from "../components/Loading";
+import { useLocation } from "react-router-dom";
 
 function Users() {
   const [users, setUsers] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const { search } = useLocation();
 
   const getUsers = async () => {
     setLoading(true);
     try {
-      const response = await indexService.getUsers();
-      setUsers(response.users);
+      // gets params form URL path
+      const params = new URLSearchParams(search);
+      const response = await indexService.getUsers(
+        params.get("search"),
+        params.get("industry")
+      );
+      setUsers(response);
       setLoading(false);
     } catch (error) {
       setErrorMessage("Sorry, we couldn't retrieve users.");
@@ -21,6 +28,7 @@ function Users() {
   
   useEffect(() => {
     getUsers();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -22,9 +22,9 @@ class IndexService {
       .catch(({ error }) => error);
   }
 
-  getUsers() {
+  getUsers(search, industry) {
     return this.api
-      .get("/users")
+      .get("/users", { params: { search, industry } })
       .then(({ data }) => data)
       .catch(({ error }) => error);
   }

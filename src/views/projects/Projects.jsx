@@ -15,6 +15,7 @@ function Projects() {
   const getProjects = async () => {
     setLoading(true);
     try {
+      // gets params form URL path
       const params = new URLSearchParams(search);
       const response = await projectService.getProjects(
         params.get("search"),
@@ -29,7 +30,6 @@ function Projects() {
 
   useEffect(() => {
     getProjects();
-    console.log(search)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

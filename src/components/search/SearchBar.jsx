@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function SearchBar() {
@@ -16,6 +16,7 @@ function SearchBar() {
   };
 
   const handleIndustryChange = (e) => {
+    // needs to be an array as per DB model 
     setSearchIndustry(
       Array.from(e.target.selectedOptions, (option) => option.value)
     );
@@ -33,10 +34,6 @@ function SearchBar() {
       );
     }
   };
-
-  useEffect(() => {
-    console.log(searchIndustry, searchType, searchValue)
-  }, [searchIndustry, searchType, searchValue]);
 
   return (
     <>
