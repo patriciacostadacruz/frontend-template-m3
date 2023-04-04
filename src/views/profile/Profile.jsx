@@ -41,6 +41,7 @@ function Profile() {
       const updatedMe = await profileService.editProfile(updatedUser);
       setUser(updatedMe);
       setIsEditing(false);
+      getProfile();
       toast.success("Profile updated successfully.");
     } catch (error) {
       toast.error("Couldn't update your data. Try again later.");
