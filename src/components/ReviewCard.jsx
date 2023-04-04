@@ -1,7 +1,7 @@
 import React from "react";
 
 function ReviewCard({ review }) {
-  const { personRating, rating, comment, createdAt } = review;
+  const { title, personRating, rating, comment } = review;
 
   return (
     <div className="review-card">
@@ -13,13 +13,13 @@ function ReviewCard({ review }) {
         />
         <div className="review-info">
           <h3 className="review-name">{personRating.name}</h3>
-          <p className="review-date">
-            {new Date(createdAt).toLocaleDateString()}
-          </p>
         </div>
       </div>
       <div className="review-content">
-        <p className="review-rating">{rating}/5</p>
+        <div className="review-subheader">
+          <p className="review-title"><strong>{title}</strong></p>
+          <p className="review-rating">{rating}/5</p>
+        </div>
         <p className="review-comment">{comment}</p>
       </div>
     </div>
