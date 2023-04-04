@@ -46,7 +46,7 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await authService.signup({
+      const newUser = await authService.signup({
       firstName: user.firstName,
       lastName: user.lastName,
       image: user.image,
@@ -60,8 +60,12 @@ export default function Signup() {
       bio: user.bio,
       status: user.status
     });
+    if (newUser) {
       navigate('/login');
       toast.success("Account created successfully!");
+    } else {
+      toast.error("There was an issue when creating your account. Please try again.");
+    }
     } catch (error) {
       console.error(error)
       toast.error('Unable to create user account.')
