@@ -140,6 +140,7 @@ export default function Signup() {
                 value={user.role}
                 onChange={handleChange}
               >
+                <option value="">-- Select your role --</option>
                 <option value="investee">
                   Investee (the person looking for inversions)
                 </option>
