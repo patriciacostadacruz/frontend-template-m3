@@ -1,13 +1,17 @@
 import { useParams } from "react-router-dom";
 import profileServices from "../../services/profileServices";
+import reviewService from "../../services/reviewServices";
 import { useState, useEffect } from "react";
 import linkedin from "../../images/linkedin.png";
 import Loading from "../../components/Loading";
+import AddReview from "../../components/profile/AddReview";
+import { toast } from "react-hot-toast";
 
 function OtherUserProfile() {
   const { userId } = useParams();
   const [otherUser, setOtherUser] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [isRating, setIsRating] = useState(false);
   const [loading, setLoading] = useState(false);
   const style = { height: "300px", width: "300px", objectFit: "cover" };
 
@@ -27,11 +31,29 @@ function OtherUserProfile() {
     getUser();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
+
+  const handleShowReviewForm = () => {
+    setIsRating(true);
+  };
+
+  const handleCancel = () => {
+    setIsRating(false);
+  };
+
+  const handleAddReview = async (review) => {
+    try {
+      await reviewService.addReview(review);
+      setIsRating(false);
+      toast.success("Review was added successfully.");
+    } catch (error) {
+      toast.error(error);
+    }
+  };
   
   return (
     <>
       {loading && <Loading />}
-      {otherUser && 
+      {otherUser && (
         <>
           <div className="profile-data">
             <img style={style} src={otherUser.image} alt="Avatar" />
@@ -64,14 +86,25 @@ function OtherUserProfile() {
               <p>
                 <strong>Industry: </strong>
                 {otherUser.industry.map((elem) => {
-                  return <span key={otherUser.industry.indexOf(elem)}>{elem}</span>;
+                  return (
+                    <span key={otherUser.industry.indexOf(elem)}>{elem}</span>
+                  );
                 })}
               </p>
               <p>{otherUser.bio}</p>
             </div>
           </div>
           <button>Send message</button>
-          <button>Rate user</button>
+          {!isRating && otherUser && (
+            <button onClick={handleShowReviewForm}>Rate user</button>
+          )}
+          {isRating && otherUser && (
+            <AddReview
+              personRated={otherUser._id}
+              onCreation={handleAddReview}
+              onCancel={handleCancel}
+            />
+          )}
           <div className="profile-projects">
             <h3>Projects</h3>
             {otherUser.userProjects ? (
@@ -88,8 +121,8 @@ function OtherUserProfile() {
               "This user has no ratings."
             )}
           </div>
-        </>  
-      }
+        </>
+      )}
       {errorMessage && <p>{errorMessage}</p>}
     </>
   );

@@ -24,6 +24,7 @@ function Project() {
     try {
       const oneProject = await projectService.getProject(projectId);
       setProject(oneProject);
+      setErrorMessage(null);
       setLoading(false);
     } catch (error) {
       setErrorMessage("Sorry, we couldn't find this project.");
@@ -63,8 +64,8 @@ function Project() {
 
   const handleUpdate = async (updatedProject) => {
     try {
-      await projectService.editProject(projectId, updatedProject);
-      setProject(updatedProject);
+      const updatedProj = await projectService.editProject(projectId, updatedProject);
+      setProject(updatedProj);
       setIsEditing(false);
       toast.success("Project data updated successfully.");
     } catch (error) {
