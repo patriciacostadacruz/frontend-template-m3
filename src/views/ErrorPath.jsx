@@ -1,12 +1,17 @@
 import React from 'react'
-import { useLocation, Link } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom';
+import wrongWay from "../images/wrongway.jpg";
 
 export default function ErrorPath() {
   const location = useLocation();
  
   return (
     <div>
-      <p>Sorry, there is no URL called {location.pathname} in this website. You might want to <Link to="/">go back to the main page</Link>.</p>
+      <img height="300" src={wrongWay} alt="GIF" />
+      <p>
+        There is no URL called <strong>{location.pathname}</strong> in this website.<br/>You might want to go back to the{" "}
+        <Link to="/">home page</Link>.
+      </p>
     </div>
-  )
+  );
 }
