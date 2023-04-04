@@ -1,18 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import profileService from "../../services/profileServices";
 import ProfileData from "../../components/profile/ProfileData";
 import EditProfileData from "../../components/profile/EditProfileData";
 import Loading from "../../components/Loading";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
-import authService from "../../services/authService";
+import { AuthContext } from "../../context/AuthContext";
 
 function Profile() {
   const [user, setUser] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const navigate = useNavigate();
+  const { logOutUser } = useContext(AuthContext);
 
   const getProfile = async () => {
     setLoading(true);
@@ -56,8 +55,7 @@ function Profile() {
       try {
         const disabledAccount = await profileService.editStatus({ status: "inactive" });
         if (disabledAccount) {
-          authService.logout();
-          navigate("/");
+          logOutUser();
           toast.success("Account successfully disabled!");
         }
       } catch (error) {

@@ -13,9 +13,24 @@ function EditProfileData({ user, onUpdate, onCancel }) {
   });
 
   const handleInputChange = (e) => {
+    console.log(formState.industry);
     setFormState((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSelectChange = (e) => {
+    const options = e.target.options;
+    const values = [];
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].selected) {
+        values.push(options[i].value);
+      }
+    }
+    setFormState((prev) => ({
+      ...prev,
+      industry: values,
     }));
   };
 
@@ -89,7 +104,7 @@ function EditProfileData({ user, onUpdate, onCancel }) {
               multiple
               name="industry"
               value={formState.industry}
-              onChange={handleInputChange}
+              onChange={handleSelectChange}
             >
               <option value="">-- Select an option --</option>
               <option value="All" selected={formState.industry === "All"}>

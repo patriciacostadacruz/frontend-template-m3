@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+// import FontAwesomeIcon from "@fortawesome/react-fontawesome";
+// import { faMagnifyingGlass } from "@fortawesome/free-regular-svg-icons";
 
 function SearchBar() {
   const [searchValue, setSearchValue] = useState("");
@@ -46,7 +48,13 @@ function SearchBar() {
             <option value="users">Users</option>
           </select>
         </label>
-        <input type="text" value={searchValue} onChange={handleChange} />
+        <input type="text" value={searchValue} onChange={handleChange}>
+          {/* <FontAwesomeIcon
+            icon="fa-solid fa-magnifying-glass"
+            fade
+            style={{ color: "#6c6a6a" }}
+          /> */}
+        </input>
         <label>
           Industry:
           <select

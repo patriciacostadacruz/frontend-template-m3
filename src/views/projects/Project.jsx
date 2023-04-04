@@ -66,6 +66,7 @@ function Project() {
       const updatedProj = await projectService.editProject(projectId, updatedProject);
       setProject(updatedProj);
       setIsEditing(false);
+      getProject();
       toast.success("Project data updated successfully.");
     } catch (error) {
       toast.error("We could not update this project's data, try again later.");
