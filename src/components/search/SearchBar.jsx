@@ -46,11 +46,7 @@ function SearchBar() {
             <option value="users">Users</option>
           </select>
         </label>
-        <input
-          type="text"
-          value={searchValue}
-          onChange={handleChange}
-        />
+        <input type="text" value={searchValue} onChange={handleChange} />
         <label>
           Industry:
           <select
