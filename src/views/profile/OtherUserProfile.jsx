@@ -12,6 +12,8 @@ import ProjectCard from "../../components/project/ProjectCard";
 function OtherUserProfile() {
   const { userId } = useParams();
   const [otherUser, setOtherUser] = useState(null);
+  const [otherUserProjects, setOtherUserProjects] = useState(null);
+  const [otherUserReviews, setOtherUserReviews] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [isRating, setIsRating] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -22,7 +24,10 @@ function OtherUserProfile() {
     try {
       const response = await profileServices.getOtherUser(userId);
       setOtherUser(response.otherUser);
+      console.log(response)
       setErrorMessage(null);
+      setOtherUserProjects(response.userProjects);
+      setOtherUserReviews(response.userReviews);
       setLoading(false);
     } catch (error) {
       setErrorMessage("Sorry, we couldn't get this user's profile.");
@@ -109,8 +114,8 @@ function OtherUserProfile() {
           )}
           <div className="profile-projects">
             <h3>Projects</h3>
-            {otherUser.userProjects ? (
-              otherUser.userProjects.map((project) => {
+            {otherUserProjects ? (
+              otherUserProjects.map((project) => {
                 return (
                   <ProjectCard
                     project={project}
@@ -124,8 +129,8 @@ function OtherUserProfile() {
           </div>
           <div className="profile-reviews">
             <h3>Reviews</h3>
-            {otherUser.userReviews ? (
-              otherUser.userReviews.map((review) => {
+            {otherUserReviews ? (
+              otherUserReviews.map((review) => {
                 return (
                   <ReviewCard
                   review={review}

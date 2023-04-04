@@ -5,9 +5,13 @@ import EditProfileData from "../../components/profile/EditProfileData";
 import Loading from "../../components/Loading";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../context/AuthContext";
+import ProjectCard from "../../components/project/ProjectCard";
+import ReviewCard from "../../components/ReviewCard";
 
 function Profile() {
   const [user, setUser] = useState(null);
+  const [userProjects, setUserProjects] = useState(null);
+  const [userReviews, setUserReviews] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -18,6 +22,8 @@ function Profile() {
     try {
       const response = await profileService.getProfile();
       setUser(response.user);
+      setUserProjects(response.userProjects);
+      setUserReviews(response.userReviews);
       setLoading(false);
     } catch (error) {
       setErrorMessage("Sorry, we couldn't retrieve your profile data. Please try again.");
@@ -84,36 +90,22 @@ function Profile() {
         />
       )}
       {errorMessage && <p>{errorMessage}</p>}
-      {/* <div className="profile-projects">
-        <h3>Projects</h3>
-        {user.userProjects ? (
-          user.userProjects.map((project) => {
-            return (
-              <ProjectCard
-                    project={project}
-                    key={`${project._id}1`}
-                  />
-            )
-          })
-        ) : (
-          "You havent added any project yet."
-        )}
-      </div>
       <div className="profile-reviews">
         <h3>Reviews</h3>
-        {user.userReviews ? (
-          user.userReviews.map((review) => {
-            return (
-              <ReviewCard
-              review={review}
-              key={`${review._id}1`}
-              />
-            )
-          })
-        ) : (
-          "You haven't been reviewed by other users yet."
-        )}
-      </div> */}
+        {userReviews
+          ? userReviews.map((review) => {
+              return <ReviewCard review={review} key={`${review._id}1`} />;
+            })
+          : "You haven't been reviewed by other users yet."}
+      </div>
+      <div className="profile-projects">
+        <h3>Projects</h3>
+        {userProjects
+          ? userProjects.map((project) => {
+              return <ProjectCard project={project} key={`${project._id}1`} />;
+            })
+          : "You havent added any project yet."}
+      </div>
     </div>
   );
 }
