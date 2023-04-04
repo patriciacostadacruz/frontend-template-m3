@@ -8,7 +8,6 @@ function Profile() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
 
-
   const getProfile = async () => {
     setLoading(true);
     try {

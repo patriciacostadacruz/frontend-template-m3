@@ -9,6 +9,7 @@ function OtherUserProfile() {
   const [otherUser, setOtherUser] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const style = { height: "300px", width: "300px", objectFit: "cover" };
 
   const getUser = async () => {
     setLoading(true);
@@ -33,7 +34,7 @@ function OtherUserProfile() {
       {otherUser && 
         <>
           <div className="profile-data">
-            <img height="250" src={otherUser.image} alt="Avatar" />
+            <img style={style} src={otherUser.image} alt="Avatar" />
             <div className="profile-data-personal">
               <div className="profile-name-linkedin">
                 <h2>

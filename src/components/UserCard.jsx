@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 
 function UserCard({ user }) {
+  const style = {height: "200px", width: "200px", objectFit: "cover"}
+  
   return (
     <div className="user-card">
-      <img width="200" src={user.image} alt={user.firstName}/>
+      <img style={style} src={user.image} alt={user.firstName}/>
       <Link to={`/profile/${user._id}`}>
         {user.firstName} {user.lastName}
       </Link>

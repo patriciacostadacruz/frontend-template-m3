@@ -1,11 +1,12 @@
 import linkedin from "../../images/linkedin.png";
 
 function ProfileData({ user }) {
+  const style = { height: "300px", width: "300px", objectFit: "cover" };
 
   return (
     <>
       <div className="profile-data">
-        <img height="300" src={user.image} alt="Avatar" />
+        <img style={style} src={user.image} alt="Avatar" />
         <div className="profile-data-personal">
           <div className="profile-name-linkedin">
             <h2>
