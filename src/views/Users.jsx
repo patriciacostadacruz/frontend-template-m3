@@ -9,6 +9,7 @@ function Users() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [sortBy, setSortBy] = useState("firstName");
   const [sortDirection, setSortDirection] = useState("asc");
+  const [selectedRole, setSelectedRole] = useState("");
   const [loading, setLoading] = useState(false);
   const { search } = useLocation();
 
@@ -19,7 +20,8 @@ function Users() {
       const params = new URLSearchParams(search);
       const response = await indexService.getUsers(
         params.get("search"),
-        params.get("industry")
+        params.get("industry"),
+        selectedRole
       );
       setUsers(response);
       setLoading(false);
@@ -34,7 +36,10 @@ function Users() {
   }, []);
 
   const sortUsers = (users) => {
-    const sortedUsers = [...users];
+    const filteredUsers = selectedRole
+      ? users.filter((user) => user.role === selectedRole)
+      : users;
+    const sortedUsers = [...filteredUsers];
     if (sortBy === "firstName") {
       sortedUsers.sort((a, b) =>
         sortByName(a.firstName, b.firstName, sortDirection)
@@ -61,12 +66,17 @@ function Users() {
     setSortDirection(value[1]);
   };
 
+  const handleRoleChange = (e) => {
+    // adds sort filter if there's a value so if box is checked for investee or investor
+    setSelectedRole(e.target.checked ? e.target.value : "");
+  };
+
   return (
     <>
       <h1>Users</h1>
       {loading && <Loading />}
       <div>
-        <label>Sort by:</label>
+        <label>Sort by</label>
         <select
           onChange={handleSortChange}
           value={`${sortBy}_${sortDirection}`}
@@ -76,6 +86,21 @@ function Users() {
           <option value="lastName_asc">Last Name (A-Z)</option>
           <option value="lastName_desc">Last Name (Z-A)</option>
         </select>
+        <label>Filter by role</label>
+        <input
+          type="checkbox"
+          value="investee"
+          checked={selectedRole === "investee"}
+          onChange={handleRoleChange}
+        />
+        <label>Investee</label>
+        <input
+          type="checkbox"
+          value="investor"
+          checked={selectedRole === "investor"}
+          onChange={handleRoleChange}
+        />
+        <label>Investor</label>
       </div>
       {users
         ? sortUsers(users).map((user) => {
