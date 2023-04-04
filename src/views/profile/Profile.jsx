@@ -4,12 +4,14 @@ import ProfileData from "../../components/profile/ProfileData";
 import EditProfileData from "../../components/profile/EditProfileData";
 import Loading from "../../components/Loading";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
   const [user, setUser] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const navigate = useNavigate();
 
   const getProfile = async () => {
     setLoading(true);
@@ -45,6 +47,21 @@ function Profile() {
     }
   };
 
+  const handleDisable = async () => {
+    const confirmation = window.confirm(
+      "Are you sure you want to disable your account? Your profile won't appear in the search results anymore, but your projects will still be visible. You can re-enable your account by trying to log in again."
+    );
+    if (confirmation) {
+      try {
+        await profileService.editStatus({status: "inactive"});
+        toast.success("Account successfully disabled!");
+        navigate("/");
+      } catch (error) {
+        toast.error(error);
+      }
+    }
+  };
+
   return (
     <div>
       {loading && <Loading />}
@@ -52,6 +69,7 @@ function Profile() {
         <>
           <ProfileData user={user} />
           <button onClick={handleEdit}>Edit profile</button>
+          <button onClick={handleDisable}>Disable account</button>
         </>
       )}
       {isEditing && user && (
