@@ -25,7 +25,7 @@ function AddReview({ personRated, onCreation, onCancel }) {
       <h3>Add a review</h3>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Title:</label>
+          <label>Title</label>
           <input
             required
             type="text"
@@ -35,7 +35,7 @@ function AddReview({ personRated, onCreation, onCancel }) {
           />
         </div>
         <div>
-          <label>Rating:</label>
+          <label>Rating</label>
           <select
             required
             name="rating"
@@ -51,7 +51,7 @@ function AddReview({ personRated, onCreation, onCancel }) {
           </select>
         </div>
         <div>
-          <label>Comment:</label>
+          <label>Comment</label>
           <textarea
             required
             name="comment"
