@@ -15,9 +15,9 @@ class ProjectService {
     });
   }
 
-  getProjects() {
+  getProjects(search, industry) {
     return this.api
-      .get("/")
+      .get("/", { params: { search, industry } })
       .then(({ data }) => data)
       .catch(({ error }) => error);
   }

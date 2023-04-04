@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function SearchBar() {
@@ -33,6 +33,10 @@ function SearchBar() {
       );
     }
   };
+
+  useEffect(() => {
+    console.log(searchIndustry, searchType, searchValue)
+  }, [searchIndustry, searchType, searchValue]);
 
   return (
     <>

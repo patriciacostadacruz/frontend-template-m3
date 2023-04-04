@@ -2,6 +2,7 @@ import projectService from "../../services/projectServices";
 import { useState, useEffect } from "react";
 import ProjectCard from "../../components/project/ProjectCard";
 import Loading from "../../components/Loading";
+import { useLocation } from "react-router-dom";
 
 function Projects() {
   const [projects, setProjects] = useState(null);
@@ -9,11 +10,16 @@ function Projects() {
   const [sortDirection, setSortDirection] = useState("title");
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const { search } = useLocation();
 
   const getProjects = async () => {
     setLoading(true);
     try {
-      const response = await projectService.getProjects();
+      const params = new URLSearchParams(search);
+      const response = await projectService.getProjects(
+        params.get("search"),
+        params.get("industry")
+      );
       setProjects(response);
       setLoading(false);
     } catch (error) {
@@ -23,6 +29,8 @@ function Projects() {
 
   useEffect(() => {
     getProjects();
+    console.log(search)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const sortProjects = (projects) => {
