@@ -54,6 +54,7 @@ function AddProject() {
         owner: user._id,
         investors: [],
       });
+      toast.success(`Project ${newProject.title} successfully created!`);
       navigate(`/projects/${newProject._id}`);
     } catch (error) {
       toast.error("Error creating project, please review the form and ensure you have added all the fields needed.");
@@ -69,7 +70,7 @@ function AddProject() {
       <h2>Create a new project</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Title:</label>
+          <label>Title</label>
           <input
             type="text"
             name="title"
