@@ -16,6 +16,7 @@ import Users from "./views/Users";
 import Conversations from "./views/messenger/Conversations";
 import ConvMessages from "./views/messenger/ConvMessages";
 import AllReviews from "./views/AllReviews";
+import IsPrivate from './components/IsPrivate';
 
 function App() {
   return (
@@ -24,17 +25,80 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/projects/:projectId" element={<Project />} />
-        <Route path="/projects/new" element={<AddProject />} />
-        <Route path="/users" element={<Users />} />
-        <Route path="/profile/:userId" element={<OtherUserProfile />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/reviews/all" element={<AllReviews />} />
+        <Route
+          path="/projects"
+          element={
+            <IsPrivate>
+              <Projects />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/projects/:projectId"
+          element={
+            <IsPrivate>
+              <Project />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/projects/new"
+          element={
+            <IsPrivate>
+              <AddProject />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/users"
+          element={
+            <IsPrivate>
+              <Users />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/profile/:userId"
+          element={
+            <IsPrivate>
+              <OtherUserProfile />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <IsPrivate>
+              <Profile />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/reviews/all"
+          element={
+            <IsPrivate>
+              <AllReviews />
+            </IsPrivate>
+          }
+        />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/conversations" element={<Conversations />} />
-        <Route path="/messages/:conversationId" element={<ConvMessages />} />
+        <Route
+          path="/conversations"
+          element={
+            <IsPrivate>
+              <Conversations />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/messages/:conversationId"
+          element={
+            <IsPrivate>
+              <ConvMessages />
+            </IsPrivate>
+          }
+        />
         <Route path="*" element={<ErrorPath />} />
       </Routes>
       <Footer />
