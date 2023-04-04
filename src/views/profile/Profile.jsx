@@ -5,6 +5,7 @@ import EditProfileData from "../../components/profile/EditProfileData";
 import Loading from "../../components/Loading";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import authService from "../../services/authService";
 
 function Profile() {
   const [user, setUser] = useState(null);
@@ -55,6 +56,7 @@ function Profile() {
       try {
         await profileService.editStatus({status: "inactive"});
         toast.success("Account successfully disabled!");
+        authService.logout();
         navigate("/");
       } catch (error) {
         toast.error(error);

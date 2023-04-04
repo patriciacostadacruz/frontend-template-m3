@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import authService from "../../services/authService";
+import profileService from "../../services/profileServices";
 
 export default function Login() {
   const { storeToken, authenticateUser, isLoggedIn } = useAuth();
@@ -28,15 +29,41 @@ export default function Login() {
       if (response.authToken) {
         storeToken(response.authToken);
         authenticateUser();
+        const currentUser = await authService.me();
+        if (currentUser.status === "inactive") {
+          await profileService.editStatus({ status: "active" });
+          toast.success("Welcome back! Your account is active again.");
+        } else {
+          toast.success("Welcome back!");
+        }
         navigate("/");
-        toast.success("Welcome back!");
       } else {
         toast.error("Unable to authenticate user.");
       }
     } catch (error) {
-      toast.error(error);
+      toast.error("Unable to log in. Please try again later.");
     }
   };
+
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await authService.login(user);
+  //     if (response.authToken) {
+  //       storeToken(response.authToken);
+  //       authenticateUser();
+  //       const currentUser = await authService.me();
+
+  //       navigate("/");
+  //       toast.success("Welcome back!");
+  //     } else {
+  //       toast.error("Unable to authenticate user.");
+  //     }
+  //   } catch (error) {
+  //     toast.error(error);
+  //   }
+  // };
 
   useEffect(() => {
     if (isLoggedIn) {

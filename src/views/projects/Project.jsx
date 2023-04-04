@@ -57,7 +57,6 @@ function Project() {
     }
   };
 
-
   const handleMessage = () => {
     // redirect to create conv + message
   };
