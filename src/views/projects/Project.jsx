@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import projectService from "../../services/projectServices";
 import toast from "react-hot-toast";

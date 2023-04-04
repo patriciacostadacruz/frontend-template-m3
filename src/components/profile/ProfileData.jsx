@@ -39,23 +39,6 @@ function ProfileData({ user }) {
           <p>{user.bio}</p>
         </div>
       </div>
-      <button>Edit profile</button>
-      <div className="profile-projects">
-        <h3>Projects</h3>
-        {user.userProjects ? (
-          <p>projects</p>
-        ) : (
-          "You havent added any project yet."
-        )}
-      </div>
-      <div className="profile-reviews">
-        <h3>Reviews</h3>
-        {user.userReviews ? (
-          <p>reviews</p>
-        ) : (
-          "You haven't been reviewed by other users yet."
-        )}
-      </div>
     </>
   );
 }
