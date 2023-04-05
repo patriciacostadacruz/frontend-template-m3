@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import whiteLogoBlackLetter from "../images/investMate-white-logo-black-letter.png";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Navbar() {
   const { isLoggedIn, logOutUser } = useContext(AuthContext); 

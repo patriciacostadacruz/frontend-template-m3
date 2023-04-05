@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import FontAwesomeIcon from "@fortawesome/react-fontawesome";
-// import { faMagnifyingGlass } from "@fortawesome/free-regular-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 function SearchBar() {
   const [searchValue, setSearchValue] = useState("");
@@ -50,7 +50,7 @@ function SearchBar() {
         </label>
         <input type="text" value={searchValue} onChange={handleChange}>
           {/* <FontAwesomeIcon
-            icon="fa-solid fa-magnifying-glass"
+            icon={faMagnifyingGlass}
             fade
             style={{ color: "#6c6a6a" }}
           /> */}
