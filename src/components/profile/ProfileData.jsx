@@ -1,7 +1,37 @@
+import Password from "../profile/Password";
+import EditPassword from "../profile/EditPassword";
 import linkedin from "../../images/linkedin.png";
+import profileService from "../../services/profileServices";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 function ProfileData({ user }) {
   const style = { height: "300px", width: "300px", objectFit: "cover" };
+  const [isEditing, setIsEditing] = useState(false);
+  const [password, setPassword] = useState(null);
+
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleCancel = () => {
+    setIsEditing(false);
+  };
+
+  const handleUpdate = async (updatedPassword) => {
+    try {
+      const updatedPass = await profileService.editPassword(updatedPassword);
+      if (updatedPassword) {
+        setIsEditing(false);
+        setPassword(updatedPass);
+        toast.success("Password updated successfully.");
+      } else {
+        toast.error("Password not updated.")
+      }
+    } catch (error) {
+      toast.error("Couldn't update your password. Try again later.");
+    }
+  };
 
   return (
     <>
@@ -19,9 +49,20 @@ function ProfileData({ user }) {
               </a>
             )}
           </div>
-          <p><strong>Email: </strong>{user.email}</p>
-          <p><strong>Password: </strong>********</p>
-          <p><strong>Role: </strong>
+          <p>
+            <strong>Email: </strong>
+            {user.email}
+          </p>
+          {!isEditing ? (
+            <>
+              <Password />
+              <button onClick={handleEdit}>Change password</button>
+            </>
+          ) : (
+            <EditPassword onUpdate={handleUpdate} onCancel={handleCancel} />
+          )}
+          <p>
+            <strong>Role: </strong>
             {user.role}
           </p>
         </div>

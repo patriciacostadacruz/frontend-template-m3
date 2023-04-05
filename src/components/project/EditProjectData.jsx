@@ -246,7 +246,7 @@ function EditProjectData({ project, onUpdate, onCancel, investors }) {
           value={formState.investors}
           onChange={handleInvestorsChange}
         >
-          <option value="">-- Select an option --</option>
+          <option value="">None</option>
           {investors.map((investor) => (
             <option
               key={investor._id}
