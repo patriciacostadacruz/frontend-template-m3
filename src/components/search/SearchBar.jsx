@@ -5,13 +5,11 @@ import { useNavigate } from "react-router-dom";
 
 function SearchBar() {
   const [searchValue, setSearchValue] = useState("");
-  const [searchType, setSearchType] = useState("");
   const [searchIndustry, setSearchIndustry] = useState([]);
+  const [selectedUsers, setSelectedUsers] = useState(false);
+  const [selectedProjects, setSelectedProjects] = useState(false);
   const navigate = useNavigate();
 
-  const handleSearchTypeChange = (e) => {
-    setSearchType(e.target.value);
-  };
 
   const handleChange = (e) => {
     setSearchValue(e.target.value);
@@ -24,13 +22,21 @@ function SearchBar() {
     );
   };
 
+  const handleUserCheckboxChange = (e) => {
+    setSelectedUsers(e.target.checked);
+  };
+
+  const handleProjectCheckboxChange = (e) => {
+    setSelectedProjects(e.target.checked);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (searchType === "projects") {
+    if (selectedProjects) {
       navigate(
         `/projects?search=${searchValue}&industry=${searchIndustry.join(",")}`
       );
-    } else if (searchType === "users") {
+    } else if (selectedUsers) {
       navigate(
         `/users?search=${searchValue}&industry=${searchIndustry.join(",")}`
       );
@@ -42,18 +48,26 @@ function SearchBar() {
       <form onSubmit={handleSubmit}>
         <label>
           Search for:
-          <select value={searchType} onChange={handleSearchTypeChange}>
-            <option value="">-- Select an option</option>
-            <option value="projects">Projects</option>
-            <option value="users">Users</option>
-          </select>
+          <label>
+            <input
+              type="checkbox"
+              value="projects"
+              checked={selectedProjects}
+              onChange={handleProjectCheckboxChange}
+            />
+            Projects
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              value="users"
+              checked={selectedUsers}
+              onChange={handleUserCheckboxChange}
+            />
+            Users
+          </label>
         </label>
         <input type="text" value={searchValue} onChange={handleChange}>
-          {/* <FontAwesomeIcon
-            icon={faMagnifyingGlass}
-            fade
-            style={{ color: "#6c6a6a" }}
-          /> */}
         </input>
         <label>
           Industry:

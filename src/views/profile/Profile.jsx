@@ -92,7 +92,7 @@ function Profile() {
       {errorMessage && <p>{errorMessage}</p>}
       <div className="profile-reviews">
         <h3>Reviews</h3>
-        {userReviews.length > 0 ? userReviews.map((review) => {
+        {userReviews ? userReviews.map((review) => {
               return <ReviewCard review={review} key={`${review._id}1`} />;
             })
           : "You haven't been reviewed by other users yet."}
