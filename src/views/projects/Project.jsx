@@ -7,10 +7,12 @@ import ProjectData from "../../components/project/ProjectData";
 import EditProjectData from "../../components/project/EditProjectData";
 import { AuthContext } from "../../context/AuthContext";
 import Loading from "../../components/Loading";
+import indexServices from "../../services/indexServices";
 
 function Project() {
   const { projectId } = useParams();
   const [project, setProject] = useState(null);
+  const [investors, setInvestors] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -31,8 +33,19 @@ function Project() {
     }
   };
 
+  const getInvestors = async () => {
+    try {
+      const usersList = await indexServices.getUsers();
+      const investorsList = usersList.filter(user => user.role === "investor" && user.status !== "inactive");
+      setInvestors(investorsList);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   useEffect(() => {
     getProject();
+    getInvestors();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -97,6 +110,7 @@ function Project() {
           project={project}
           onUpdate={handleUpdate}
           onCancel={handleCancel}
+          investors={investors}
         />
       )}
       {errorMessage ? <p>{errorMessage}</p> : null}

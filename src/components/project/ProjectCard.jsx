@@ -1,6 +1,4 @@
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
-import { useContext } from "react";
 
 function ProjectCard({ project }) {
   return (

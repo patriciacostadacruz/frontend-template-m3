@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function EditProjectData({ project, onUpdate, onCancel }) {
+function EditProjectData({ project, onUpdate, onCancel, investors }) {
   const [formState, setFormState] = useState({
     title: project.title,
     status: project.status,
@@ -212,7 +212,7 @@ function EditProjectData({ project, onUpdate, onCancel }) {
         </select>
       </div>
       <div>
-        <label>Description:</label>
+        <label>Description</label>
         <textarea
           column="30"
           rows="10"
@@ -221,6 +221,22 @@ function EditProjectData({ project, onUpdate, onCancel }) {
           value={formState.description}
           onChange={handleInputChange}
         />
+      </div>
+      <div>
+        <label>Investors</label>
+        <select
+          name="investors"
+          required
+          value={formState.investors}
+          onChange={handleInputChange}
+        >
+          <option value="">-- Select an option --</option>
+          {investors.map((investor) => (
+            <option key={investor._id} value={investor._id}>
+              {investor.firstName} {investor.lastName}
+            </option>
+          ))}
+        </select>
       </div>
       <button type="submit">Save changes</button>
       <button type="button" onClick={onCancel}>
