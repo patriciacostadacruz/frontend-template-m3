@@ -8,6 +8,7 @@ function EditProjectData({ project, onUpdate, onCancel, investors }) {
     fundingNeeded: project.fundingNeeded,
     industry: project.industry,
     description: project.description,
+    investors: project.investors
   });
 
   const handleInputChange = (e) => {
@@ -17,7 +18,7 @@ function EditProjectData({ project, onUpdate, onCancel, investors }) {
     }));
   };
 
-  const handleSelectChange = (e) => {
+  const handleIndustryChange = (e) => {
     const options = e.target.options;
     const values = [];
     for (let i = 0; i < options.length; i++) {
@@ -27,7 +28,21 @@ function EditProjectData({ project, onUpdate, onCancel, investors }) {
     }
     setFormState((prev) => ({
       ...prev,
-      industry: values,
+      industry: values
+    }));
+  };
+
+  const handleInvestorsChange = (e) => {
+    const options = e.target.options;
+    const values = [];
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].selected) {
+        values.push(options[i].value);
+      }
+    }
+    setFormState((prev) => ({
+      ...prev,
+      investors: values,
     }));
   };
 
@@ -97,7 +112,7 @@ function EditProjectData({ project, onUpdate, onCancel, investors }) {
           name="industry"
           required
           value={formState.industry}
-          onChange={handleSelectChange}
+          onChange={handleIndustryChange}
           multiple
         >
           <option value="">-- Select an option --</option>
@@ -227,12 +242,17 @@ function EditProjectData({ project, onUpdate, onCancel, investors }) {
         <select
           name="investors"
           required
+          multiple
           value={formState.investors}
-          onChange={handleInputChange}
+          onChange={handleInvestorsChange}
         >
           <option value="">-- Select an option --</option>
           {investors.map((investor) => (
-            <option key={investor._id} value={investor._id}>
+            <option
+              key={investor._id}
+              value={investor._id}
+              selected={formState.investors.includes(investor._id)}
+            >
               {investor.firstName} {investor.lastName}
             </option>
           ))}
