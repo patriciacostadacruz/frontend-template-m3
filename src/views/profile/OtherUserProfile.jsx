@@ -113,32 +113,21 @@ function OtherUserProfile() {
           )}
           <div className="profile-projects">
             <h3>Projects</h3>
-            {otherUserProjects ? (
-              otherUserProjects.map((project) => {
-                return (
-                  <ProjectCard
-                    project={project}
-                    key={`${project._id}1`}
-                  />
-                );
-              })
-            ) : (
-              "This user has no active projects."
-            )}
+            {otherUserProjects.length > 0
+              ? otherUserProjects.map((project) => {
+                  return (
+                    <ProjectCard project={project} key={`${project._id}1`} />
+                  );
+                })
+              : "This user has no active projects."}
           </div>
           <div className="profile-reviews">
             <h3>Reviews</h3>
-            {otherUserReviews ? (
-              otherUserReviews.map((review) => {
-                return (
-                  <ReviewCard
-                  review={review}
-                  key={`${review._id}1`}
-                />
-                )})
-            ) : (
-              "This user has no ratings."
-            )}
+            {otherUserReviews.length > 0
+              ? otherUserReviews.map((review) => {
+                  return <ReviewCard review={review} key={`${review._id}1`} />;
+                })
+              : "This user has no ratings."}
           </div>
         </>
       )}
