@@ -1,7 +1,9 @@
+import blueLogoWhiteLetter from "../images/investMate-blue-logo-white letter.png";
+
 function Footer() {
   return (
     <div className="footer">
-      <img src="" alt="investMate logo" />
+      <img height="70" className="footer-app-logo" src={blueLogoWhiteLetter} alt="investMate logo" />
       <p>Copyright C 2023 investMate, Inc</p>
       <div className="footer-links">
         <a

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import whiteLogoBlackLetter from "../images/investMate-white-logo-black-letter.png";
 
 export default function Navbar() {
   const { isLoggedIn, logOutUser } = useContext(AuthContext); 
@@ -8,6 +9,7 @@ export default function Navbar() {
   return (
     <div className="navbar-container">
       <ul>
+        <img width="150" className="navbar-app-logo" src={whiteLogoBlackLetter} alt="" />
         <li>
           <NavLink to="/">Home</NavLink>
         </li>
