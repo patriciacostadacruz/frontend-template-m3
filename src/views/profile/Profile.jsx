@@ -92,16 +92,14 @@ function Profile() {
       {errorMessage && <p>{errorMessage}</p>}
       <div className="profile-reviews">
         <h3>Reviews</h3>
-        {userReviews.length > 0
-          ? userReviews.map((review) => {
+        {userReviews.length > 0 ? userReviews.map((review) => {
               return <ReviewCard review={review} key={`${review._id}1`} />;
             })
           : "You haven't been reviewed by other users yet."}
       </div>
       <div className="profile-projects">
         <h3>Projects</h3>
-        {userProjects.length > 0
-          ? userProjects.map((project) => {
+        {userProjects ? userProjects.map((project) => {
               return <ProjectCard project={project} key={`${project._id}1`} />;
             })
           : "You havent added any project yet."}
