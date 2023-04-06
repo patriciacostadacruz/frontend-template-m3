@@ -56,7 +56,7 @@ function Conversations() {
                   </strong>
                 </p>
                 <p>
-                  {conversation.messages[conversation.messages.length - 1]
+                  {conversation.messages[0]
                     .sender._id === user._id ? (
                     <img width="20" src={checkmark} alt="Message checkmark" />
                   ) : null}
