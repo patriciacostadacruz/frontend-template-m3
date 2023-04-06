@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import profileServices from "../../services/profileServices";
 import reviewService from "../../services/reviewServices";
 import { useState, useEffect } from "react";
@@ -17,6 +17,7 @@ function OtherUserProfile() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [isRating, setIsRating] = useState(false);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const style = { height: "300px", width: "300px", objectFit: "cover" };
 
   const getUser = async () => {
@@ -24,13 +25,21 @@ function OtherUserProfile() {
     try {
       const response = await profileServices.getOtherUser(userId);
       setOtherUser(response.otherUser);
-      setErrorMessage(null);
-      setOtherUserProjects(response.userProjects);
-      setOtherUserReviews(response.userReviews);
-      console.log(response.userReviews);
-      setLoading(false);
+      if (response.otherUser.status === "inactive") {
+        console.log("inactive")
+        setErrorMessage("Sorry, this user's account is disabled.")
+        setLoading(false);
+        navigate("/");
+        return;
+      } else if (response.otherUser.status === "active") {
+        console.log("active");
+        setErrorMessage(null);
+        setOtherUserProjects(response.userProjects);
+        setOtherUserReviews(response.userReviews);
+        setLoading(false);
+      }
     } catch (error) {
-      setErrorMessage("Sorry, we couldn't get this user's profile.");
+      setErrorMessage("Sorry, we couldn't get this user's profile, it might be disabled.");
     }
   }
 

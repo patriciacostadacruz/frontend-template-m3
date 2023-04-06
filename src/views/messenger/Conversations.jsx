@@ -55,14 +55,14 @@ function Conversations() {
                     {conversation.users[0].lastName}
                   </strong>
                 </p>
-                <p>
+                {/* <p>
                   {conversation.messages[0]
                     .sender._id === user._id ? (
                     <img width="20" src={checkmark} alt="Message checkmark" />
                   ) : null}
                   {conversation.messages[conversation.messages.length - 1]
                       .content}
-                </p>
+                </p> */}
               </div>
             </Link>
           ))}
