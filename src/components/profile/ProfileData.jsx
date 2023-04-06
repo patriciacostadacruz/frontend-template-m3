@@ -21,12 +21,12 @@ function ProfileData({ user }) {
   const handleUpdate = async (updatedPassword) => {
     try {
       const updatedPass = await profileService.editPassword(updatedPassword);
-      if (updatedPassword) {
+      if (updatedPass.error) {
+        toast.error(updatedPass.error);
+      } else {
         setIsEditing(false);
         setPassword(updatedPass);
-        toast.success("Password updated successfully.");
-      } else {
-        toast.error("Password not updated.")
+        toast.success("Password updated seccessfully.");
       }
     } catch (error) {
       toast.error("Couldn't update your password. Try again later.");
