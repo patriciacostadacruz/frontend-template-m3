@@ -9,14 +9,19 @@ function Conversations() {
   const [loading, setLoading] = useState(true);
   const [conversations, setConversations] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
   const { user } = useContext(AuthContext);
-  const style = { height: "100px", width: "100px", objectFit: "cover", borderRadius: "50px" };
+  const style = {
+    height: "100px",
+    width: "100px",
+    objectFit: "cover",
+    borderRadius: "50px",
+  };
 
   const getConversations = async () => {
     setLoading(true);
     try {
       const response = await messengerServices.getConversations();
-      console.log(response.conversations);
       setConversations(response.conversations);
       setLoading(false);
     } catch (error) {
@@ -29,14 +34,29 @@ function Conversations() {
     getConversations();
   }, []);
 
+  const filteredConversations = conversations.filter((conversation) => {
+    const firstName = conversation.users[0].firstName.toLowerCase();
+    const lastName = conversation.users[0].lastName.toLowerCase();
+    const searchTermLowerCase = searchTerm.toLowerCase();
+    return (
+      firstName.includes(searchTermLowerCase) ||
+      lastName.includes(searchTermLowerCase)
+    );
+  });
+
   return (
     <>
       <h2>Conversations</h2>
+      <input
+        type="text"
+        placeholder="Search by recipient's name"
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
       {loading && <Loading />}
       {errorMessage && <p>{errorMessage}</p>}
-      {!loading && conversations.length > 0 ? (
+      {!loading && filteredConversations.length > 0 ? (
         <div>
-          {conversations.map((conversation) => (
+          {filteredConversations.map((conversation) => (
             <Link
               to={`/messages/${conversation._id}`}
               key={`${conversation._id}2`}
