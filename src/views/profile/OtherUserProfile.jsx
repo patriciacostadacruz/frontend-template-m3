@@ -14,7 +14,6 @@ function OtherUserProfile() {
   const [otherUser, setOtherUser] = useState(null);
   const [otherUserProjects, setOtherUserProjects] = useState(null);
   const [otherUserReviews, setOtherUserReviews] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
   const [isRating, setIsRating] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -34,7 +33,6 @@ function OtherUserProfile() {
       } else if (response.otherUser.status === "active") {
         console.log("from 2nd condition");
         setOtherUser(response.otherUser);
-        setErrorMessage(null);
         setOtherUserProjects(response.userProjects);
         setOtherUserReviews(response.userReviews);
         setLoading(false);
@@ -42,7 +40,7 @@ function OtherUserProfile() {
     } catch (error) {
       console.log("from catch");
       setLoading(false);
-      setErrorMessage("Sorry, we couldn't get this user's profile. It might be disabled or in maintenance.");
+      toast.error("Sorry, we couldn't get this user's profile. It might be disabled or in maintenance.");
     }
   }
 
@@ -144,7 +142,6 @@ function OtherUserProfile() {
           </div>
         </>
       )}
-      {errorMessage && <p>{errorMessage}</p>}
     </>
   );
 }

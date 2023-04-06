@@ -12,7 +12,6 @@ function Profile() {
   const [user, setUser] = useState(null);
   const [userProjects, setUserProjects] = useState(null);
   const [userReviews, setUserReviews] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const { logOutUser } = useContext(AuthContext);
@@ -26,7 +25,7 @@ function Profile() {
       setUserReviews(response.userReviews);
       setLoading(false);
     } catch (error) {
-      setErrorMessage("Sorry, we couldn't retrieve your profile data. Please try again.");
+      toast.error("Sorry, we couldn't retrieve your profile data. Please try again.");
     }
   }
 
@@ -89,20 +88,21 @@ function Profile() {
           onCancel={handleCancel}
         />
       )}
-      {errorMessage && <p>{errorMessage}</p>}
-      <div className="profile-reviews">
-        <h3>Reviews</h3>
-        {userReviews ? userReviews.map((review) => {
-              return <ReviewCard review={review} key={`${review._id}1`} />;
-            })
-          : "You haven't been reviewed by other users yet."}
-      </div>
       <div className="profile-projects">
         <h3>Projects</h3>
-        {userProjects ? userProjects.map((project) => {
+        {userProjects.length > 0
+          ? userProjects.map((project) => {
               return <ProjectCard project={project} key={`${project._id}1`} />;
             })
           : "You havent added any project yet."}
+      </div>
+      <div className="profile-reviews">
+        <h3>Reviews</h3>
+        {userReviews.length > 0 
+          ? userReviews.map((review) => {
+              return <ReviewCard review={review} key={`${review._id}1`} />;
+            })
+          : "You haven't been reviewed by other users yet."}
       </div>
     </div>
   );
