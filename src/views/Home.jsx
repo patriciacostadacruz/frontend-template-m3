@@ -4,13 +4,14 @@ import { AuthContext } from "../context/AuthContext";
 import projectService from "../services/projectServices";
 import ProjectCard from "../components/project/ProjectCard";
 import SearchBar from "../components/search/SearchBar";
+import { toast } from "react-hot-toast";
+
 const landingImage =
   "https://cloudinary.hbs.edu/hbsit/image/upload/s--EmT0lNtW--/f_auto,c_fill,h_375,w_750,/v20200101/6978C1C20B650473DD135E5352D37D55.jpg";
 
 export default function Home() {
   const { isLoggedIn, user } = useContext(AuthContext);
   const [projects, setProjects] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(undefined);
   
   const getRandomProjects = async () => {
     try {
@@ -18,7 +19,7 @@ export default function Home() {
       const randomProjects = response.sort(() => 0.5 - Math.random()).slice(0, 3);
       setProjects(randomProjects);
     } catch (error) {
-      setErrorMessage(error);
+      toast.error(error);
     }
   }
 
@@ -64,7 +65,6 @@ export default function Home() {
             return <ProjectCard key={project._id} project={project} />;
           })
         : null}
-      {errorMessage && <p>{errorMessage}</p>}
     </div>
   );
 }

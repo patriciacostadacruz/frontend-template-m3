@@ -60,7 +60,8 @@ export default function Signup() {
       bio: user.bio,
       status: user.status
     });
-    if (newUser) {
+    console.log(newUser);
+    if (!newUser.error) {
       navigate('/login');
       toast.success("Account created successfully!");
     } else {

@@ -26,7 +26,7 @@ function Users() {
       setUsers(response);
       setLoading(false);
     } catch (error) {
-      setErrorMessage("Sorry, we couldn't retrieve users.");
+      setErrorMessage("Sorry, we couldn't retrieve any user.");
     }
   };
 

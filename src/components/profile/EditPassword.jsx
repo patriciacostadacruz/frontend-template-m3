@@ -27,7 +27,7 @@ function EditPassword({ onUpdate, onCancel }) {
 			return;
     } 
 		if (passwordForm.password !== passwordForm.passwordConfirmation) {
-			toast.error("Password do not match!")
+			toast.error("Confirmation password doesn't match the new one chosen.");
 			return;
     }
 		if (!passwordRegex.test(passwordForm.password)) {
@@ -41,7 +41,7 @@ function EditPassword({ onUpdate, onCancel }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>Old password:</label>
+      <label>Old password</label>
       <input
         type="password"
         value={passwordForm.oldPassword}
@@ -49,7 +49,7 @@ function EditPassword({ onUpdate, onCancel }) {
         onChange={handleInputChange}
         name="oldPassword"
       />
-      <label>New password:</label>
+      <label>New password</label>
       <input
         type="password"
         value={passwordForm.password}
@@ -57,7 +57,7 @@ function EditPassword({ onUpdate, onCancel }) {
         onChange={handleInputChange}
         name="password"
       />
-      <label>Confirm new password:</label>
+      <label>Confirm new password</label>
       <input
         type="password"
         value={passwordForm.passwordConfirmation}

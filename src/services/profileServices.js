@@ -47,9 +47,7 @@ class ProfileService {
     return this.api
       .get(`/${userId}`)
       .then(({ data }) => data)
-      .catch(({ error }) => {
-        return error;
-      });
+      .catch(({ error }) => error);
   }
 
   editProfile(body) {

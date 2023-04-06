@@ -18,7 +18,7 @@ function ProjectCard({ project }) {
         <strong>Funding needed: </strong>
         {project.fundingNeeded}
       </p>
-      <Link to={`/projects/${project._id}`}>See project</Link>
+      <Link to={`/projects/${project._id}`}>Read more about this project</Link>
     </div>
   );
 }

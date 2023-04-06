@@ -49,13 +49,27 @@ function AddProject() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const newProject = await projectService.createProject({
-        ...formData,
-        owner: user._id,
-        investors: [],
-      });
-      toast.success(`Project ${newProject.title} successfully created!`);
-      navigate(`/projects/${newProject._id}`);
+      if (
+        !formData.title ||
+        !formData.status ||
+        !formData.location ||
+        !formData.description ||
+        formData.industry.length < 1 ||
+        !formData.fundingNeeded ||
+        !formData.owner
+      ) {
+        toast.error({
+          error: "Please fill all the fields to add a new project.",
+        });
+      } else {
+        const newProject = await projectService.createProject({
+          ...formData,
+          owner: user._id,
+          investors: [],
+        });
+        toast.success(`Project ${newProject.title} successfully created!`);
+        navigate(`/projects/${newProject._id}`);
+      }
     } catch (error) {
       toast.error("Error creating project, please review the form and ensure you have added all the fields needed.");
     }

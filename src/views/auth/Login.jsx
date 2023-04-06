@@ -54,6 +54,7 @@ export default function Login() {
 
   return (
     <div>
+      {/* add app logo here */}
       <h2>Log in</h2>
       <form onSubmit={handleSubmit}>
         <label>Email</label>

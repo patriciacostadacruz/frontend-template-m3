@@ -23,29 +23,31 @@ function OtherUserProfile() {
   const getUser = async () => {
     setLoading(true);
     try {
+      console.log("from try")
       const response = await profileServices.getOtherUser(userId);
-      setOtherUser(response.otherUser);
-      if (typeof response === "string") {
-        console.log("inactive");
-        toast.error("Sorry, this user's account is disabled.");
+      if (response.error) {
+        console.log("from 1st condition");
+        toast.error(response.error);
         setLoading(false);
         navigate("/users");
         return;
       } else if (response.otherUser.status === "active") {
-        console.log("active");
+        console.log("from 2nd condition");
+        setOtherUser(response.otherUser);
         setErrorMessage(null);
         setOtherUserProjects(response.userProjects);
         setOtherUserReviews(response.userReviews);
         setLoading(false);
       }
     } catch (error) {
-      setErrorMessage("Sorry, we couldn't get this user's profile, it might be disabled.");
+      console.log("from catch");
+      setLoading(false);
+      setErrorMessage("Sorry, we couldn't get this user's profile. It might be disabled or in maintenance.");
     }
   }
 
   useEffect(() => {
     getUser();
-    console.log(otherUser)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 

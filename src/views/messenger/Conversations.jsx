@@ -21,8 +21,8 @@ function Conversations() {
   const getConversations = async () => {
     setLoading(true);
     try {
-      const response = await messengerServices.getConversations();
-      setConversations(response.conversations);
+      const conversations = await messengerServices.getConversations();
+      setConversations(conversations);
       setLoading(false);
     } catch (error) {
       setErrorMessage("Failed to fetch conversations");

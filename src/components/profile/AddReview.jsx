@@ -1,4 +1,6 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
+
 function AddReview({ personRated, onCreation, onCancel }) {
   const [review, setReview] = useState({
     title: "",
@@ -17,7 +19,17 @@ function AddReview({ personRated, onCreation, onCancel }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onCreation(review);
+    if (!review.title || !review.rating || !review.comment || !review.personRating || !review.personRated) {
+      toast.error("Please fill all the fields requested to add a review.");
+    }
+    if (review.rating < 0 || review.rating > 5) {
+      toast.error("You should choose a note between 0 and 5.");
+    } 
+    if (typeof review.title !== "string" || typeof review.comment !== "string") {
+      toast.error("Please add a valid title and comment.");
+    } else {
+      onCreation(review);
+    }
   };
 
   return (

@@ -3,11 +3,11 @@ import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import messengerServices from "../../services/messengerServices";
 import { AuthContext } from "../../context/AuthContext";
+import toast from "react-hot-toast";
 
-function ConvMessages(props) {
+function ConvMessages() {
   const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState([]);
-  const [errorMessage, setErrorMessage] = useState(null);
   const { conversationId } = useParams();
   const { user } = useContext(AuthContext);
 
@@ -15,11 +15,15 @@ function ConvMessages(props) {
     setLoading(true);
     try {
       const response = await messengerServices.getConvMessages(conversationId);
-      console.log(response.messages);
-      setMessages(response.messages);
-      setLoading(false);
+      if (response.error) {
+        toast.error(response.error);
+      } else {
+        console.log(response.messages);
+        setMessages(response.messages);
+        setLoading(false);
+      }
     } catch (error) {
-      setErrorMessage("Failed to fetch messages");
+      toast.error("Failed to fetch messages.");
       setLoading(false);
     }
   };
@@ -32,7 +36,6 @@ function ConvMessages(props) {
   return (
     <>
       {loading && <Loading />}
-      {errorMessage && <p>{errorMessage}</p>}
       {!loading && messages.length > 0 ? (
         <div>
           <h2>Conversation</h2>

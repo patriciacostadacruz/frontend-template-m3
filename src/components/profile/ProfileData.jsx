@@ -1,4 +1,3 @@
-import Password from "../profile/Password";
 import EditPassword from "../profile/EditPassword";
 import linkedin from "../../images/linkedin.png";
 import profileService from "../../services/profileServices";
@@ -26,7 +25,7 @@ function ProfileData({ user }) {
       } else {
         setIsEditing(false);
         setPassword(updatedPass);
-        toast.success("Password updated seccessfully.");
+        toast.success("Password updated successfully.");
       }
     } catch (error) {
       toast.error("Couldn't update your password. Try again later.");
@@ -55,7 +54,9 @@ function ProfileData({ user }) {
           </p>
           {!isEditing ? (
             <>
-              <Password />
+              <p>
+                <strong>Password:</strong> ********
+              </p>
               <button onClick={handleEdit}>Change password</button>
             </>
           ) : (
