@@ -1,13 +1,15 @@
 import Loading from "../../components/Loading";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import messengerServices from "../../services/messengerServices";
+import { AuthContext } from "../../context/AuthContext";
 
 function ConvMessages(props) {
   const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const { conversationId } = useParams();
+  const { user } = useContext(AuthContext);
 
   const getMessages = async () => {
     setLoading(true);
@@ -36,7 +38,10 @@ function ConvMessages(props) {
           <h2>Conversation</h2>
           <ul>
             {messages.map((message) => (
-              <li key={message._id}>
+              <li
+                key={message._id}
+                className={message.sender._id === user._id ? "sent-by-user" : "sent-by-other-person"}
+              >
                 <p>
                   <strong>{message.sender.firstName}</strong>
                 </p>
