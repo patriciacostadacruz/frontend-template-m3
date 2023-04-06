@@ -1,12 +1,15 @@
 import Loading from "../../components/Loading";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import messengerServices from "../../services/messengerServices";
 import { Link } from "react-router-dom";
+import checkmark from "../../images/checkmark.png";
+import { AuthContext } from "../../context/AuthContext";
 
 function Conversations() {
   const [loading, setLoading] = useState(true);
   const [conversations, setConversations] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
+  const { user } = useContext(AuthContext);
   const style = { height: "100px", width: "100px", objectFit: "cover", borderRadius: "50px" };
 
   const getConversations = async () => {
@@ -39,7 +42,11 @@ function Conversations() {
               key={`${conversation._id}2`}
             >
               <div className="small-profile-picture">
-                <img style={style} src={conversation.users[0].image} alt="Small avatar" />
+                <img
+                  style={style}
+                  src={conversation.users[0].image}
+                  alt="Small avatar"
+                />
               </div>
               <div className="conversation-last-message">
                 <p>
@@ -49,10 +56,12 @@ function Conversations() {
                   </strong>
                 </p>
                 <p>
-                  {
-                    conversation.messages[conversation.messages.length - 1]
-                      .content
-                  }
+                  {conversation.messages[conversation.messages.length - 1]
+                    .sender._id === user._id ? (
+                    <img width="20" src={checkmark} alt="Message checkmark" />
+                  ) : null}
+                  {conversation.messages[conversation.messages.length - 1]
+                      .content}
                 </p>
               </div>
             </Link>
