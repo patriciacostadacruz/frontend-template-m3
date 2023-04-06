@@ -1,13 +1,16 @@
 import { useParams, useNavigate } from "react-router-dom";
 import profileServices from "../../services/profileServices";
 import reviewService from "../../services/reviewServices";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import linkedin from "../../images/linkedin.png";
 import Loading from "../../components/Loading";
 import AddReview from "../../components/profile/AddReview";
 import { toast } from "react-hot-toast";
 import ReviewCard from "../../components/ReviewCard";
 import ProjectCard from "../../components/project/ProjectCard";
+import messengerService from "../../services/messengerServices";
+import { AuthContext } from "../../context/AuthContext";
+
 
 function OtherUserProfile() {
   const { userId } = useParams();
@@ -17,6 +20,7 @@ function OtherUserProfile() {
   const [isRating, setIsRating] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
   const style = { height: "300px", width: "300px", objectFit: "cover" };
 
   const getUser = async () => {
@@ -66,7 +70,29 @@ function OtherUserProfile() {
       toast.error(error);
     }
   };
-  
+
+   const handleSendMessage = async () => {
+     try {
+       const conversation = await messengerService.createConversation(userId, {
+         users: [user._id, userId],
+       });
+       if (conversation.error) {
+        toast.error(conversation.error);
+        navigate(`"/profile/${userId}`)
+       }
+       if (conversation.existingConversation) {
+        navigate(`/messages/${conversation.existingConversation._id}`);
+       }
+       navigate(`/messages/${conversation._id}`);
+     } catch (error) {
+       console.log(error);
+       toast.error("Sorry, we couldn't send your message.");
+     }
+   };
+
+  // navigate(`/messages/${existingConversation._id}`);
+  // navigate(`/messages/${newConversation._id}`);
+
   return (
     <>
       {loading && <Loading />}
@@ -111,7 +137,7 @@ function OtherUserProfile() {
               <p>{otherUser.bio}</p>
             </div>
           </div>
-          <button>Send message</button>
+          <button onClick={handleSendMessage}>Send message</button>
           {!isRating && otherUser && (
             <button onClick={handleShowReviewForm}>Rate user</button>
           )}
