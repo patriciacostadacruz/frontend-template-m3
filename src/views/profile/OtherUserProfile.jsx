@@ -27,6 +27,7 @@ function OtherUserProfile() {
       setErrorMessage(null);
       setOtherUserProjects(response.userProjects);
       setOtherUserReviews(response.userReviews);
+      console.log(response.userReviews);
       setLoading(false);
     } catch (error) {
       setErrorMessage("Sorry, we couldn't get this user's profile.");
