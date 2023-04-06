@@ -251,7 +251,9 @@ function EditProjectData({ project, onUpdate, onCancel, investors }) {
             <option
               key={investor._id}
               value={investor._id}
-              selected={formState.investors.includes(investor._id)}
+              selected={formState.investors.filter()}
+                // includes(investor._id)}
+              // have to filter formdata investors array and if an elemen contains investor ID so if the result is bigger than 0 then selected
             >
               {investor.firstName} {investor.lastName}
             </option>

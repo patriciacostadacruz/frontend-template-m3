@@ -19,42 +19,44 @@ class ProfileService {
     return this.api
       .get("/")
       .then(({ data }) => data)
-      .catch(({ error }) => error);
+      .catch(({ message }) => message);
   }
 
   editPassword(body) {
     return this.api
       .put("/password-edit", body)
       .then(({ data }) => data)
-      .catch(({ error }) => error);
+      .catch(({ message }) => message);
   }
 
   editStatus(body) {
     return this.api
       .put("/status-update", body)
       .then(({ data }) => data)
-      .catch(({ error }) => error);
+      .catch(({ message }) => message);
   }
 
   editPicture(body) {
     return this.api
       .put("/edit-picture", body)
       .then(({ data }) => data)
-      .catch(({ error }) => error);
+      .catch(({ message }) => message);
   }
 
   getOtherUser(userId) {
     return this.api
       .get(`/${userId}`)
       .then(({ data }) => data)
-      .catch(({ error }) => error);
+      .catch(({ message }) => {
+        return message;
+      });
   }
 
   editProfile(body) {
     return this.api
       .put("/", body)
       .then(({ data }) => data)
-      .catch(({ error }) => error);
+      .catch(({ message }) => message);
   }
 }
 

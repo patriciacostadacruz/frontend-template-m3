@@ -25,11 +25,11 @@ function OtherUserProfile() {
     try {
       const response = await profileServices.getOtherUser(userId);
       setOtherUser(response.otherUser);
-      if (response.otherUser.status === "inactive") {
-        console.log("inactive")
-        setErrorMessage("Sorry, this user's account is disabled.")
+      if (typeof response === "string") {
+        console.log("inactive");
+        toast.error("Sorry, this user's account is disabled.");
         setLoading(false);
-        navigate("/");
+        navigate("/users");
         return;
       } else if (response.otherUser.status === "active") {
         console.log("active");
@@ -45,6 +45,7 @@ function OtherUserProfile() {
 
   useEffect(() => {
     getUser();
+    console.log(otherUser)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
