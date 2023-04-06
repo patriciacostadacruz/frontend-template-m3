@@ -6,6 +6,12 @@ import peopleCount from "../../images/peopleCount.png";
 function ProjectData({ project }) {
   // eslint-disable-next-line no-unused-vars
   const { user } = useContext(AuthContext);
+  const style = {
+    height: "70px",
+    width: "70px",
+    objectFit: "cover",
+    borderRadius: "50px",
+  };
 
   return (
     <div className="project-detail">
@@ -18,6 +24,7 @@ function ProjectData({ project }) {
                 <strong>Added by:</strong>{" "}
                 {user._id === project.owner._id ? (
                   <Link to="/profile">
+                    <img src={project.owner.image} style={style} alt="Avatar" />
                     {project.owner.firstName} {project.owner.lastName}
                   </Link>
                 ) : (

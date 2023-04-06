@@ -3,8 +3,8 @@ import React from "react";
 function ReviewCard({ review }) {
   const { title, personRating, rating, comment } = review;
   const style = {
-    height: "100px",
-    width: "100px",
+    height: "70px",
+    width: "70px",
     objectFit: "cover",
     borderRadius: "50px",
   };
