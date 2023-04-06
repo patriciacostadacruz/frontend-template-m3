@@ -23,11 +23,21 @@ function SearchBar() {
   };
 
   const handleUserCheckboxChange = (e) => {
-    setSelectedUsers(e.target.checked);
+    if (e.target.checked) {
+      setSelectedUsers(true);
+      setSelectedProjects(false);
+    } else {
+      setSelectedUsers(false);
+    }
   };
 
   const handleProjectCheckboxChange = (e) => {
-    setSelectedProjects(e.target.checked);
+    if (e.target.checked) {
+      setSelectedProjects(true);
+      setSelectedUsers(false);
+    } else {
+      setSelectedProjects(false);
+    }
   };
 
   const handleSubmit = (e) => {
