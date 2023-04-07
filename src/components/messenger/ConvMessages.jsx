@@ -74,6 +74,7 @@ function ConvMessages() {
     const interval = setInterval(() => {
       getMessages();
     }, 2000);
+    scrollToBottom();
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [messages]);
