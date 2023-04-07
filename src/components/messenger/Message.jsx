@@ -11,10 +11,10 @@ const Message = ({ message, user, onDelete, onUpdate }) => {
   };
 
   const handleDelete = () => {
-    const shouldDelete = window.confirm(
+    const confirmation = window.confirm(
       "Are you sure you want to delete this message?"
     );
-    if (shouldDelete) {
+    if (confirmation) {
       onDelete(message._id);
     }
   };

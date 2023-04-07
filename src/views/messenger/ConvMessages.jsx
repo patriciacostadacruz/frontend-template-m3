@@ -52,10 +52,13 @@ function ConvMessages() {
   };
 
   const handleSendMessage = async () => {
+    console.log("func called")
     if (!newMessage) {
       toast.error("Please write your message content.");
+      console.log("!newMessage called");
     }
     try {
+      console.log("send message try called called");
       const response = await messengerServices.sendMessage(conversationId, {
         recipient:
           messages[0].sender._id === user._id
