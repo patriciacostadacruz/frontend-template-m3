@@ -9,7 +9,6 @@ import toast from "react-hot-toast";
 function ConvMessages() {
   const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState([]);
-  const [refreshTimer, setRefreshTimer] = useState(null);
   const [newMessage, setNewMessage] = useState("");
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
@@ -75,6 +74,44 @@ function ConvMessages() {
     }
   };
 
+  const handleUpdateMessage = async (messageId, updatedContent) => {
+    try {
+      const response = await messengerServices.updateMessage(
+        messageId,
+        updatedContent
+      );
+      if (response.error) {
+        toast.error(response.error);
+      } else {
+        const updatedMessages = messages.map((message) =>
+          message._id === messageId ? response.message : message
+        );
+        setMessages(updatedMessages);
+      }
+    } catch (error) {
+      toast.error("Failed to update message.");
+    }
+  };
+
+
+  const handleDeleteMessage = async (messageId) => {
+    try {
+      const response = await messengerServices.deleteMessage(messageId);
+      if (response.error) {
+        toast.error(response.error);
+      } else {
+        const updatedMessages = messages.filter(
+          (message) => message._id !== messageId
+        );
+        setMessages(updatedMessages);
+        toast.success("Message deleted successfully!");
+      }
+    } catch (error) {
+      toast.error("Failed to delete message.");
+    }
+  };
+
+
   useEffect(() => {
     getMessages();
     scrollToBottom();
@@ -90,7 +127,13 @@ function ConvMessages() {
           <h2>Conversation</h2>
           <ul>
             {messages.map((message) => (
-              <Message key={message._id} message={message} user={user} />
+              <Message
+                key={message._id}
+                message={message}
+                user={user}
+                onDelete={handleDeleteMessage}
+                onUpdate={handleUpdateMessage}
+              />
             ))}
           </ul>
           <div>
