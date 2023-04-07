@@ -34,7 +34,7 @@ function OtherUserProfile() {
         setLoading(false);
         navigate("/users");
         return;
-      } else if (response.otherUser.status === "active") {
+      } else  {
         console.log("from 2nd condition");
         setOtherUser(response.otherUser);
         setOtherUserProjects(response.userProjects);
@@ -73,18 +73,19 @@ function OtherUserProfile() {
   };
 
    const handleSendMessage = async () => {
+    console.log("send message func called")
      try {
-       const conversation = await messengerService.createConversation(userId, {
+      console.log("entering send conv try");
+       const conversation = await messengerService.createConversation({ recipientId: userId}, {
          users: [user._id, userId],
        });
-       if (conversation.error) {
-        toast.error(conversation.error);
-        navigate(`"/profile/${userId}`)
-       }
        if (conversation.existingConversation) {
+        console.log("if existing conv");
         navigate(`/messages/${conversation.existingConversation._id}`);
+       } else {
+        console.log("else new conv navigate");
+         navigate(`/messages/${conversation._id}`);
        }
-       navigate(`/messages/${conversation._id}`);
      } catch (error) {
        console.log(error);
        toast.error("Sorry, we couldn't send your message.");

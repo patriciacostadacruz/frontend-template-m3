@@ -35,15 +35,24 @@ function Conversations() {
   }, []);
 
   const filteredConversations = conversations.filter((conversation) => {
-    // the first user added to the users array ALWAYS is the recipient
     const firstName = conversation.users[0].firstName.toLowerCase();
     const lastName = conversation.users[0].lastName.toLowerCase();
     const searchLowerCase = search.toLowerCase();
     return (
-      firstName.includes(searchLowerCase) ||
-      lastName.includes(searchLowerCase)
+      firstName.includes(searchLowerCase) || lastName.includes(searchLowerCase)
     );
   });
+
+  const getOtherUser = (conversation) => {
+    return conversation.users.find((person) => person._id !== user._id);
+  };
+
+  const lastMessageSentByCurrentUser = (conversation) => {
+    return (
+      conversation.messages[conversation.messages.length - 1].sender._id ===
+      user._id
+    );
+  };
 
   return (
     <>
@@ -57,34 +66,35 @@ function Conversations() {
       {errorMessage && <p>{errorMessage}</p>}
       {!loading && filteredConversations.length > 0 ? (
         <div>
-          {filteredConversations.map((conversation) => (
-            <Link
-              to={`/messages/${conversation._id}`}
-              key={`${conversation._id}2`}
-            >
-              <div className="small-profile-picture">
-                <img
-                  style={style}
-                  src={conversation.users[0].image}
-                  alt="Small avatar"
-                />
-              </div>
-              <div className="conversation-last-message">
-                <p>
-                  <strong>
-                    {conversation.users[0].firstName}{" "}
-                    {conversation.users[0].lastName}
-                  </strong>
-                </p>
-                <p>
-                  {conversation.messages[0].sender._id === user._id ? (
-                    <img width="20" src={checkmark} alt="Message checkmark" />
-                  ) : null}
-                  {conversation.messages[0].content}
-                </p>
-              </div>
-            </Link>
-          ))}
+          {filteredConversations.map((conversation) => {
+            const otherUser = getOtherUser(conversation);
+            return (
+              <Link
+                to={`/messages/${conversation._id}`}
+                key={`${conversation._id}2`}
+              >
+                <div className="small-profile-picture">
+                  <img style={style} src={otherUser.image} alt="Small avatar" />
+                </div>
+                <div className="conversation-last-message">
+                  <p>
+                    <strong>
+                      {otherUser.firstName} {otherUser.lastName}
+                    </strong>
+                  </p>
+                  <p>
+                    {lastMessageSentByCurrentUser(conversation) && (
+                      <img width="20" src={checkmark} alt="Message checkmark" />
+                    )}
+                    {/* always displays last messsage because of how it is sorted when pulled form DB */}
+                    {
+                      conversation.messages[0].content
+                    }
+                  </p>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       ) : (
         "No conversations to show."
