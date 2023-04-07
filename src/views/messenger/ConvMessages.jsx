@@ -78,6 +78,7 @@ function ConvMessages() {
   useEffect(() => {
     getMessages();
     scrollToBottom();
+    console.log(messages);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
