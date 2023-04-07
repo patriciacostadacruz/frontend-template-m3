@@ -2,7 +2,7 @@ import { useState, useEffect, useContext, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import messengerServices from "../../services/messengerServices";
 import { AuthContext } from "../../context/AuthContext";
-import Message from "../../components/messenger/Message";
+import Message from "./Message";
 import toast from "react-hot-toast";
 
 function ConvMessages() {
@@ -30,7 +30,7 @@ function ConvMessages() {
 
   const handleUpdateMessage = async (messageId, updatedContent) => {
     try {
-      const response = await messengerServices.updateMessage(
+      const response = await messengerServices.editMessage(
         messageId,
         updatedContent
       );
@@ -80,8 +80,7 @@ function ConvMessages() {
 
   return (
     <>
-      {messages.length > 0 ? (
-        <div>
+      {messages && messages.length > 0 ? (
           <div>
             {messages.map((message) => (
               <Message
@@ -92,7 +91,6 @@ function ConvMessages() {
                 onUpdate={handleUpdateMessage}
               />
             ))}
-          </div>
           <div ref={messagesEndRef} />
         </div>
       ) : (

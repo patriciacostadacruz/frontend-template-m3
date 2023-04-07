@@ -2,7 +2,7 @@ import { useState, useContext, useRef, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import messengerServices from "../../services/messengerServices";
 import { AuthContext } from "../../context/AuthContext";
-import ConvMessages from "./ConvMessages";
+import ConvMessages from "../../components/messenger/ConvMessages";
 import toast from "react-hot-toast";
 
 function ConvContainer() {
