@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../context/AuthContext";
 
 function AddReview({ personRated, onCreation, onCancel }) {
+  const { user } = useContext(AuthContext);
   const [review, setReview] = useState({
     title: "",
     rating: 0,
     comment: "",
-    personRating: "",
+    personRating: user._id,
     personRated: personRated,
   });
 
@@ -19,7 +21,7 @@ function AddReview({ personRated, onCreation, onCancel }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!review.title || !review.rating || !review.comment || !review.personRating || !review.personRated) {
+    if (!review.title || !review.comment || !review.personRating || !review.personRated) {
       toast.error("Please fill all the fields requested to add a review.");
     }
     if (review.rating < 0 || review.rating > 5) {

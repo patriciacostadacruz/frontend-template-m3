@@ -64,6 +64,7 @@ function OtherUserProfile() {
   const handleAddReview = async (review) => {
     try {
       await reviewService.addReview(review);
+      console.log(review);
       setIsRating(false);
       toast.success("Review was added successfully.");
     } catch (error) {
@@ -89,9 +90,6 @@ function OtherUserProfile() {
        toast.error("Sorry, we couldn't send your message.");
      }
    };
-
-  // navigate(`/messages/${existingConversation._id}`);
-  // navigate(`/messages/${newConversation._id}`);
 
   return (
     <>
