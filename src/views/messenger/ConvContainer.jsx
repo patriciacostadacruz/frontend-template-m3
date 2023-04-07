@@ -43,6 +43,7 @@ function ConvContainer() {
   const handleSendMessage = async () => {
     if (!newMessage) {
       toast.error("Please write your message content.");
+      return;
     }
     try {
       const response = await messengerServices.sendMessage(conversationId, {
