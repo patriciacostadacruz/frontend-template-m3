@@ -14,9 +14,9 @@ import AddProject from "./views/projects/AddProject";
 import Projects from "./views/projects/Projects";
 import Users from "./views/Users";
 import Conversations from "./views/messenger/Conversations";
-import ConvMessages from "./views/messenger/ConvMessages";
 import AllReviews from "./views/AllReviews";
 import IsPrivate from './components/IsPrivate';
+import ConvContainer from "./views/messenger/ConvContainer.jsx";
 
 function App() {
   return (
@@ -95,7 +95,7 @@ function App() {
           path="/messages/:conversationId"
           element={
             <IsPrivate>
-              <ConvMessages />
+              <ConvContainer />
             </IsPrivate>
           }
         />

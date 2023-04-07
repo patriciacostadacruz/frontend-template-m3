@@ -51,7 +51,7 @@ function OtherUserProfile() {
   useEffect(() => {
     getUser();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userId]);
+  }, []);
 
   const handleShowReviewForm = () => {
     setIsRating(true);
@@ -64,8 +64,8 @@ function OtherUserProfile() {
   const handleAddReview = async (review) => {
     try {
       await reviewService.addReview(review);
-      console.log(review);
       setIsRating(false);
+      getUser();
       toast.success("Review was added successfully.");
     } catch (error) {
       toast.error(error);

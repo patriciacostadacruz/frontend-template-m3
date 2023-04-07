@@ -9,7 +9,7 @@ function Conversations() {
   const [loading, setLoading] = useState(true);
   const [conversations, setConversations] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [search, setSearch] = useState("");
   const { user } = useContext(AuthContext);
   const style = {
     height: "100px",
@@ -35,12 +35,13 @@ function Conversations() {
   }, []);
 
   const filteredConversations = conversations.filter((conversation) => {
+    // the first user added to the users array ALWAYS is the recipient
     const firstName = conversation.users[0].firstName.toLowerCase();
     const lastName = conversation.users[0].lastName.toLowerCase();
-    const searchTermLowerCase = searchTerm.toLowerCase();
+    const searchLowerCase = search.toLowerCase();
     return (
-      firstName.includes(searchTermLowerCase) ||
-      lastName.includes(searchTermLowerCase)
+      firstName.includes(searchLowerCase) ||
+      lastName.includes(searchLowerCase)
     );
   });
 
@@ -50,7 +51,7 @@ function Conversations() {
       <input
         type="text"
         placeholder="Search by recipient's name"
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={(e) => setSearch(e.target.value)}
       />
       {loading && <Loading />}
       {errorMessage && <p>{errorMessage}</p>}

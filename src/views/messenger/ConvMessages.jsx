@@ -1,17 +1,13 @@
-import Loading from "../../components/Loading";
 import { useState, useEffect, useContext, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import messengerServices from "../../services/messengerServices";
 import { AuthContext } from "../../context/AuthContext";
 import Message from "../../components/messenger/Message";
 import toast from "react-hot-toast";
 
 function ConvMessages() {
-  const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState("");
   const messagesEndRef = useRef(null);
-  const inputRef = useRef(null);
   const { conversationId } = useParams();
   const { user } = useContext(AuthContext);
 
@@ -20,60 +16,15 @@ function ConvMessages() {
   };
 
   const getMessages = async () => {
-    setLoading(true);
     try {
       const response = await messengerServices.getConvMessages(conversationId);
       if (response.error) {
         toast.error(response.error);
       } else {
-        console.log(response.messages);
         setMessages(response.messages);
-        setLoading(false);
       }
     } catch (error) {
       toast.error("Failed to fetch messages.");
-      setLoading(false);
-    }
-  };
-
-  const handleNewMessageChange = (e) => {
-    setNewMessage(e.target.value);
-  };
-
-  const handleKeyDown = (e) => {
-    if (
-      e.key === "Enter" &&
-      inputRef.current &&
-      // allows to send with enter button only if user has input elected
-      inputRef.current === document.activeElement
-    ) {
-      handleSendMessage();
-    }
-  };
-
-  const handleSendMessage = async () => {
-    console.log("func called")
-    if (!newMessage) {
-      toast.error("Please write your message content.");
-      console.log("!newMessage called");
-    }
-    try {
-      console.log("send message try called called");
-      const response = await messengerServices.sendMessage(conversationId, {
-        recipient:
-          messages[0].sender._id === user._id
-            ? messages[0].recipient._id
-            : messages[0].sender._id,
-        content: newMessage,
-      });
-      if (response.error) {
-        toast.error(response.error);
-      } else {
-        setMessages([...messages, response.message]);
-        setNewMessage("");
-      }
-    } catch (error) {
-      toast.error("Failed to send message.");
     }
   };
 
@@ -96,7 +47,6 @@ function ConvMessages() {
     }
   };
 
-
   const handleDeleteMessage = async (messageId) => {
     try {
       const response = await messengerServices.deleteMessage(messageId);
@@ -114,21 +64,25 @@ function ConvMessages() {
     }
   };
 
-
   useEffect(() => {
     getMessages();
     scrollToBottom();
-    console.log(messages);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      getMessages();
+    }, 2000);
+    return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [messages]);
+
   return (
     <>
-      {loading && <Loading />}
-      {!loading && messages.length > 0 ? (
+      {messages.length > 0 ? (
         <div>
-          <h2>Conversation</h2>
-          <ul>
+          <div>
             {messages.map((message) => (
               <Message
                 key={message._id}
@@ -138,23 +92,12 @@ function ConvMessages() {
                 onUpdate={handleUpdateMessage}
               />
             ))}
-          </ul>
-          <div>
-            <input
-              type="text"
-              placeholder="Type your message here."
-              value={newMessage}
-              onChange={handleNewMessageChange}
-              onKeyDown={handleKeyDown}
-              ref={inputRef}
-            />
-            <button onClick={handleSendMessage}>Send</button>
           </div>
+          <div ref={messagesEndRef} />
         </div>
       ) : (
         "No messages to show."
       )}
-      <div ref={messagesEndRef} />
     </>
   );
 }
