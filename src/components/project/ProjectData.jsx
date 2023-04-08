@@ -5,7 +5,10 @@ import peopleCount from "../../images/peopleCount.png";
 
 function ProjectData({ project }) {
   const { user } = useContext(AuthContext);
-  const isInvestor = project.investors.includes(user._id);
+  const isInvestor = project.investors.some(
+    (investor) => investor._id.toString() === user._id.toString()
+  );
+
   const style = {
     height: "70px",
     width: "70px",
