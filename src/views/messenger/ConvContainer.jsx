@@ -1,6 +1,7 @@
 import { useState, useContext, useRef, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import messengerServices from "../../services/messengerServices";
+import profileServices from "../../services/profileServices";
 import { AuthContext } from "../../context/AuthContext";
 import ConvMessages from "../../components/messenger/ConvMessages";
 import toast from "react-hot-toast";
@@ -8,6 +9,7 @@ import toast from "react-hot-toast";
 function ConvContainer() {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [otherUser, setOtherUser] = useState(null);
   const inputRef = useRef(null);
   const { conversationId } = useParams();
   const { user } = useContext(AuthContext);  
@@ -22,6 +24,31 @@ function ConvContainer() {
       }
     } catch (error) {
       toast.error("Failed to fetch messages.");
+    }
+  };
+
+  const getOtherUserId = () => {
+    //get the other user ID by returning the one not equal to logged user ID
+    if (messages.length > 0) {
+      const firstMessage = messages[0];
+      if (firstMessage.sender._id === user._id) {
+        return firstMessage.recipient._id;
+      } else {
+        return firstMessage.sender._id;
+      }
+    }
+    return null;
+  };
+
+  const getOtherUser = async () => {
+    const otherUserId = getOtherUserId();
+    if (otherUserId) {
+      try {
+        const response = await profileServices.getOtherUser(otherUserId);
+        setOtherUser(response.otherUser);
+      } catch (error) {
+        toast.error("Failed to get other user data.");
+      }
     }
   };
 
@@ -48,10 +75,10 @@ function ConvContainer() {
     try {
       const response = await messengerServices.sendMessage(conversationId, {
         recipient:
-          messages[0].sender._id === user._id
-            ? messages[0].recipient._id
-            : messages[0].sender._id,
-        content: newMessage,
+        messages[0].sender._id === user._id
+          ? messages[0].recipient._id
+          : messages[0].sender._id,
+          content: newMessage,
       });
       if (response.error) {
         toast.error(response.error);
@@ -66,17 +93,24 @@ function ConvContainer() {
 
 	useEffect(() => {
     getMessages();
+    getOtherUser();
+    console.log(otherUser)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
-      <h2>
-        Conversation with{" "}
-        {/* <Link to={`/users/${messages[0].recipient._id}`}>
-          {messages[0].recipient.name}
-        </Link> */}
-      </h2>
+      {messages ? (
+        <h2>
+          {otherUser && (
+            <Link to={`/profile/${otherUser._id}`}>
+              name {otherUser.firstName} {otherUser.lastName}
+            </Link>
+          )}
+        </h2>
+      ) : (
+        <p>New conversation</p>
+      )}
       <ConvMessages />
       <input
         type="text"
