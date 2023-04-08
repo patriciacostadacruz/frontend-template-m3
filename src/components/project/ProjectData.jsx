@@ -4,8 +4,8 @@ import { useContext } from "react";
 import peopleCount from "../../images/peopleCount.png";
 
 function ProjectData({ project }) {
-  // eslint-disable-next-line no-unused-vars
   const { user } = useContext(AuthContext);
+  const isInvestor = project.investors.includes(user._id);
   const style = {
     height: "70px",
     width: "70px",
@@ -53,18 +53,26 @@ function ProjectData({ project }) {
           <p>{project.description}</p>
           <p>
             <strong>Investors:</strong>
-            {project.investors.length === 0
-              ? "No investors yet."
-              : project.investors.map((person) => {
-                  return (
-                    <img
-                      key={`${project._id}${project.investors.length}`}
-                      height="40"
-                      src={peopleCount}
-                      alt="Investors count"
-                    />
-                  );
-                })}
+            {project.investors.length === 0 && "No investors yet."}
+            {project.investors.map((investor) => {
+              return (
+                <span key={investor._id}>
+                  {isInvestor && user._id === investor._id && (
+                    <Link to="/profile">
+                      <img src={investor.image} style={style} alt="Avatar" />
+                    </Link>
+                  )}
+                  {isInvestor && user._id !== investor._id && (
+                    <Link to={`/profile/${investor._id}`}>
+                      <img src={investor.image} style={style} alt="Avatar" />
+                    </Link>
+                  )}
+                  {!isInvestor && (
+                    <img height="40" src={peopleCount} alt="Investors count" />
+                  )}
+                </span>
+              );
+            })}
           </p>
         </div>
       )}
