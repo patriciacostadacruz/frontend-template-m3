@@ -38,10 +38,16 @@ function Conversations() {
     const firstName = conversation.users[0].firstName.toLowerCase();
     const lastName = conversation.users[0].lastName.toLowerCase();
     const searchLowerCase = search.toLowerCase();
+    const isActive = conversation.users.map(
+      (user) => user.status !== "inactive"
+    );
     return (
-      firstName.includes(searchLowerCase) || lastName.includes(searchLowerCase)
+      (firstName.includes(searchLowerCase) ||
+        lastName.includes(searchLowerCase)) &&
+      isActive
     );
   });
+
 
   const getOtherUser = (conversation) => {
     return conversation.users.find((person) => person._id !== user._id);
