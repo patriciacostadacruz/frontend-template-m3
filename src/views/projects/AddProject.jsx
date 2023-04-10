@@ -22,6 +22,7 @@ function AddProject() {
       ...prev,
       [e.target.name]: e.target.value,
     }));
+    console.log(formData);
   };
 
   const handleStatusChange = (e) => {
@@ -55,12 +56,9 @@ function AddProject() {
         !formData.location ||
         !formData.description ||
         formData.industry.length < 1 ||
-        !formData.fundingNeeded ||
-        !formData.owner
+        !formData.fundingNeeded
       ) {
-        toast.error({
-          error: "Please fill all the fields to add a new project.",
-        });
+        toast.error("Please fill all the fields to add a new project.");
       } else {
         const newProject = await projectService.createProject({
           ...formData,
