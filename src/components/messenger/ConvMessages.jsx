@@ -5,7 +5,7 @@ import { AuthContext } from "../../context/AuthContext";
 import Message from "./Message";
 import toast from "react-hot-toast";
 
-function ConvMessages({ messagesFromFather }) {
+function ConvMessages() {
   const [messages, setMessages] = useState(null);
   const [newMessage, setNewMessage] = useState("");
   const messagesEndRef = useRef(null);
@@ -47,26 +47,23 @@ function ConvMessages({ messagesFromFather }) {
       return;
     }
     try {
+      const recipient =
+        messages.length > 0 && messages[0].sender._id === user._id
+          ? messages[0].recipient._id
+          : messages[0].sender._id;
       const response = await messengerServices.sendMessage(conversationId, {
-        recipient:
-          messages[0].sender._id === user._id
-            ? messages[0].recipient._id
-            : messages[0].sender._id,
+        recipient,
         content: newMessage,
       });
       if (response.error) {
         toast.error(response.error);
       } else {
-        setMessages([...messages, response.message]);
         setNewMessage("");
+        getMessages();
       }
     } catch (error) {
       toast.error("Failed to send message.");
     }
-  };
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleUpdateMessage = async (messageId, updatedContent) => {
@@ -78,10 +75,7 @@ function ConvMessages({ messagesFromFather }) {
       if (response.error) {
         toast.error(response.error);
       } else {
-        const updatedMessages = messages.map((message) =>
-          message._id === messageId ? response.message : message
-        );
-        setMessages(updatedMessages);
+        getMessages();
       }
     } catch (error) {
       toast.error("Failed to update message.");
@@ -94,15 +88,16 @@ function ConvMessages({ messagesFromFather }) {
       if (response.error) {
         toast.error("We could not delete this message.");
       } else {
-        const updatedMessages = messages.filter(
-          (message) => message._id !== messageId
-        );
-        setMessages(updatedMessages);
+        getMessages();
         toast.success("Message deleted successfully!");
       }
     } catch (error) {
       toast.error("Failed to delete message.");
     }
+  };
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -132,7 +127,6 @@ function ConvMessages({ messagesFromFather }) {
               onUpdate={handleUpdateMessage}
             />
           ))}
-          <div ref={messagesEndRef} />
         </div>
       ) : (
         "No messages to show."
@@ -145,6 +139,7 @@ function ConvMessages({ messagesFromFather }) {
         onKeyDown={handleKeyDown}
         ref={inputRef}
       />
+      <div ref={messagesEndRef} />
     </>
   );
 }

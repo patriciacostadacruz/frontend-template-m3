@@ -249,12 +249,10 @@ function EditProjectData({ project, onUpdate, onCancel, investors }) {
         <label>Investors</label>
         <select
           name="investors"
-          required
           multiple
           value={formState.investors}
           onChange={handleInvestorsChange}
         >
-          <option value="">None</option>
           {investors.map((investor) => (
             <option
               key={investor._id}
