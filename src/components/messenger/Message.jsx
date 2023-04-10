@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import checkmark from "../../images/checkmark.png";
 
 const Message = ({ message, user, onDelete, onUpdate }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -52,7 +53,12 @@ const Message = ({ message, user, onDelete, onUpdate }) => {
         </>
       ) : (
         <>
-          <p>{message.content}</p>
+          <p>
+            {message.sender._id === user._id && (
+              <img width="20" src={checkmark} alt="Message checkmark" />
+            )}
+            {message.content}
+          </p>
           {message.sender._id === user._id && (
             <>
               <button onClick={handleDelete}>Delete</button>
