@@ -35,36 +35,27 @@ npm run start
 - User can sign up and create a new account
 - User can login
 - User can log out
-- User cna edit his/her profile
+- User can edit his/her profile
 - User can enable/disable his/her account
 - User can create a project
 - User can edit and delete a project
 - User can see all projects
 - User can also see all users
-- User cna become a project's investor by being added ot this project's investor field
+- User can be added as a project's investor by being added ot this project's investor field and see this project in his/her profile
 - User can review other users
 - User's reviews are visible in the profile section
 
 ### Backlog
 
 - User will see an error page if he/she tries to access a path wich doesn't exist or a page where no data is pulled
-- User not logged in can search for projects only with filters
-- Logged in users can search for users AND projects with filters
-- User can upload his/her profile picture
+- Logged in users can search for users and projects with filters
 - User can edit profile picture
 - User can send messages to other users
 - User can edit and delete messages
 - User can see a page with all his/her messages listed
 - User can also see a chat UI with all messages per conversation
-- User virtually accepts app conditions and NDA when signing up
-- User can log in with Google
 - User can add projects to favorites
-- User can remove projects from favorites
-- User can add users to contacts for quick access
-- User can remove users from contacts
 - App is responsive
-- Password change/being added to contacts/a project being added to favourite triggers an email notification to the user
-- User can use app in dark mode
 
 ---
 
