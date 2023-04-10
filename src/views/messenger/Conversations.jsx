@@ -73,9 +73,10 @@ function Conversations() {
   };
 
   const lastMessageSentByCurrentUser = (conversation) => {
+    const lastMessage = conversation.messages[0];
     return (
-      conversation.messages[conversation.messages.length - 1].sender._id ===
-      user._id
+      lastMessage.sender._id === user._id &&
+      lastMessage.sender.firstName === user.firstName
     );
   };
 
