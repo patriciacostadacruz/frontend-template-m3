@@ -72,24 +72,23 @@ function OtherUserProfile() {
     }
   };
 
-   const handleSendMessage = async () => {
-    const users = [user._id, userId];
-    console.log("send message func called")
+   const handleCreateConversation = async () => {
+    const recipientId = userId;
      try {
-      console.log("entering send conv try");
-       const conversation = await messengerService.createConversation({ recipientId: userId}, {users});
+       const conversation = await messengerService.createConversation(recipientId);
        if (conversation.existingConversation) {
-        console.log("if existing conv");
-        navigate(`/messages/${conversation.existingConversation._id}`);
+        toast.success("yYou already have a conversation with this user.");
+        navigate(`/conversations/${conversation.existingConversation._id}`);
+        return;
        } else {
-        console.log("else new conv navigate");
-         navigate(`/messages/${conversation._id}`);
+        toast.success("Conversation created! Start exchanging with this user by sending a message.");
+        navigate(`/messages/${conversation._id}`);
        }
      } catch (error) {
-       console.log(error);
-       toast.error("Sorry, we couldn't send your message.");
+       toast.error("We cannot create this conversation. The user might be inactive.");
      }
    };
+
 
   return (
     <>
@@ -135,7 +134,7 @@ function OtherUserProfile() {
               <p>{otherUser.bio}</p>
             </div>
           </div>
-          <button onClick={handleSendMessage}>Send message</button>
+          <button onClick={handleCreateConversation}>Send message</button>
           {!isRating && otherUser && (
             <button onClick={handleShowReviewForm}>Rate user</button>
           )}
