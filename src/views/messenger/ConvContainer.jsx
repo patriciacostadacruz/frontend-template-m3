@@ -7,7 +7,7 @@ import ConvMessages from "../../components/messenger/ConvMessages";
 import toast from "react-hot-toast";
 
 function ConvContainer() {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState(null);
   const [newMessage, setNewMessage] = useState("");
   const [otherUser, setOtherUser] = useState(null);
   const inputRef = useRef(null);
@@ -27,21 +27,17 @@ function ConvContainer() {
     }
   };
 
-  const getOtherUserId = () => {
-    //get the other user ID by returning the one not equal to logged user ID
+  const getOtherUser =  async () => {
+    let otherUserId;
+    // get the other user ID by returning the one not equal to logged user ID
     if (messages.length > 0) {
       const firstMessage = messages[0];
       if (firstMessage.sender._id === user._id) {
-        return firstMessage.recipient._id;
+         otherUserId = firstMessage.recipient._id;
       } else {
-        return firstMessage.sender._id;
+        otherUserId = firstMessage.sender._id;
       }
     }
-    return null;
-  };
-
-  const getOtherUser = async () => {
-    const otherUserId = getOtherUserId();
     if (otherUserId) {
       try {
         const response = await profileServices.getOtherUser(otherUserId);
@@ -111,7 +107,7 @@ function ConvContainer() {
       ) : (
         <p>New conversation</p>
       )}
-      <ConvMessages />
+      {messages && <ConvMessages messagesFromFather={messages} />}
       <input
         type="text"
         placeholder="Type your message here."

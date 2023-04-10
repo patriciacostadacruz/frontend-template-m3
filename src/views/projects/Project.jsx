@@ -15,6 +15,7 @@ function Project() {
   const [investors, setInvestors] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [isInvestor, setIsInvestor] = useState(null);
   const [loading, setLoading] = useState(false);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -26,8 +27,8 @@ function Project() {
     try {
       const oneProject = await projectService.getProject(projectId);
       setProject(oneProject);
-      setErrorMessage(null);
       setLoading(false);
+      setErrorMessage(null);
     } catch (error) {
       setErrorMessage("Sorry, we couldn't find this project.");
     }
@@ -38,6 +39,11 @@ function Project() {
       const usersList = await indexServices.getUsers();
       const investorsList = usersList.filter(user => user.role === "investor" && user.status !== "inactive");
       setInvestors(investorsList);
+      setIsInvestor(
+        project.investors.some(
+          (investor) => investor._id.toString() === user._id.toString()
+        )
+      );
     } catch (error) {
       console.error(error);
     }
@@ -91,7 +97,7 @@ function Project() {
       {loading && <Loading />}
       {!isEditing && project && (
         <>
-          <ProjectData project={project} />
+          <ProjectData project={project} isOwner={isOwner} isInvestor={isInvestor}/>
           {isOwner && (
             <div>
               <button onClick={handleEdit}>Edit project</button>

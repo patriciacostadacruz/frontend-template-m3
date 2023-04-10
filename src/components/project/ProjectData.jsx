@@ -3,11 +3,8 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import peopleCount from "../../images/peopleCount.png";
 
-function ProjectData({ project }) {
+function ProjectData({ project, isOwner, isInvestor }) {
   const { user } = useContext(AuthContext);
-  const isInvestor = project.investors.some(
-    (investor) => investor._id.toString() === user._id.toString()
-  );
 
   const style = {
     height: "70px",
@@ -25,7 +22,7 @@ function ProjectData({ project }) {
             <h3>{project.title}</h3>
             <p>
               <strong>Added by:</strong>{" "}
-              {user._id === project.owner._id ? (
+              {isOwner ? (
                 <Link to="/profile">
                   <img src={project.owner.image} style={style} alt="Avatar" />
                   {project.owner.firstName} {project.owner.lastName}
@@ -60,17 +57,17 @@ function ProjectData({ project }) {
             {project.investors.map((investor) => {
               return (
                 <span key={investor._id}>
-                  {isInvestor && user._id === investor._id && (
+                  {(isOwner || isInvestor) && user._id === investor._id && (
                     <Link to="/profile">
                       <img src={investor.image} style={style} alt="Avatar" />
                     </Link>
                   )}
-                  {isInvestor && user._id !== investor._id && (
+                  {(isOwner || isInvestor) && user._id !== investor._id && (
                     <Link to={`/profile/${investor._id}`}>
                       <img src={investor.image} style={style} alt="Avatar" />
                     </Link>
                   )}
-                  {!isInvestor && (
+                  {(!isInvestor && !isOwner) && (
                     <img height="40" src={peopleCount} alt="Investors count" />
                   )}
                 </span>

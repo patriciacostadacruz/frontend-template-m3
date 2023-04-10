@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 function EditProjectData({ project, onUpdate, onCancel, investors }) {
+  console.log(investors)
   const [formState, setFormState] = useState({
     title: project.title,
     status: project.status,
@@ -46,11 +47,18 @@ function EditProjectData({ project, onUpdate, onCancel, investors }) {
     }));
   };
 
+// const handleinvest = () => {
+//   const investInApp = investors;
+//   const currentInvest = formState.investors;
+//   investInApp.map(elem => {
+//     ...elem, 
+//     isCurrentProjInvest: currentInvest.filter()
+//   });
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onUpdate(formState);
   };
-
   return (
     <form onSubmit={handleSubmit}>
       <h2>Project detail - edit</h2>
@@ -251,7 +259,7 @@ function EditProjectData({ project, onUpdate, onCancel, investors }) {
             <option
               key={investor._id}
               value={investor._id}
-              selected={formState.investors.filter((elem) => investor._id in elem).length > 0}
+              // selected={investor.isInvestor?}
             >
               {investor.firstName} {investor.lastName}
             </option>
