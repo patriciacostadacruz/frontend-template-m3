@@ -53,12 +53,16 @@ function ConvMessages() {
       return;
     }
     try {
-      const recipient =
-        messages.length > 0 && messages[0].sender._id === user._id
-          ? messages[0].recipient._id
-          : messages[0].sender._id;
+      const conversations = await messengerServices.getConversations();
+      const thisConversation = conversations.filter((conversation) => {
+        return conversation._id === conversationId;
+      });
+      console.log(thisConversation)
+      let recipientId = thisConversation[0].users.find((elem) => {
+        return elem._id !== user._id;
+      })._id;
       const response = await messengerServices.sendMessage(conversationId, {
-        recipient,
+        recipientId,
         content: newMessage,
       });
       if (response.error) {
@@ -69,6 +73,7 @@ function ConvMessages() {
       }
     } catch (error) {
       toast.error("Failed to send message.");
+      console.log(error);
     }
   };
 
