@@ -2,7 +2,6 @@ import { useState, useEffect, useContext, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import Message from "./Message";
-import Loading from "../Loading";
 import messengerServices from "../../services/messengerServices";
 import { AuthContext } from "../../context/AuthContext";
 
