@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../context/AuthContext";
 
-function AddReview({ personRated, onCreation, onCancel }) {
+const AddReview = ({ personRated, onCreation, onCancel }) => {
   const { user } = useContext(AuthContext);
   const [review, setReview] = useState({
     title: "",

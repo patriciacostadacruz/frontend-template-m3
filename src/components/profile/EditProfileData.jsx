@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function EditProfileData({ user, onUpdate, onCancel }) {
+const EditProfileData = ({ user, onUpdate, onCancel }) => {
   const style = { height: "300px", width: "300px", objectFit: "cover" };
   const [formState, setFormState] = useState({
     firstName: user.firstName,

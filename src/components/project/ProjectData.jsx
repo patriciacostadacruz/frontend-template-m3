@@ -1,11 +1,10 @@
-import { AuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 import peopleCount from "../../images/peopleCount.png";
 
-function ProjectData({ project, isOwner, isInvestor }) {
+const ProjectData = ({ project, isOwner, isInvestor }) => {
   const { user } = useContext(AuthContext);
-
   const style = {
     height: "70px",
     width: "70px",
@@ -21,7 +20,7 @@ function ProjectData({ project, isOwner, isInvestor }) {
           <div>
             <h3>{project.title}</h3>
             <p>
-              <strong>Added by:</strong>{" "}
+              <strong>Added by</strong>{" "}
               {isOwner ? (
                 <Link to="/profile">
                   <img src={project.owner.image} style={style} alt="Avatar" />
@@ -36,23 +35,23 @@ function ProjectData({ project, isOwner, isInvestor }) {
             </p>
           </div>
           <p>
-            <strong>Status:</strong> {project.status}
+            <strong>Status</strong> {project.status}
           </p>
           <p>
-            <strong>Location:</strong> {project.location}
+            <strong>Location</strong> {project.location}
           </p>
           <p>
-            <strong>Funding needed:</strong> {project.fundingNeeded}
+            <strong>Funding needed</strong> {project.fundingNeeded}
           </p>
           <p>
-            <strong>Industry: </strong>
+            <strong>Industry </strong>
             {project.industry.map((elem) => {
               return <span key={project.industry.indexOf(elem)}>{elem}</span>;
             })}
           </p>
           <p>{project.description}</p>
           <p>
-            <strong>Investors:</strong>
+            <strong>Investors</strong>
             {project.investors.length === 0 && "No investors yet."}
             {project.investors.map((investor) => {
               return (

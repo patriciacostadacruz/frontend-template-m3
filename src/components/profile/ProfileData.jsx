@@ -1,13 +1,14 @@
-import EditPassword from "../profile/EditPassword";
-import linkedin from "../../images/linkedin.png";
-import profileService from "../../services/profileServices";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import EditPassword from "../profile/EditPassword";
+import profileService from "../../services/profileServices";
+import linkedin from "../../images/linkedin.png";
 
-function ProfileData({ user }) {
-  const style = { height: "300px", width: "300px", objectFit: "cover" };
+const ProfileData = ({ user }) => {
   const [isEditing, setIsEditing] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [password, setPassword] = useState(null);
+  const style = { height: "300px", width: "300px", objectFit: "cover" };
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -49,13 +50,13 @@ function ProfileData({ user }) {
             )}
           </div>
           <p>
-            <strong>Email: </strong>
+            <strong>Email </strong>
             {user.email}
           </p>
           {!isEditing ? (
             <>
               <p>
-                <strong>Password:</strong> ********
+                <strong>Password</strong> ********
               </p>
               <button onClick={handleEdit}>Change password</button>
             </>
@@ -63,17 +64,17 @@ function ProfileData({ user }) {
             <EditPassword onUpdate={handleUpdate} onCancel={handleCancel} />
           )}
           <p>
-            <strong>Role: </strong>
+            <strong>Role </strong>
             {user.role}
           </p>
         </div>
         <div className="profile-data-professional">
           <p>
-            <strong>Company: </strong>
+            <strong>Company </strong>
             {user.company}
           </p>
           <p>
-            <strong>Industry: </strong>
+            <strong>Industry </strong>
             {user.industry.map((elem) => {
               return <span key={user.industry.indexOf(elem)}>{elem}</span>;
             })}

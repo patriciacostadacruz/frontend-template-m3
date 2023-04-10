@@ -1,14 +1,14 @@
 import { useEffect, useState, useContext } from "react";
-import profileService from "../../services/profileServices";
+import toast from "react-hot-toast";
 import ProfileData from "../../components/profile/ProfileData";
 import EditProfileData from "../../components/profile/EditProfileData";
 import Loading from "../../components/Loading";
-import toast from "react-hot-toast";
-import { AuthContext } from "../../context/AuthContext";
 import ProjectCard from "../../components/project/ProjectCard";
 import ReviewCard from "../../components/ReviewCard";
+import profileService from "../../services/profileServices";
+import { AuthContext } from "../../context/AuthContext";
 
-function Profile() {
+const Profile = () => {
   const [user, setUser] = useState(null);
   const [userProjects, setUserProjects] = useState(null);
   const [userReviews, setUserReviews] = useState(null);
@@ -28,10 +28,6 @@ function Profile() {
       toast.error("Sorry, we couldn't retrieve your profile data. Please try again.");
     }
   }
-
-  useEffect(() => {
-    getProfile();
-  }, []);
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -70,6 +66,9 @@ function Profile() {
     }
   };
 
+  useEffect(() => {
+    getProfile();
+  }, []);
 
   return (
     <div>

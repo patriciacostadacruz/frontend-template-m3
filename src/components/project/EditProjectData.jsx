@@ -1,7 +1,6 @@
 import { useState } from "react";
 
-function EditProjectData({ project, onUpdate, onCancel, investors }) {
-  console.log(investors)
+const EditProjectData = ({ project, onUpdate, onCancel, investors }) => {
   const [formState, setFormState] = useState({
     title: project.title,
     status: project.status,
@@ -58,6 +57,7 @@ function EditProjectData({ project, onUpdate, onCancel, investors }) {
     e.preventDefault();
     onUpdate(formState);
   };
+  
   return (
     <form onSubmit={handleSubmit}>
       <h2>Project detail - edit</h2>

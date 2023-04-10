@@ -1,8 +1,4 @@
-import React from "react";
-// eslint-disable-next-line no-unused-vars
-import { Link } from "react-router-dom";
-
-export default function AllReviews() {
+const AllReviews = () => {
 
   return (
     <div>
@@ -10,3 +6,5 @@ export default function AllReviews() {
     </div>
   );
 }
+
+export default AllReviews;

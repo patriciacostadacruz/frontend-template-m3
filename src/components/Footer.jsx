@@ -1,6 +1,6 @@
 import blueLogoWhiteLetter from "../images/investMate-blue-logo-white letter.png";
 
-function Footer() {
+const Footer = () => {
   return (
     <div className="footer">
       <img
@@ -25,6 +25,7 @@ function Footer() {
         >
           Privacy policy
         </a>
+        <a href="mailto:investmate-admin@gmail.com">Contact</a>
       </div>
     </div>
   );

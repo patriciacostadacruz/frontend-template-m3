@@ -2,8 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
-function SearchBar() {
+const SearchBar = () => {
   const [searchValue, setSearchValue] = useState("");
   const [searchIndustry, setSearchIndustry] = useState([]);
   const [selectedUsers, setSelectedUsers] = useState(false);

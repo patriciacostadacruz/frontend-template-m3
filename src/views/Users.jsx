@@ -1,10 +1,10 @@
-import indexService from "../services/indexServices";
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import UserCard from "../components/UserCard";
 import Loading from "../components/Loading";
-import { useLocation } from "react-router-dom";
+import indexService from "../services/indexServices";
 
-function Users() {
+const Users = () => {
   const [users, setUsers] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [sortBy, setSortBy] = useState("firstName");
@@ -29,11 +29,6 @@ function Users() {
       setErrorMessage("Sorry, we couldn't retrieve any user.");
     }
   };
-
-  useEffect(() => {
-    getUsers();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const sortUsers = (users) => {
     const filteredUsers = selectedRole
@@ -70,6 +65,11 @@ function Users() {
     // adds sort filter if there's a value so if box is checked for investee or investor
     setSelectedRole(e.target.checked ? e.target.value : "");
   };
+
+  useEffect(() => {
+    getUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

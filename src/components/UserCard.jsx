@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
-function UserCard({ user }) {
+const UserCard = ({ user }) => {
   const { user: me } = useContext(AuthContext);
   const style = {height: "200px", width: "200px", objectFit: "cover"}
   

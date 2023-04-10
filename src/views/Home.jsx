@@ -1,17 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
-// import { NavLink, useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
-import projectService from "../services/projectServices";
+import { toast } from "react-hot-toast";
 import ProjectCard from "../components/project/ProjectCard";
 import SearchBar from "../components/search/SearchBar";
-import { toast } from "react-hot-toast";
-
+import projectService from "../services/projectServices";
+import { AuthContext } from "../context/AuthContext";
 const landingImage =
   "https://cloudinary.hbs.edu/hbsit/image/upload/s--EmT0lNtW--/f_auto,c_fill,h_375,w_750,/v20200101/6978C1C20B650473DD135E5352D37D55.jpg";
 
-export default function Home() {
-  const { isLoggedIn, user } = useContext(AuthContext);
+const Home = () => {
   const [projects, setProjects] = useState(null);
+  const { isLoggedIn, user } = useContext(AuthContext);
   
   const getRandomProjects = async () => {
     try {
@@ -68,3 +66,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;

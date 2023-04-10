@@ -1,12 +1,10 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { AuthContext } from "../../context/AuthContext";
 import projectService from "../../services/projectServices";
+import { AuthContext } from "../../context/AuthContext";
 
-function AddProject() {
-  const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
+const AddProject = () => {
   const [showFunding, setShowFunding] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
@@ -16,6 +14,8 @@ function AddProject() {
     industry: [],
     fundingNeeded: ""
   });
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
 
   const handleInputChange = (e) => {
     setFormData((prev) => ({

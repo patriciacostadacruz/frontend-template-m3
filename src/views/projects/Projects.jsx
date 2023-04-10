@@ -1,10 +1,10 @@
-import projectService from "../../services/projectServices";
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import ProjectCard from "../../components/project/ProjectCard";
 import Loading from "../../components/Loading";
-import { useLocation } from "react-router-dom";
+import projectService from "../../services/projectServices";
 
-function Projects() {
+const Projects = () => {
   const [projects, setProjects] = useState(null);
   const [sortBy, setSortBy] = useState("title");
   const [sortDirection, setSortDirection] = useState("title");
@@ -28,11 +28,6 @@ function Projects() {
     }
   };
 
-  useEffect(() => {
-    getProjects();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const sortProjects = (projects) => {
     const sortedProjects = [...projects];
     if (sortBy === "date") {
@@ -46,7 +41,6 @@ function Projects() {
     }
     return sortedProjects;
   };
-
 
   const sortByDate = (a, b, direction) => {
     const dateA = new Date(a);
@@ -71,6 +65,11 @@ function Projects() {
     setSortBy(value[0]);
     setSortDirection(value[1]);
   };
+
+  useEffect(() => {
+    getProjects();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

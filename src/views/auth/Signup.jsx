@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import toast from "react-hot-toast";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import authService from "../../services/authService";
+import appLogo from "../../images/investMate-blue-logo-black-letter.png";
 
-export default function Signup() {
+const Signup = () => {
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
@@ -34,15 +35,6 @@ export default function Signup() {
     });
   };
 
-  useEffect(() => {
-    if (password !== passwordConfirmation) {
-      setErrorMessage("Passwords don't match.");
-    } else {
-      setErrorMessage(undefined);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [passwordConfirmation, password]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -60,7 +52,6 @@ export default function Signup() {
       bio: user.bio,
       status: user.status
     });
-    console.log(newUser);
     if (!newUser.error) {
       navigate('/login');
       toast.success("Account created successfully!");
@@ -68,13 +59,22 @@ export default function Signup() {
       toast.error("There was an issue when creating your account. Please try again.");
     }
     } catch (error) {
-      console.error(error)
       toast.error('Unable to create user account.')
     }
   }
 
+  useEffect(() => {
+    if (password !== passwordConfirmation) {
+      setErrorMessage("Passwords don't match.");
+    } else {
+      setErrorMessage(undefined);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [passwordConfirmation, password]);
+
   return (
     <div className="form-container">
+      <img src={appLogo} alt="App logo" />
       <h2>Create your account to enjoy investMate's features!</h2>
       <p>It's completely free!</p>
       <form onSubmit={handleSubmit}>
@@ -208,7 +208,13 @@ export default function Signup() {
         </>
         {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
         <button type="submit">Sign up</button>
+        <p>
+          Don't have an account?
+          <Link to="/login">Log in</Link>
+        </p>
       </form>
     </div>
   );
 }
+
+export default Signup;

@@ -1,12 +1,20 @@
 import React from "react";
 
-function ReviewCard({ review }) {
+const ReviewCard = ({ review }) => {
   const { title, personRating, rating, comment } = review;
   const style = {
     height: "70px",
     width: "70px",
     objectFit: "cover",
     borderRadius: "50px",
+  };
+
+  const printStars = (num) => {
+    let stars = "";
+    for (let i=0; i<num; i++) {
+      stars += "⭐️";
+    }
+    return stars;
   };
 
   return (
@@ -27,7 +35,7 @@ function ReviewCard({ review }) {
           <p className="review-title">
             <strong>{title}</strong>
           </p>
-          <p className="review-rating">{rating}/5</p>
+          <p className="review-rating">{printStars(rating)}</p>
         </div>
         <p className="review-comment">{comment}</p>
       </div>

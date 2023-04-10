@@ -4,9 +4,10 @@ import { AuthContext } from '../context/AuthContext';
 import whiteLogoBlackLetter from "../images/investMate-white-logo-black-letter.png";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function Navbar() {
+const Navbar = () => {
   const { isLoggedIn, logOutUser } = useContext(AuthContext); 
   const navigate = useNavigate();
+
   return (
     <div className="navbar-container">
       <ul>
@@ -60,3 +61,5 @@ export default function Navbar() {
     </div>
   );
 }
+
+export default Navbar;

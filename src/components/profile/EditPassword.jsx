@@ -1,7 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-function EditPassword({ onUpdate, onCancel }) {
+const EditPassword = ({ onUpdate, onCancel }) => {
 	const [passwordForm, setPasswordForm] = useState({
 		oldPassword: "",
 		password: "",
@@ -32,7 +32,7 @@ function EditPassword({ onUpdate, onCancel }) {
     }
 		if (!passwordRegex.test(passwordForm.password)) {
       toast.error(
-        "Password must have at least 6 characters and contain at least one number, one lowercase and one uppercase letter."
+        "Password must functionhave at least 6 characters and contain at least one number, one lowercase and one uppercase letter."
       );
       return;
     }

@@ -1,11 +1,11 @@
-import Loading from "../../components/Loading";
 import { useState, useEffect, useContext } from "react";
-import messengerServices from "../../services/messengerServices";
 import { Link } from "react-router-dom";
-import checkmark from "../../images/checkmark.png";
+import Loading from "../../components/Loading";
+import messengerServices from "../../services/messengerServices";
 import { AuthContext } from "../../context/AuthContext";
+import checkmark from "../../images/checkmark.png";
 
-function Conversations() {
+const Conversations = () => {
   const [loading, setLoading] = useState(true);
   const [conversations, setConversations] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -29,10 +29,6 @@ function Conversations() {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    getConversations();
-  }, []);
 
   const filteredConversations = conversations.filter((conversation) => {
     const firstName = conversation.users[0].firstName.toLowerCase();
@@ -80,6 +76,10 @@ function Conversations() {
       lastMessage.sender.firstName === user.firstName
     );
   };
+
+  useEffect(() => {
+    getConversations();
+  }, []);
 
   return (
     <>

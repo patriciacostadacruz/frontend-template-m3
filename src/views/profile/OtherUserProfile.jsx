@@ -1,58 +1,47 @@
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import profileServices from "../../services/profileServices";
-import reviewService from "../../services/reviewServices";
-import { useState, useEffect, useContext } from "react";
-import linkedin from "../../images/linkedin.png";
+import { toast } from "react-hot-toast";
 import Loading from "../../components/Loading";
 import AddReview from "../../components/profile/AddReview";
-import { toast } from "react-hot-toast";
 import ReviewCard from "../../components/ReviewCard";
 import ProjectCard from "../../components/project/ProjectCard";
+import profileServices from "../../services/profileServices";
+import reviewService from "../../services/reviewServices";
 import messengerServices from "../../services/messengerServices";
-import { AuthContext } from "../../context/AuthContext";
+import linkedin from "../../images/linkedin.png";
 
 
-function OtherUserProfile() {
-  const { userId } = useParams();
+const OtherUserProfile = () => {
   const [otherUser, setOtherUser] = useState(null);
   const [otherUserProjects, setOtherUserProjects] = useState(null);
   const [otherUserReviews, setOtherUserReviews] = useState(null);
   const [isRating, setIsRating] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
+  const { userId } = useParams();
   const style = { height: "300px", width: "300px", objectFit: "cover" };
 
   const getUser = async () => {
     setLoading(true);
     try {
-      console.log("from try")
       const response = await profileServices.getOtherUser(userId);
       if (response.error) {
-        console.log("from 1st condition");
         toast.error(response.error);
         setLoading(false);
         navigate("/users");
         return;
       } else  {
-        console.log("from 2nd condition");
         setOtherUser(response.otherUser);
         setOtherUserProjects(response.userProjects);
         setOtherUserReviews(response.userReviews);
         setLoading(false);
       }
     } catch (error) {
-      console.log("from catch");
       setLoading(false);
       toast.error("Sorry, we couldn't get this user's profile. It might be disabled or in maintenance.");
       navigate(-1);
     }
   }
-
-  useEffect(() => {
-    getUser();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const handleShowReviewForm = () => {
     setIsRating(true);
@@ -90,6 +79,10 @@ function OtherUserProfile() {
      }
    };
 
+   useEffect(() => {
+     getUser();
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, []);
 
   return (
     <>
@@ -111,21 +104,21 @@ function OtherUserProfile() {
                 )}
               </div>
               <p>
-                <strong>Email: </strong>
+                <strong>Email </strong>
                 {otherUser.email}
               </p>
               <p>
-                <strong>Role: </strong>
+                <strong>Role </strong>
                 {otherUser.role}
               </p>
             </div>
             <div className="profile-data-professional">
               <p>
-                <strong>Company: </strong>
+                <strong>Company </strong>
                 {otherUser.company}
               </p>
               <p>
-                <strong>Industry: </strong>
+                <strong>Industry </strong>
                 {otherUser.industry.map((elem) => {
                   return (
                     <span key={otherUser.industry.indexOf(elem)}>{elem}</span>

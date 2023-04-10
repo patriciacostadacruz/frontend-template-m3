@@ -1,23 +1,23 @@
 // eslint-disable-next-line no-unused-vars
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
-import projectService from "../../services/projectServices";
 import toast from "react-hot-toast";
 import ProjectData from "../../components/project/ProjectData";
 import EditProjectData from "../../components/project/EditProjectData";
-import { AuthContext } from "../../context/AuthContext";
 import Loading from "../../components/Loading";
+import projectService from "../../services/projectServices";
 import indexServices from "../../services/indexServices";
 import messengerServices from "../../services/messengerServices";
+import { AuthContext } from "../../context/AuthContext";
 
-function Project() {
-  const { projectId } = useParams();
+const Project = () => {
   const [project, setProject] = useState(null);
   const [investors, setInvestors] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [isInvestor, setIsInvestor] = useState(null);
   const [loading, setLoading] = useState(false);
+  const { projectId } = useParams();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   // only allows project owner to see the edit button
@@ -49,12 +49,6 @@ function Project() {
       console.error(error);
     }
   }
-
-  useEffect(() => {
-    getProject();
-    getInvestors();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -111,6 +105,12 @@ function Project() {
       toast.error("We could not update this project's data, try again later.");
     }
   };
+
+  useEffect(() => {
+    getProject();
+    getInvestors();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
