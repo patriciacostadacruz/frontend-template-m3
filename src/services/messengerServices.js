@@ -22,9 +22,9 @@ class MessengerService {
       .catch(({ error }) => error);
   }
 
-  createConversation(recipientId, users) {
+  createConversation(recipientId) {
     return this.api
-      .post(`/conversations/${recipientId}`, users)
+      .post(`/conversations/${recipientId}`)
       .then(({ data }) => data)
       .catch(({ error }) => error);
   }

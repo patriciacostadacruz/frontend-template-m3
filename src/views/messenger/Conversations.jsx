@@ -41,10 +41,11 @@ function Conversations() {
     const isActive = conversation.users.map(
       (user) => user.status !== "inactive"
     );
+    const hasMessages = conversation.messages[0] ? true : false;
     return (
       (firstName.includes(searchLowerCase) ||
         lastName.includes(searchLowerCase)) &&
-      isActive
+      isActive && hasMessages
     );
   });
 

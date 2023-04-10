@@ -73,12 +73,11 @@ function OtherUserProfile() {
   };
 
    const handleSendMessage = async () => {
+    const users = [user._id, userId];
     console.log("send message func called")
      try {
       console.log("entering send conv try");
-       const conversation = await messengerService.createConversation({ recipientId: userId}, {
-         users: [user._id, userId],
-       });
+       const conversation = await messengerService.createConversation({ recipientId: userId}, {users});
        if (conversation.existingConversation) {
         console.log("if existing conv");
         navigate(`/messages/${conversation.existingConversation._id}`);

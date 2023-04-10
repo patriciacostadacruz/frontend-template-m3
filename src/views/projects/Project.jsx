@@ -8,6 +8,7 @@ import EditProjectData from "../../components/project/EditProjectData";
 import { AuthContext } from "../../context/AuthContext";
 import Loading from "../../components/Loading";
 import indexServices from "../../services/indexServices";
+import messengerServices from "../../services/messengerServices";
 
 function Project() {
   const { projectId } = useParams();
@@ -17,8 +18,10 @@ function Project() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [isInvestor, setIsInvestor] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [users, setUsers] = useState(null);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+  const recipient = useParams();
   // only allows project owner to see the edit button
   const isOwner = user && project && user._id === project.owner._id;
 
@@ -71,13 +74,26 @@ function Project() {
         toast.success(`Project named "${deletedProject.title}" deleted successfully.`);
         navigate("/");
       } catch (error) {
-        toast.error("We could not deete this project, sorry. Try again later.");
+        toast.error("We could not delete this project, sorry. Try again later.");
       }
     }
   };
 
-  const handleMessage = () => {
-    // redirect to create conv + message
+  const handleSendMessage = async () => {
+    try {
+      const conversation = await messengerServices.createConversation();
+      console.log(conversation)
+      if (conversation.error) {
+        toast.error(conversation.error);
+      }
+      if (conversation.existingConversation) {
+        navigate(`/messages/${conversation.existingConversation._id}`);
+      } else {
+        navigate(`/messages/${conversation._id}`);
+      }
+    } catch (error) {
+      toast.error("We could not create this conversation.");
+    }
   };
 
   const handleUpdate = async (updatedProject) => {
@@ -106,7 +122,7 @@ function Project() {
           )}
           {!isOwner && (
             <div>
-              <button onClick={handleMessage}>Send message</button>
+              <button onClick={handleSendMessage}>Send message</button>
             </div>
           )}
         </>
