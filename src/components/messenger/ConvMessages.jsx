@@ -1,28 +1,34 @@
 import { useState, useEffect, useContext, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import messengerServices from "../../services/messengerServices";
 import { AuthContext } from "../../context/AuthContext";
 import Message from "./Message";
 import toast from "react-hot-toast";
+import Loading from "../Loading";
 
 function ConvMessages() {
   const [messages, setMessages] = useState(null);
   const [newMessage, setNewMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
   const { conversationId } = useParams();
   const { user } = useContext(AuthContext);
 
   const getMessages = async () => {
+    setIsLoading(true);
     try {
       const response = await messengerServices.getConvMessages(conversationId);
       if (response.error) {
         toast.error(response.error);
+        setIsLoading(false);
       } else {
         setMessages(response.messages);
+        setIsLoading(false);
       }
     } catch (error) {
       toast.error("Failed to fetch messages.");
+      setIsLoading(false);
     }
   };
 
@@ -116,6 +122,20 @@ function ConvMessages() {
 
   return (
     <>
+      <h2>
+        {messages &&
+          messages.length > 0 &&
+          (messages[0].sender._id === user._id ? (
+            <Link to={`/profile/${messages[0].recipient._id}`}>
+              {messages[0].recipient.firstName} {messages[0].recipient.lastName}
+            </Link>
+          ) : (
+            <Link to={`/profile/${messages[0].sender._id}`}>
+              {messages[0].sender.firstName} {messages[0].sender.lastName}
+            </Link>
+          ))}
+      </h2>
+      {isLoading && <Loading />}
       {messages && messages.length > 0 ? (
         <div>
           {messages.map((message) => (
@@ -131,14 +151,16 @@ function ConvMessages() {
       ) : (
         "No messages to show."
       )}
-      <input
-        type="text"
-        placeholder="Type your message here."
-        value={newMessage}
-        onChange={handleNewMessageChange}
-        onKeyDown={handleKeyDown}
-        ref={inputRef}
-      />
+      {!isLoading && (
+        <input
+          type="text"
+          placeholder="Type your message here."
+          value={newMessage}
+          onChange={handleNewMessageChange}
+          onKeyDown={handleKeyDown}
+          ref={inputRef}
+        />
+      )}
       <div ref={messagesEndRef} />
     </>
   );
