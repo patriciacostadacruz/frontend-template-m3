@@ -45,6 +45,7 @@ function OtherUserProfile() {
       console.log("from catch");
       setLoading(false);
       toast.error("Sorry, we couldn't get this user's profile. It might be disabled or in maintenance.");
+      navigate(-1);
     }
   }
 
