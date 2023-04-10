@@ -8,7 +8,7 @@ import AddReview from "../../components/profile/AddReview";
 import { toast } from "react-hot-toast";
 import ReviewCard from "../../components/ReviewCard";
 import ProjectCard from "../../components/project/ProjectCard";
-import messengerService from "../../services/messengerServices";
+import messengerServices from "../../services/messengerServices";
 import { AuthContext } from "../../context/AuthContext";
 
 
@@ -75,13 +75,13 @@ function OtherUserProfile() {
    const handleCreateConversation = async () => {
     const recipientId = userId;
      try {
-       const conversation = await messengerService.createConversation(recipientId);
+       const conversation = await messengerServices.createConversation(recipientId);
        if (conversation.existingConversation) {
-        toast.success("yYou already have a conversation with this user.");
+        toast.success("You already have a conversation with this user.");
         navigate(`/conversations/${conversation.existingConversation._id}`);
         return;
        } else {
-        toast.success("Conversation created! Start exchanging with this user by sending a message.");
+        toast.success("Start exchanging with this user by sending a message.");
         navigate(`/messages/${conversation._id}`);
        }
      } catch (error) {

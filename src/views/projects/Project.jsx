@@ -18,10 +18,8 @@ function Project() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [isInvestor, setIsInvestor] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [users, setUsers] = useState(null);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  const recipient = useParams();
   // only allows project owner to see the edit button
   const isOwner = user && project && user._id === project.owner._id;
 
@@ -79,20 +77,26 @@ function Project() {
     }
   };
 
-  const handleSendMessage = async () => {
+  const handleCreateConversation = async () => {
+    const recipientId = project.owner._id;
     try {
-      const conversation = await messengerServices.createConversation();
-      console.log(conversation)
-      if (conversation.error) {
-        toast.error(conversation.error);
-      }
+      const conversation = await messengerServices.createConversation(
+        recipientId
+      );
       if (conversation.existingConversation) {
-        navigate(`/messages/${conversation.existingConversation._id}`);
+        toast.success("You already have a conversation with this user.");
+        navigate(`/conversations/${conversation.existingConversation._id}`);
+        return;
       } else {
+        toast.success(
+          "Start exchanging with this user by sending a message."
+        );
         navigate(`/messages/${conversation._id}`);
       }
     } catch (error) {
-      toast.error("We could not create this conversation.");
+      toast.error(
+        "We cannot create this conversation. The user might be inactive."
+      );
     }
   };
 
@@ -113,7 +117,11 @@ function Project() {
       {loading && <Loading />}
       {!isEditing && project && (
         <>
-          <ProjectData project={project} isOwner={isOwner} isInvestor={isInvestor}/>
+          <ProjectData
+            project={project}
+            isOwner={isOwner}
+            isInvestor={isInvestor}
+          />
           {isOwner && (
             <div>
               <button onClick={handleEdit}>Edit project</button>
@@ -122,7 +130,7 @@ function Project() {
           )}
           {!isOwner && (
             <div>
-              <button onClick={handleSendMessage}>Send message</button>
+              <button onClick={handleCreateConversation}>Send message</button>
             </div>
           )}
         </>
