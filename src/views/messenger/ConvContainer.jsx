@@ -12,9 +12,9 @@ function ConvContainer() {
   const [otherUser, setOtherUser] = useState(null);
   const inputRef = useRef(null);
   const { conversationId } = useParams();
-  const { user } = useContext(AuthContext);  
+  const { user } = useContext(AuthContext);
 
-	const getMessages = async () => {
+  const getMessages = async () => {
     try {
       const response = await messengerServices.getConvMessages(conversationId);
       if (response.error) {
@@ -27,13 +27,13 @@ function ConvContainer() {
     }
   };
 
-  const getOtherUser =  async () => {
+  const getOtherUser = async () => {
     let otherUserId;
     // get the other user ID by returning the one not equal to logged user ID
     if (messages.length > 0) {
       const firstMessage = messages[0];
       if (firstMessage.sender._id === user._id) {
-         otherUserId = firstMessage.recipient._id;
+        otherUserId = firstMessage.recipient._id;
       } else {
         otherUserId = firstMessage.sender._id;
       }
@@ -71,10 +71,10 @@ function ConvContainer() {
     try {
       const response = await messengerServices.sendMessage(conversationId, {
         recipient:
-        messages[0].sender._id === user._id
-          ? messages[0].recipient._id
-          : messages[0].sender._id,
-          content: newMessage,
+          messages[0].sender._id === user._id
+            ? messages[0].recipient._id
+            : messages[0].sender._id,
+        content: newMessage,
       });
       if (response.error) {
         toast.error(response.error);
@@ -87,12 +87,19 @@ function ConvContainer() {
     }
   };
 
-	useEffect(() => {
+  useEffect(() => {
     getMessages();
     getOtherUser();
-    console.log(otherUser)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     getMessages();
+  //   }, 2000);
+  //   return () => clearInterval(interval);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [messages]);
 
   return (
     <>

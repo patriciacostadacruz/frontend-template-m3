@@ -38,6 +38,26 @@ const Message = ({ message, user, onDelete, onUpdate }) => {
     setContent(e.target.value);
   };
 
+  const formatMessageDate = (date) => {
+    const messageDate = new Date(date);
+    const currentDate = new Date();
+    const isToday =
+      messageDate.getDate() === currentDate.getDate() &&
+      messageDate.getMonth() === currentDate.getMonth() &&
+      messageDate.getFullYear() === currentDate.getFullYear();
+    if (isToday) {
+      const hours = messageDate.getHours();
+      const minutes = messageDate.getMinutes();
+      const formattedTime = `${hours}:${minutes.toString().padStart(2, "0")}`;
+      return formattedTime;
+    } else {
+      const month = messageDate.toLocaleString("default", { month: "short" });
+      const day = messageDate.getDate();
+      const formattedDate = `${month} ${day}`;
+      return formattedDate;
+    }
+  };
+
   return (
     <span
       className={
@@ -59,6 +79,7 @@ const Message = ({ message, user, onDelete, onUpdate }) => {
             )}
             {message.content}
           </p>
+          <p>{formatMessageDate(message.createdAt)}</p>
           {message.sender._id === user._id && (
             <>
               <button onClick={handleDelete}>Delete</button>

@@ -48,6 +48,25 @@ function Conversations() {
     );
   });
 
+  const formatMessageDate = (date) => {
+    const messageDate = new Date(date);
+    const currentDate = new Date();
+    const isToday =
+      messageDate.getDate() === currentDate.getDate() &&
+      messageDate.getMonth() === currentDate.getMonth() &&
+      messageDate.getFullYear() === currentDate.getFullYear();
+    if (isToday) {
+      const hours = messageDate.getHours();
+      const minutes = messageDate.getMinutes();
+      const formattedTime = `${hours}:${minutes.toString().padStart(2, "0")}`;
+      return formattedTime;
+    } else {
+      const month = messageDate.toLocaleString("default", { month: "short" });
+      const day = messageDate.getDate();
+      const formattedDate = `${month} ${day}`;
+      return formattedDate;
+    }
+  }
 
   const getOtherUser = (conversation) => {
     return conversation.users.find((person) => person._id !== user._id);
@@ -93,10 +112,9 @@ function Conversations() {
                       <img width="20" src={checkmark} alt="Message checkmark" />
                     )}
                     {/* always displays last messsage because of how it is sorted when pulled form DB */}
-                    {
-                      conversation.messages[0].content
-                    }
+                    {conversation.messages[0].content}
                   </p>
+                  <p>{formatMessageDate(conversation.messages[0].createdAt)}</p>
                 </div>
               </Link>
             );

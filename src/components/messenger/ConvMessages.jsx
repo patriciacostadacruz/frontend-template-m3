@@ -36,7 +36,7 @@ function ConvMessages({ messagesFromFather }) {
     try {
       const response = await messengerServices.deleteMessage(messageId);
       if (response.error) {
-        toast.error(response.error);
+        toast.error("We could not delete this message.");
       } else {
         const updatedMessages = messages.filter(
           (message) => message._id !== messageId
@@ -50,19 +50,9 @@ function ConvMessages({ messagesFromFather }) {
   };
 
   useEffect(() => {
-    // getMessages();
     scrollToBottom();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     getMessages();
-  //   }, 2000);
-  //   scrollToBottom();
-  //   return () => clearInterval(interval);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [messages]);
+  }, [messages]);
 
   return (
     <>
