@@ -47,13 +47,12 @@ function EditProjectData({ project, onUpdate, onCancel, investors }) {
     }));
   };
 
-// const handleinvest = () => {
-//   const investInApp = investors;
-//   const currentInvest = formState.investors;
-//   investInApp.map(elem => {
-//     ...elem, 
-//     isCurrentProjInvest: currentInvest.filter()
-//   });
+  const handleInvest = () => {
+    const appInvestors = investors;
+    const currentInvestors = formState.investors;
+    const isInvestor = appInvestors.some((investor) => currentInvestors.includes(investor));
+    return isInvestor;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -257,7 +256,7 @@ function EditProjectData({ project, onUpdate, onCancel, investors }) {
             <option
               key={investor._id}
               value={investor._id}
-              // selected={investor.isInvestor?}
+              selected={handleInvest}
             >
               {investor.firstName} {investor.lastName}
             </option>
