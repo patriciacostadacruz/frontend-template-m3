@@ -1,3 +1,55 @@
+/*** APP COLORS AND RESETS ***/
+@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+:root {
+  --base-blue: #5271ff;
+  --width100: 100%;
+  --border-radius-pic: 50%;
+  --border-radius-classic: 15px;
+}
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-width: 100%;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: "Quicksand", sans-serif;
+}
+
+/*** NAVBAR ***/
+
 .active {
   color: green;
+}
+.navbar-container {
+  background-color: var(--base-blue);
+  width: 100%;
+}
+.navbar-items {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.logout-button {
+  background-color: var(--base-blue);
+  border: none;
+}
+.navbar-options,
+.logout-button {
+  color: white;
+  text-decoration: none;
+  font-size: 22px;
+  padding: 5px;
+}
+.navbar-options:hover {
+  background-color: white;
+  color: var(--base-blue);
+  border-radius: var(--border-radius-classic);
+}
+.navbar-app-logo {
+  height: 60px;
+}
+.go-back-button {
+  display: none;
 }

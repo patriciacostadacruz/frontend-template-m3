@@ -10,54 +10,70 @@ const Navbar = () => {
 
   return (
     <div className="navbar-container">
-      <ul>
-        <img width="150" className="navbar-app-logo" src={whiteLogoBlackLetter} alt="" />
+      <ul className="navbar-items">
+        <img className="navbar-app-logo" src={whiteLogoBlackLetter} alt="" />
         <li>
-          <NavLink to="/">Home</NavLink>
+          <NavLink to="/" className="navbar-options">
+            Home
+          </NavLink>
         </li>
         {!isLoggedIn && (
           <li>
-            <NavLink to="/signup">Sign up</NavLink>
+            <NavLink to="/signup" className="navbar-options">
+              Sign up
+            </NavLink>
           </li>
         )}
         {!isLoggedIn && (
           <li>
-            <NavLink to="/login">Login</NavLink>
+            <NavLink to="/login" className="navbar-options">
+              Login
+            </NavLink>
           </li>
         )}
 
         {isLoggedIn && (
           <li>
-            <NavLink to="/users">Users</NavLink>
+            <NavLink to="/users" className="navbar-options">
+              Users
+            </NavLink>
           </li>
         )}
         {isLoggedIn && (
           <li>
-            <NavLink to="/projects">Projects</NavLink>
+            <NavLink to="/projects" className="navbar-options">
+              Projects
+            </NavLink>
           </li>
         )}
         {isLoggedIn && (
           <li>
-            <NavLink to="/projects/new">Create a project</NavLink>
+            <NavLink to="/projects/new" className="navbar-options">
+              Create project
+            </NavLink>
           </li>
         )}
         {isLoggedIn && (
           <li>
-            <NavLink to="/conversations">Conversations</NavLink>
+            <NavLink to="/conversations" className="navbar-options">
+              Conversations
+            </NavLink>
           </li>
         )}
         {isLoggedIn && (
           <li>
-            <NavLink to="/profile">Profile</NavLink>
+            <NavLink to="/profile" className="navbar-options">
+              Profile
+            </NavLink>
           </li>
         )}
         {isLoggedIn && (
           <li>
-            <button onClick={() => logOutUser()}>Log out</button>
+            <button onClick={() => logOutUser()} className="logout-button">Log out</button>
           </li>
         )}
       </ul>
-      <button onClick={() => navigate(-1)}>Go back</button>
+      <button className="go-back-button" onClick={() => navigate(-1)}>Go back</button>
     </div>
   );
 }
