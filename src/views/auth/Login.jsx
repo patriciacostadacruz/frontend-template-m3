@@ -55,8 +55,8 @@ const Login = () => {
 
   return (
     <div>
-      <img src={appLogo} alt="App logo" />
-      <h2>Log in</h2>
+      <img className="auth-app-logo" src={appLogo} alt="App logo" />
+      <h2 className="auth-h2">Log in</h2>
       <form onSubmit={handleSubmit}>
         <label>Email</label>
         <input

@@ -1,7 +1,9 @@
-/*** APP COLORS AND RESETS ***/
+/*** VARIABLES; BASICS AND RESETS ***/
 @import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
 :root {
   --base-blue: #5271ff;
+  --dark-blue: #2c4978;
+  --light-blue: #b4c2ff;
   --light-grey: #a6a6a6;
   --border-radius-classic: 15px;
 }
@@ -14,27 +16,27 @@
   font-size: 20px;
   font-family: "Quicksand", sans-serif;
 }
-
 body {
-  height: 100%;
-  min-height: 100%;
+  margin-top: 65px;
 }
 
 /*** NAVBAR ***/
 
 .active {
-  color: green;
+  font-weight: bold;
 }
 .navbar-container {
   background-color: var(--base-blue);
   width: 100%;
-  height: 62px;
+  height: auto;
   position: fixed;
+  top: 0;
 }
 .navbar-items {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
 }
 .logout-button {
   background-color: var(--base-blue);
@@ -47,15 +49,7 @@ body {
   font-size: 22px;
   padding: 5px;
 }
-.navbar-options:hover {
-  background-color: white;
-  color: var(--base-blue);
-  border-radius: var(--border-radius-classic);
-}
 .navbar-app-logo {
-  position: absolute;
-  top: 0;
-  left: 0;
   height: 60px;
 }
 .go-back-button {
@@ -90,7 +84,7 @@ body {
 /*** HOME PAGE ***/
 
 .landing-image {
-  width: 70%;
+  width: 65%;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -102,12 +96,29 @@ body {
 }
 article {
   width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+article img {
+  height: 40vh;
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+article p {
+  text-align: justify;
 }
 
 /*** GLOBAL ELEMENTS ***/
 
-h2 {
+h1 {
   color: var(--base-blue);
+  text-align: center;
+  font-size: 2.7rem;
+  margin: 20px 0;
+}
+h2 {
+  color: var(--dark-blue);
   text-align: center;
   font-size: 2.5rem;
   margin: 20px;
@@ -116,4 +127,48 @@ h3 {
   text-align: center;
   font-size: 2rem;
   margin: 20px;
+}
+button {
+  background-color: var(--light-blue);
+  border: none;
+  padding: 5px 10px;
+  border-radius: var(--border-radius-classic);
+  margin: 10px;
+}
+button:hover {
+  cursor: pointer;
+}
+
+/*** LOG IN AND SIGN UP ***/
+
+.auth-app-logo {
+  height: 20vh;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.signup-phrase {
+  font-weight: bold;
+  text-align: center;
+}
+.auth-h2 {
+  font-size: 2rem;
+}
+.signup-section {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 40%;
+}
+.signup-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+/*** FORMS AND INPUTS ***/
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
 }

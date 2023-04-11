@@ -74,13 +74,15 @@ const Signup = () => {
 
   return (
     <div className="form-container">
-      <img src={appLogo} alt="App logo" />
-      <h2>Create your account to enjoy investMate's features!</h2>
-      <p>It's completely free!</p>
+      <img className="auth-app-logo" src={appLogo} alt="App logo" />
+      <h2 className="auth-h2">
+        Create your account to enjoy investMate's features!
+      </h2>
+      <p className="signup-phrase">It's completely free!</p>
       <form onSubmit={handleSubmit}>
-        <>
-          <h3>Personal data:</h3>
-          <div>
+        <div className="signup-container">
+          <div className="signup-section">
+            <h3 className="signup-section-title">Personal data</h3>
             <label>First name</label>
             <input
               required
@@ -129,83 +131,79 @@ const Signup = () => {
               onChange={(e) => setPasswordConfirmation(e.target.value)}
             />
           </div>
-        </>
-        <>
-          <div>
-            <h3>Professional data:</h3>
-            <div>
-              <label>Role</label>
-              <select
-                required
-                name="role"
-                value={user.role}
-                onChange={handleChange}
-              >
-                <option value="">-- Select your role --</option>
-                <option value="investee">
-                  Investee (the person looking for inversions)
-                </option>
-                <option value="investor">
-                  Investor (the person looking to invest)
-                </option>
-              </select>
-              <label>LinkedIn page</label>
-              <input
-                type="text"
-                name="linkedIn"
-                value={user.linkedIn}
-                onChange={handleChange}
-              />
-              <label>Company</label>
-              <input
-                type="text"
-                name="company"
-                value={user.company}
-                onChange={handleChange}
-              />
-              <label>Industry</label>
-              <select
-                required
-                multiple
-                name="industry"
-                value={user.industry}
-                onChange={handleChange}
-              >
-                <option value="All">All</option>
-                <option value="Agriculture">Agriculture</option>
-                <option value="Chems and materials">Chems and materials</option>
-                <option value="Communication">Communication</option>
-                <option value="Construction">Construction</option>
-                <option value="Consumer goods and retail">
-                  Consumer goods and retail
-                </option>
-                <option value="Consumer services">Consumer services</option>
-                <option value="Energy and environment">
-                  Energy and environment
-                </option>
-                <option value="Financial services">Financial services</option>
-                <option value="Infrastructures">Infrastructures</option>
-                <option value="Life science">Life science</option>
-                <option value="Real estate">Real estate</option>
-                <option value="Transportation">Transportation</option>
-                <option value="Digital mark">Digital mark</option>
-                <option value="IT/Tech">IT/Tech</option>
-                <option value="Electronics">Electronics</option>
-                <option value="Other">Other</option>
-              </select>
-              <label>Biography</label>
-              <textarea
-                type="text"
-                name="bio"
-                value={user.bio}
-                placeholder="Write something about yourself"
-                column="30"
-                rows="10"
-                onChange={handleChange}
-              />
-            </div>
+          <div className="signup-section">
+            <h3 className="signup-section-title">Professional data</h3>
+            <label>Role</label>
+            <select
+              required
+              name="role"
+              value={user.role}
+              onChange={handleChange}
+            >
+              <option value="">-- Select your role --</option>
+              <option value="investee">
+                Investee (the person looking for inversions)
+              </option>
+              <option value="investor">
+                Investor (the person looking to invest)
+              </option>
+            </select>
+            <label>LinkedIn page</label>
+            <input
+              type="text"
+              name="linkedIn"
+              value={user.linkedIn}
+              onChange={handleChange}
+            />
+            <label>Company</label>
+            <input
+              type="text"
+              name="company"
+              value={user.company}
+              onChange={handleChange}
+            />
+            <label>Industry</label>
+            <select
+              required
+              multiple
+              name="industry"
+              value={user.industry}
+              onChange={handleChange}
+            >
+              <option value="All">All</option>
+              <option value="Agriculture">Agriculture</option>
+              <option value="Chems and materials">Chems and materials</option>
+              <option value="Communication">Communication</option>
+              <option value="Construction">Construction</option>
+              <option value="Consumer goods and retail">
+                Consumer goods and retail
+              </option>
+              <option value="Consumer services">Consumer services</option>
+              <option value="Energy and environment">
+                Energy and environment
+              </option>
+              <option value="Financial services">Financial services</option>
+              <option value="Infrastructures">Infrastructures</option>
+              <option value="Life science">Life science</option>
+              <option value="Real estate">Real estate</option>
+              <option value="Transportation">Transportation</option>
+              <option value="Digital mark">Digital mark</option>
+              <option value="IT/Tech">IT/Tech</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Other">Other</option>
+            </select>
+            <label>Biography</label>
+            <textarea
+              type="text"
+              name="bio"
+              value={user.bio}
+              placeholder="Write something about yourself"
+              column="30"
+              rows="10"
+              onChange={handleChange}
+            />
           </div>
-        </>
+        </div>
         {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
         <button type="submit">Sign up</button>
         <p>
