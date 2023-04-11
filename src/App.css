@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
 :root {
   --base-blue: #5271ff;
+  --light-grey: #a6a6a6;
   --width100: 100%;
   --border-radius-pic: 50%;
   --border-radius-classic: 15px;
@@ -24,6 +25,7 @@
 .navbar-container {
   background-color: var(--base-blue);
   width: 100%;
+  position: fixed;
 }
 .navbar-items {
   display: flex;
@@ -52,4 +54,24 @@
 }
 .go-back-button {
   display: none;
+}
+
+/*** FOOTER ***/
+.footer {
+  background-color: var(--light-grey);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+.footer-links {
+  display: flex;
+  gap: 50px;
+}
+.footer-links a {
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
 }
