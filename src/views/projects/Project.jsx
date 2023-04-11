@@ -8,6 +8,7 @@ import Loading from "../../components/Loading";
 import projectService from "../../services/projectServices";
 import indexServices from "../../services/indexServices";
 import messengerServices from "../../services/messengerServices";
+import profileService from "../../services/profileServices";
 import { AuthContext } from "../../context/AuthContext";
 
 const Project = () => {
@@ -74,18 +75,23 @@ const Project = () => {
   const handleCreateConversation = async () => {
     const recipientId = project.owner._id;
     try {
-      const conversation = await messengerServices.createConversation(
-        recipientId
-      );
-      if (conversation.existingConversation) {
-        toast.success("You already have a conversation with this user.");
-        navigate(`/conversations/${conversation.existingConversation._id}`);
-        return;
+      const recipient = await profileService.getOtherUser(recipientId);
+      if (recipient.status !== "active") {
+        toast.error("You cannot reach out to this user, this account is disabled or in maintenance.")
       } else {
-        toast.success(
-          "Start exchanging with this user by sending a message."
+        const conversation = await messengerServices.createConversation(
+          recipientId
         );
-        navigate(`/messages/${conversation._id}`);
+        if (conversation.existingConversation) {
+          toast.success("You already have a conversation with this user.");
+          navigate(`/conversations/${conversation.existingConversation._id}`);
+          return;
+        } else {
+          toast.success(
+            "Start exchanging with this user by sending a message."
+          );
+          navigate(`/messages/${conversation._id}`);
+        }
       }
     } catch (error) {
       toast.error(
