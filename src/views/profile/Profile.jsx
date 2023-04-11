@@ -6,6 +6,7 @@ import Loading from "../../components/Loading";
 import ProjectCard from "../../components/project/ProjectCard";
 import ReviewCard from "../../components/ReviewCard";
 import profileService from "../../services/profileServices";
+import authService from "../../services/authService";
 import { AuthContext } from "../../context/AuthContext";
 
 const Profile = () => {
@@ -14,7 +15,8 @@ const Profile = () => {
   const [userReviews, setUserReviews] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const { logOutUser } = useContext(AuthContext);
+  const { storeToken, removeToken, authenticateUser, logOutUser } =
+    useContext(AuthContext);
 
   const getProfile = async () => {
     setLoading(true);
@@ -41,9 +43,15 @@ const Profile = () => {
     try {
       const updatedMe = await profileService.editProfile(updatedUser);
       setUser(updatedMe);
-      setIsEditing(false);
-      getProfile();
-      toast.success("Profile updated successfully.");
+      if (updatedMe.authToken) {
+        removeToken();
+        storeToken(updatedMe.authToken);
+        authenticateUser();
+        await authService.me();
+        setIsEditing(false);
+        getProfile();
+        toast.success("Profile updated successfully.");
+      }
     } catch (error) {
       toast.error("Couldn't update your data. Try again later.");
     }
@@ -55,11 +63,11 @@ const Profile = () => {
     );
     if (confirmation) {
       try {
-        const disabledAccount = await profileService.editStatus({ status: "inactive" });
-        if (disabledAccount) {
-          logOutUser();
-          toast.success("Account successfully disabled!");
-        }
+        await profileService.editStatus({ status: "inactive" });
+        removeToken();
+        authenticateUser();
+        logOutUser();
+        toast.success("Account successfully disabled!");
       } catch (error) {
         toast.error("We could not disable your account, try again later.");
       }

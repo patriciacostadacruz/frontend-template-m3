@@ -46,10 +46,12 @@ const EditProjectData = ({ project, onUpdate, onCancel, investors }) => {
     }));
   };
 
-  const handleInvest = () => {
-    const appInvestors = investors;
-    const currentInvestors = formState.investors;
-    const isInvestor = appInvestors.some((investor) => currentInvestors.includes(investor));
+  const handleInvest = (investor) => {
+    // should returns true if investor is included in projInvestors
+    const projInvestors = formState.investors;
+    const isInvestor = projInvestors.filter(
+      (elem) => elem._id === investor._id
+    );
     return isInvestor;
   };
 
@@ -256,7 +258,7 @@ const EditProjectData = ({ project, onUpdate, onCancel, investors }) => {
             <option
               key={investor._id}
               value={investor._id}
-              selected={handleInvest}
+              selected={() => handleInvest(investor)}
             >
               {investor.firstName} {investor.lastName}
             </option>

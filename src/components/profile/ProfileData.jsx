@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import toast from "react-hot-toast";
 import EditPassword from "../profile/EditPassword";
 import profileService from "../../services/profileServices";
+import authService from "../../services/authService";
+import { AuthContext } from "../../context/AuthContext";
 import linkedin from "../../images/linkedin.png";
 
 const ProfileData = ({ user }) => {
   const [isEditing, setIsEditing] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [password, setPassword] = useState(null);
+  const { storeToken, removeToken, authenticateUser } =
+    useContext(AuthContext);
   const style = { height: "300px", width: "300px", objectFit: "cover" };
 
   const handleEdit = () => {
@@ -23,7 +27,11 @@ const ProfileData = ({ user }) => {
       const updatedPass = await profileService.editPassword(updatedPassword);
       if (updatedPass.error) {
         toast.error(updatedPass.error);
-      } else {
+      } else if (updatedPass.authToken) {
+        removeToken();
+        storeToken(updatedPass.authToken);
+        authenticateUser();
+        await authService.me();
         setIsEditing(false);
         setPassword(updatedPass);
         toast.success("Password updated successfully.");
