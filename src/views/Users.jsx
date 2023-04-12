@@ -76,7 +76,9 @@ const Users = () => {
       <h1>Users</h1>
       {loading && <Loading />}
       <div>
-        <label>Sort by</label>
+        <label>
+          <strong>Sort by </strong>
+        </label>
         <select
           onChange={handleSortChange}
           value={`${sortBy}_${sortDirection}`}
@@ -86,21 +88,23 @@ const Users = () => {
           <option value="lastName_asc">Last Name (A-Z)</option>
           <option value="lastName_desc">Last Name (Z-A)</option>
         </select>
-        <label>Filter by role</label>
+        <label>
+          <strong> Filter by </strong>
+        </label>
         <input
           type="checkbox"
           value="investee"
           checked={selectedRole === "investee"}
           onChange={handleRoleChange}
         />
-        <label>Investee</label>
+        <label> Investee </label>
         <input
           type="checkbox"
           value="investor"
           checked={selectedRole === "investor"}
           onChange={handleRoleChange}
         />
-        <label>Investor</label>
+        <label> Investor </label>
       </div>
       {users
         ? sortUsers(users).map((user) => {

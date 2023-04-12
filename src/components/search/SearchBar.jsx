@@ -54,17 +54,17 @@ const SearchBar = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form className="search-bar-container" onSubmit={handleSubmit}>
         <label>
-          Search for:
+          <strong>Search for:</strong>{" "}
           <label>
             <input
               type="checkbox"
               value="projects"
               checked={selectedProjects}
               onChange={handleProjectCheckboxChange}
-            />
-            Projects
+            />{" "}
+            Projects{" "}
           </label>
           <label>
             <input
@@ -72,19 +72,18 @@ const SearchBar = () => {
               value="users"
               checked={selectedUsers}
               onChange={handleUserCheckboxChange}
-            />
+            />{" "}
             Users
           </label>
         </label>
-        <input type="text" value={searchValue} onChange={handleChange}>
-        </input>
+        <input type="text" value={searchValue} onChange={handleChange} placeholder="Type here"></input>
         <label>
-          Industry:
           <select
             multiple
             value={searchIndustry}
             onChange={handleIndustryChange}
           >
+            <option value="">-- Select one or many options --</option>
             <option value="All">All</option>
             <option value="Agriculture">Agriculture</option>
             <option value="Chems and materials">Chems and materials</option>

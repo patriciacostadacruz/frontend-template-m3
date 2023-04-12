@@ -263,3 +263,12 @@ select:focus,
 textarea:focus {
   background-color: rgb(221, 237, 241);
 }
+
+/*** SEARCH BAR ***/
+.search-bar-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 50px;
+}

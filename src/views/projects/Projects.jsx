@@ -76,7 +76,7 @@ const Projects = () => {
       <h1>Projects</h1>
       {loading && <Loading />}
       <div>
-        <label>Sort by:</label>
+        <label><strong>Sort by </strong></label>
         <select
           onChange={handleSortChange}
           value={`${sortBy}_${sortDirection}`}
