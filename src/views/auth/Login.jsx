@@ -11,6 +11,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [passwordShown, setPasswordShown] = useState(false);
   const { storeToken, authenticateUser, isLoggedIn } = useAuth();
   const navigate = useNavigate();
 
@@ -46,6 +47,10 @@ const Login = () => {
     }
   };
 
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
+
   useEffect(() => {
     if (isLoggedIn) {
       navigate("/");
@@ -57,7 +62,7 @@ const Login = () => {
     <div>
       <img className="auth-app-logo" src={appLogo} alt="App logo" />
       <h2 className="auth-h2">Log in</h2>
-      <form onSubmit={handleSubmit}>
+      <form className="login-form" onSubmit={handleSubmit}>
         <label>Email</label>
         <input
           required
@@ -67,17 +72,22 @@ const Login = () => {
           onChange={handleChange}
         />
         <label>Password</label>
-        <input
-          required
-          type="password"
-          name="password"
-          value={user.password}
-          onChange={handleChange}
-        />
-        <button type="submit">Log in </button>
-        <p>
+        <div>
+          <input
+            required
+            type={passwordShown ? "text" : "password"}
+            name="password"
+            value={user.password}
+            onChange={handleChange}
+          />
+          <button className="show-pass-button" onClick={togglePassword}>Show password</button>
+        </div>
+        <button className="basic-button" type="submit">
+          Log in{" "}
+        </button>
+        <p className="auth-phrase">
           Don't have an account?
-          <Link to="/signup">Sign up</Link>
+          <Link to="/signup"> Sign up</Link>
         </p>
       </form>
     </div>

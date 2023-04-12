@@ -75,10 +75,13 @@ const Signup = () => {
   return (
     <div className="form-container">
       <img className="auth-app-logo" src={appLogo} alt="App logo" />
-      <h2 className="auth-h2">
-        Create your account to enjoy investMate's features!
+      <h2>
+        <span className="title-word title-word-1">Create an account</span>{" "}
+        <span className="title-word title-word-2">and enjoy all of </span>
+        <span className="title-word title-word-3">investMate's features.</span>
+        <br />
+        <span className="title-word title-word-4">It's completely free!</span>
       </h2>
-      <p className="signup-phrase">It's completely free!</p>
       <form onSubmit={handleSubmit}>
         <div className="signup-container">
           <div className="signup-section">
@@ -130,6 +133,7 @@ const Signup = () => {
               value={passwordConfirmation}
               onChange={(e) => setPasswordConfirmation(e.target.value)}
             />
+            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
           </div>
           <div className="signup-section">
             <h3 className="signup-section-title">Professional data</h3>
@@ -204,11 +208,12 @@ const Signup = () => {
             />
           </div>
         </div>
-        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-        <button type="submit">Sign up</button>
-        <p>
+        <button className="basic-button" type="submit">
+          Sign up
+        </button>
+        <p className="auth-phrase">
           Don't have an account?
-          <Link to="/login">Log in</Link>
+          <Link to="/login"> Log in</Link>
         </p>
       </form>
     </div>
