@@ -70,12 +70,15 @@ const Home = () => {
           </div>
         </div>
       )}
+      <hr />
       <h3>Active projects</h3>
-      {projects
-        ? projects.map((project) => {
-            return <ProjectCard key={project._id} project={project} />;
-          })
-        : null}
+      <div className="project-cards">
+        {projects
+          ? projects.map((project) => {
+              return <ProjectCard key={project._id} project={project} />;
+            })
+          : null}
+      </div>
     </div>
   );
 }

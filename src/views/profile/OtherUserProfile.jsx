@@ -19,7 +19,7 @@ const OtherUserProfile = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { userId } = useParams();
-  const style = { height: "300px", width: "300px", objectFit: "cover" };
+  const style = { height: "300px", width: "300px", objectFit: "cover", borderRadius: "5px" };
 
   const getUser = async () => {
     setLoading(true);
@@ -146,8 +146,9 @@ const OtherUserProfile = () => {
               onCancel={handleCancel}
             />
           )}
-          <div className="profile-projects">
-            <h3>Projects {otherUser.firstName} is working on</h3>
+          <hr />
+          <h3>Projects {otherUser.firstName} is working on</h3>
+          <div className="project-cards">
             {otherUserProjects.length > 0
               ? otherUserProjects.map((project) => {
                   return (
@@ -156,6 +157,7 @@ const OtherUserProfile = () => {
                 })
               : "This user has no active projects."}
           </div>
+          <hr />
           <h3>Here's what people think about {otherUser.firstName}</h3>
           <div className="profile-reviews">
             {otherUserReviews.length > 0

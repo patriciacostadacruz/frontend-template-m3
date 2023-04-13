@@ -75,7 +75,7 @@ const Projects = () => {
     <>
       <h1>Projects</h1>
       {loading && <Loading />}
-      <div>
+      <div className="sort">
         <label><strong>Sort by </strong></label>
         <select
           onChange={handleSortChange}
@@ -87,12 +87,14 @@ const Projects = () => {
           <option value="date_desc">Creation date (newest first)</option>
         </select>
       </div>
-      {projects
-        ? sortProjects(projects).map((project) => {
-            return <ProjectCard project={project} key={project._id} />;
-          })
-        : null}
-        {projects && projects.length < 1 && <p>No projects to display.</p>}
+      <div className="project-cards">
+        {projects
+          ? sortProjects(projects).map((project) => {
+              return <ProjectCard project={project} key={project._id} />;
+            })
+          : null}
+          {projects && projects.length < 1 && <p>No projects to display.</p>}
+      </div>
       {errorMessage ? <p>{errorMessage}</p> : null}
     </>
   );

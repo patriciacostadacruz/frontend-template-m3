@@ -97,17 +97,19 @@ const Profile = () => {
           onCancel={handleCancel}
         />
       )}
-      <div className="profile-projects">
-        <h3>Your active projects</h3>
+      <hr />
+      <h3>Your active projects</h3>
+      <div className="project-cards">
         {userProjects && userProjects.length > 0
           ? userProjects.map((project) => {
               return <ProjectCard project={project} key={`${project._id}1`} />;
             })
           : "You haven't added any project yet."}
       </div>
+      <hr />
       <h3>What people think about you</h3>
       <div className="profile-reviews">
-        {userReviews && userReviews.length > 0 
+        {userReviews && userReviews.length > 0
           ? userReviews.map((review) => {
               return <ReviewCard review={review} key={`${review._id}1`} />;
             })

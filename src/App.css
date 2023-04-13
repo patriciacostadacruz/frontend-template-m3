@@ -92,6 +92,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 50px;
 }
 .footer-links {
   display: flex;
@@ -143,12 +144,12 @@ h2 {
   color: var(--dark-blue);
   text-align: center;
   font-size: 2.5rem;
-  margin: 20px;
+  margin: 40px;
 }
 h3 {
   text-align: center;
   font-size: 2rem;
-  margin: 20px;
+  margin: 40px;
 }
 h4 {
   color: white;
@@ -171,12 +172,17 @@ button {
 }
 button:hover {
   cursor: pointer;
-  background-color: var(--base-blue);
+  transform: scale(1.1);
+  transition: all ease 200ms;
 }
 a {
   text-decoration: none;
   color: var(--base-blue);
   font-weight: bold;
+}
+hr {
+  margin: 50px 100px;
+  border: 2px solid var(--light-grey);
 }
 
 /*** LOG IN AND SIGN UP ***/
@@ -280,7 +286,7 @@ label {
   font-weight: bold;
 }
 
-/*** SEARCH BAR ***/
+/*** SEARCH BAR & FILTERS ***/
 
 .search-bar-container {
   display: flex;
@@ -288,6 +294,9 @@ label {
   justify-content: center;
   align-items: center;
   gap: 50px;
+}
+.sort {
+  text-align: center;
 }
 
 /*** PROFILE ***/
@@ -319,6 +328,7 @@ label {
 }
 .industry-tag {
   background: var(--light-grey);
+  color: white;
   border-radius: 5px;
   padding: 2px 5px;
   margin: 5px;
@@ -385,4 +395,52 @@ label {
   color: var(--dark-blue);
   font-weight: bold;
   text-decoration: underline;
+}
+
+/*** PROJECT/USER VIEW & CARDS ***/
+
+.project-cards,
+.user-cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
+}
+.project-card {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  line-height: 35px;
+  color: black;
+  font-weight: normal;
+}
+.project-card h4 {
+  text-align: center;
+}
+.project-card:hover {
+  transform: scale(1.1);
+  transition: all ease 500ms;
+}
+.user-card {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 10px;
+  border-radius: var(--border-radius-classic);
+  box-shadow: 3px 3px 5px var(--light-grey);
+  transition: 0.3s;
+}
+.user-card:hover {
+  box-shadow: 6px 6px 9px var(--light-grey);
+}
+.user-card-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: black;
+  font-weight: normal;
 }

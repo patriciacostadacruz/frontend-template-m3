@@ -75,7 +75,7 @@ const Users = () => {
     <>
       <h1>Users</h1>
       {loading && <Loading />}
-      <div>
+      <div className="sort">
         <label>
           <strong>Sort by </strong>
         </label>
@@ -106,12 +106,14 @@ const Users = () => {
         />
         <label> Investor </label>
       </div>
-      {users
-        ? sortUsers(users).map((user) => {
-            return <UserCard user={user} key={user._id} />;
-          })
-        : null}
-      {users && users.length < 1 && <p>No users to display.</p>}
+      <div className="user-cards">
+        {users
+          ? sortUsers(users).map((user) => {
+              return <UserCard user={user} key={user._id} />;
+            })
+          : null}
+        {users && users.length < 1 && <p>No users to display.</p>}
+      </div>
       {errorMessage && <p>{errorMessage}</p>}
     </>
   );

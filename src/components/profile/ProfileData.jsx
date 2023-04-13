@@ -12,7 +12,7 @@ const ProfileData = ({ user }) => {
   const [password, setPassword] = useState(null);
   const { storeToken, removeToken, authenticateUser } =
     useContext(AuthContext);
-  const style = { height: "300px", width: "300px", objectFit: "cover" };
+  const style = { height: "300px", width: "300px", objectFit: "cover", borderRadius: "5px" };
 
   const handleEdit = () => {
     setIsEditing(true);
