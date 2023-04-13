@@ -83,7 +83,7 @@ const SearchBar = () => {
             value={searchIndustry}
             onChange={handleIndustryChange}
           >
-            <option value="">-- Select one or many options --</option>
+            <option value="">-- Select one or many industries --</option>
             <option value="All">All</option>
             <option value="Agriculture">Agriculture</option>
             <option value="Chems and materials">Chems and materials</option>
