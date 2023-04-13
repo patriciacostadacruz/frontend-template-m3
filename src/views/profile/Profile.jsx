@@ -21,6 +21,7 @@ const Profile = () => {
   const [loading, setLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [chartData, setChartData] = useState({datasets: []});
+  // const [selectedLabel, setSelectedLabel] = useState(null);
   const chartContainer = useRef(null);
   const { storeToken, removeToken, authenticateUser, logOutUser } =
     useContext(AuthContext);
@@ -88,15 +89,19 @@ const Profile = () => {
 
   useEffect(() => {
     if (userProjects && userProjects.length > 0 && chartContainer.current) {
+      const statuses = [
+        ...new Set(userProjects.map((project) => project.status)),
+      ];
+      const data = statuses.map(
+        (status) =>
+          userProjects.filter((project) => project.status === status).length
+      );
       setChartData({
-        labels: userProjects.map((project) => project.status),
+        labels: statuses,
         datasets: [
           {
             label: "Project by status",
-            data: userProjects.reduce((acc, curr) => {
-              acc[curr.status] = (acc[curr.status] || 0) + 1;
-              return acc;
-            }, {}),
+            data,
             backgroundColor: [
               "#3d8dae",
               "#df8453",
@@ -109,10 +114,7 @@ const Profile = () => {
           },
         ],
       });
-      console.log(chartData);
-      console.log(userProjects);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userProjects]);
 
   return (
@@ -138,10 +140,10 @@ const Profile = () => {
       <h3>Your active projects</h3>
       <div className="projects-section">
         <div className="chart-container">
-          {userProjects && chartData && (
+          {userProjects && chartData ? (
             <>
-              <h5 style={{ textAlign: "center" }}>Projects chart</h5>
               <Pie
+                className="pie"
                 ref={chartContainer}
                 data={chartData}
                 options={{
@@ -149,22 +151,26 @@ const Profile = () => {
                     title: {
                       display: true,
                       text: "Projects by status",
-                      fontsize: 20
+                      fontsize: 20,
                     },
                   },
                 }}
               />
             </>
+          ) : (
+            "No data to create chart."
           )}
         </div>
-        <div className="project-cards">
-          {userProjects && userProjects.length > 0
-            ? userProjects.map((project) => {
-                return (
-                  <ProjectCard project={project} key={`${project._id}1`} />
-                );
-              })
-            : "You haven't added any project yet."}
+        <div className="projects-list">
+          {userProjects ? (
+            <>
+              {userProjects.map((project) => (
+                <ProjectCard key={project._id} project={project} />
+              ))}
+            </>
+          ) : (
+            "No projects top show."
+          )}
         </div>
       </div>
       <hr />
