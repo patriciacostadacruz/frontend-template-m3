@@ -122,8 +122,9 @@ const Conversations = () => {
             );
           })}
         </div>
-      ) : (
-        "No conversations to show."
+      ) : null}
+      {filteredConversations && filteredConversations.length < 1 && (
+        <p>No conversations to display.</p>
       )}
     </>
   );

@@ -92,6 +92,7 @@ const Projects = () => {
             return <ProjectCard project={project} key={project._id} />;
           })
         : null}
+        {projects && projects.length < 1 && <p>No projects to display.</p>}
       {errorMessage ? <p>{errorMessage}</p> : null}
     </>
   );

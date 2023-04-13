@@ -52,6 +52,7 @@ body {
   height: auto;
   position: fixed;
   top: 0;
+  z-index: 999;
 }
 .navbar-items {
   display: flex;
@@ -148,6 +149,17 @@ h3 {
   text-align: center;
   font-size: 2rem;
   margin: 20px;
+}
+h4 {
+  color: white;
+  background-color: var(--base-blue);
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 22px;
+}
+h5 {
+  color: var(--dark-blue);
+  font-size: 22px;
 }
 button {
   background-color: var(--light-blue);
@@ -273,4 +285,76 @@ textarea:focus {
   justify-content: center;
   align-items: center;
   gap: 50px;
+}
+
+/*** PROFILE ***/
+
+.profile-data {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+.name-linkedin {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.profile-data-personal,
+.profile-data-professional {
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.profile-options {
+  position: absolute;
+  right: 15px;
+  top: 90px;
+}
+.industry-tag {
+  background: var(--light-grey);
+  border-radius: 5px;
+  padding: 2px 5px;
+  margin: 5px;
+}
+
+/*** REVIEWS ***/
+
+.review-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+}
+.review-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.profile-reviews {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.review-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 450px;
+  border: 2px solid var(--base-blue);
+  border-radius: 5px;
+  padding: 15px;
+  box-shadow: 8px 8px 8px var(--base-blue);
+  margin: 30px;
+}
+.review-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

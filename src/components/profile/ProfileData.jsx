@@ -46,14 +46,14 @@ const ProfileData = ({ user }) => {
       <div className="profile-data">
         <img style={style} src={user.image} alt="Avatar" />
         <div className="profile-data-personal">
-          <div className="profile-name-linkedin">
-            <h2>
-              {user.firstName} {user.lastName}
-            </h2>
+          <div className="name-linkedin">
+            <h4>
+            {user.firstName} {user.lastName}
+            </h4>
             {user.linkedIn && (
               // using anchor to open page in new tab with blank target
               <a href={user.linkedIn} target="_blank" rel="noreferrer">
-                <img width="30" src={linkedin} alt="Linkedin profile" />
+              <img width="30" src={linkedin} alt="Linkedin profile" />
               </a>
             )}
           </div>
@@ -84,10 +84,10 @@ const ProfileData = ({ user }) => {
           <p>
             <strong>Industry </strong>
             {user.industry.map((elem) => {
-              return <span key={user.industry.indexOf(elem)}>{elem}</span>;
+              return <span key={user.industry.indexOf(elem)} className="industry-tag">{elem}</span>;
             })}
           </p>
-          <p>{user.bio}</p>
+          <p className="bio">"{user.bio}"</p>
         </div>
       </div>
     </>

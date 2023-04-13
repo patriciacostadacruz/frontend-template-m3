@@ -111,6 +111,7 @@ const Users = () => {
             return <UserCard user={user} key={user._id} />;
           })
         : null}
+      {users && users.length < 1 && <p>No users to display.</p>}
       {errorMessage && <p>{errorMessage}</p>}
     </>
   );

@@ -92,10 +92,10 @@ const OtherUserProfile = () => {
           <div className="profile-data">
             <img style={style} src={otherUser.image} alt="Avatar" />
             <div className="profile-data-personal">
-              <div className="profile-name-linkedin">
-                <h2>
+              <div className="name-linkedin">
+                <h4>
                   {otherUser.firstName} {otherUser.lastName}
-                </h2>
+                </h4>
                 {otherUser.linkedIn && (
                   // using anchor to open page in new tab with blank target
                   <a href={otherUser.linkedIn} target="_blank" rel="noreferrer">
@@ -121,17 +121,24 @@ const OtherUserProfile = () => {
                 <strong>Industry </strong>
                 {otherUser.industry.map((elem) => {
                   return (
-                    <span key={otherUser.industry.indexOf(elem)}>{elem}</span>
+                    <span
+                      key={otherUser.industry.indexOf(elem)}
+                      className="industry-tag"
+                    >
+                      {elem}
+                    </span>
                   );
                 })}
               </p>
-              <p>{otherUser.bio}</p>
+              <p>"{otherUser.bio}"</p>
             </div>
           </div>
-          <button onClick={handleCreateConversation}>Send message</button>
-          {!isRating && otherUser && (
-            <button onClick={handleShowReviewForm}>Rate user</button>
-          )}
+          <div className="profile-options">
+            <button onClick={handleCreateConversation}>Send message</button>
+            {!isRating && otherUser && (
+              <button onClick={handleShowReviewForm}>Rate user</button>
+            )}
+          </div>
           {isRating && otherUser && (
             <AddReview
               personRated={otherUser._id}
@@ -149,8 +156,8 @@ const OtherUserProfile = () => {
                 })
               : "This user has no active projects."}
           </div>
+          <h3>Reviews</h3>
           <div className="profile-reviews">
-            <h3>Reviews</h3>
             {otherUserReviews.length > 0
               ? otherUserReviews.map((review) => {
                   return <ReviewCard review={review} key={`${review._id}1`} />;

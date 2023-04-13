@@ -84,8 +84,10 @@ const Profile = () => {
       {!isEditing && user && (
         <>
           <ProfileData user={user} />
-          <button onClick={handleEdit}>Edit profile</button>
-          <button onClick={handleDisable}>Disable account</button>
+          <div className="profile-options">
+            <button onClick={handleEdit}>Edit profile</button>
+            <button onClick={handleDisable}>Disable account</button>
+          </div>
         </>
       )}
       {isEditing && user && (
@@ -101,10 +103,10 @@ const Profile = () => {
           ? userProjects.map((project) => {
               return <ProjectCard project={project} key={`${project._id}1`} />;
             })
-          : "You havent added any project yet."}
+          : "You haven't added any project yet."}
       </div>
+      <h3>Reviews</h3>
       <div className="profile-reviews">
-        <h3>Reviews</h3>
         {userReviews && userReviews.length > 0 
           ? userReviews.map((review) => {
               return <ReviewCard review={review} key={`${review._id}1`} />;

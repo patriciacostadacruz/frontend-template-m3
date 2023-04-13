@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const ReviewCard = ({ review }) => {
   const { title, personRating, rating, comment } = review;
@@ -8,6 +10,7 @@ const ReviewCard = ({ review }) => {
     objectFit: "cover",
     borderRadius: "50px",
   };
+  const { user } = useContext(AuthContext);
 
   const printStars = (num) => {
     let stars = "";
@@ -21,14 +24,24 @@ const ReviewCard = ({ review }) => {
     <div className="review-card">
       <div className="review-header">
         <img
-        style={style}
+          style={style}
           className="review-avatar"
           src={personRating.image}
           alt={`${personRating.firstName}'s avatar`}
         />
-        <div className="review-info">
-          <h3 className="review-name">{personRating.firstName} {personRating.lastName}</h3>
-        </div>
+        {user._id === personRating._id ? (
+          <Link to="/profile">
+            <h5 className="review-name">
+              {personRating.firstName} {personRating.lastName}
+            </h5>
+          </Link>
+        ) : (
+          <Link to={`/profile/${personRating._id}`}>
+            <h5 className="review-name">
+              {personRating.firstName} {personRating.lastName}
+            </h5>
+          </Link>
+        )}
       </div>
       <div className="review-content">
         <div className="review-subheader">

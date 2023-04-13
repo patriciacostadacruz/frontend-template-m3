@@ -46,7 +46,14 @@ const ProjectData = ({ project, isOwner, isInvestor }) => {
           <p>
             <strong>Industry </strong>
             {project.industry.map((elem) => {
-              return <span key={project.industry.indexOf(elem)}>{elem}</span>;
+              return (
+                <span
+                  key={project.industry.indexOf(elem)}
+                  className="industry-tag"
+                >
+                  {elem}
+                </span>
+              );
             })}
           </p>
           <p>{project.description}</p>

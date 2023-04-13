@@ -36,10 +36,12 @@ const AddReview = ({ personRated, onCreation, onCancel }) => {
 
   return (
     <div>
-      <h3>Add a review</h3>
+      <h2>Add a review</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Title</label>
+        <div className="review-form">
+          <label>
+            <strong>Title</strong>
+          </label>
           <input
             required
             type="text"
@@ -47,9 +49,9 @@ const AddReview = ({ personRated, onCreation, onCancel }) => {
             value={review.title}
             onChange={handleInputChange}
           />
-        </div>
-        <div>
-          <label>Rating</label>
+          <label>
+            <strong>Rating</strong>
+          </label>
           <select
             required
             name="rating"
@@ -63,22 +65,22 @@ const AddReview = ({ personRated, onCreation, onCancel }) => {
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
-        </div>
-        <div>
-          <label>Comment</label>
           <textarea
             required
             name="comment"
-            column="30"
-            rows="10"
+            columns="30"
+            rows="5"
             value={review.comment}
+            placeholder="Write your comments here"
             onChange={handleInputChange}
           />
         </div>
-        <button type="submit">Add review</button>
-        <button type="button" onClick={onCancel}>
-          Cancel
-        </button>
+        <div className="review-buttons">
+          <button type="submit">Add review</button>
+          <button type="button" onClick={onCancel}>
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );
