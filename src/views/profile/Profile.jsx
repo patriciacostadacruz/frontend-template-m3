@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useRef } from "react";
 import toast from "react-hot-toast";
 import ProfileData from "../../components/profile/ProfileData";
 import EditProfileData from "../../components/profile/EditProfileData";
@@ -8,6 +8,11 @@ import ReviewCard from "../../components/ReviewCard";
 import profileService from "../../services/profileServices";
 import authService from "../../services/authService";
 import { AuthContext } from "../../context/AuthContext";
+import Chart from "chart.js/auto";
+import { CategoryScale } from "chart.js";
+import { Pie } from "react-chartjs-2";
+
+Chart.register(CategoryScale);
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -15,6 +20,8 @@ const Profile = () => {
   const [userReviews, setUserReviews] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [chartData, setChartData] = useState({datasets: []});
+  const chartContainer = useRef(null);
   const { storeToken, removeToken, authenticateUser, logOutUser } =
     useContext(AuthContext);
 
@@ -27,7 +34,7 @@ const Profile = () => {
       setUserReviews(response.userReviews);
       setLoading(false);
     } catch (error) {
-      toast.error("Sorry, we couldn't retrieve your profile data. Please try again.");
+      console.log(error)
     }
   }
 
@@ -76,7 +83,37 @@ const Profile = () => {
 
   useEffect(() => {
     getProfile();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (userProjects && userProjects.length > 0 && chartContainer.current) {
+      setChartData({
+        labels: userProjects.map((project) => project.status),
+        datasets: [
+          {
+            label: "Project by status",
+            data: userProjects.reduce((acc, curr) => {
+              acc[curr.status] = (acc[curr.status] || 0) + 1;
+              return acc;
+            }, {}),
+            backgroundColor: [
+              "#3d8dae",
+              "#df8453",
+              "#a1db9b",
+              "#e4a9a8",
+              "#accfcb",
+              "#dbad4a",
+            ],
+            borderWidth: 0,
+          },
+        ],
+      });
+      console.log(chartData);
+      console.log(userProjects);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userProjects]);
 
   return (
     <div>
@@ -99,12 +136,36 @@ const Profile = () => {
       )}
       <hr />
       <h3>Your active projects</h3>
-      <div className="project-cards">
-        {userProjects && userProjects.length > 0
-          ? userProjects.map((project) => {
-              return <ProjectCard project={project} key={`${project._id}1`} />;
-            })
-          : "You haven't added any project yet."}
+      <div className="projects-section">
+        <div className="chart-container">
+          {userProjects && chartData && (
+            <>
+              <h5 style={{ textAlign: "center" }}>Projects chart</h5>
+              <Pie
+                ref={chartContainer}
+                data={chartData}
+                options={{
+                  plugins: {
+                    title: {
+                      display: true,
+                      text: "Projects by status",
+                      fontsize: 20
+                    },
+                  },
+                }}
+              />
+            </>
+          )}
+        </div>
+        <div className="project-cards">
+          {userProjects && userProjects.length > 0
+            ? userProjects.map((project) => {
+                return (
+                  <ProjectCard project={project} key={`${project._id}1`} />
+                );
+              })
+            : "You haven't added any project yet."}
+        </div>
       </div>
       <hr />
       <h3>What people think about you</h3>
