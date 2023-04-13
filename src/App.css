@@ -383,15 +383,16 @@ label {
   flex-direction: column;
   align-items: center;
 }
-.funding-button {
+.explanation-button {
   background-color: var(--light-blue);
   color: white;
 }
-.funding-explanation {
+.explanation {
   width: 60%;
   text-align: justify;
+  margin: 50px 0;
 }
-.funding-name {
+.highlighted-name {
   color: var(--dark-blue);
   font-weight: bold;
   text-decoration: underline;
