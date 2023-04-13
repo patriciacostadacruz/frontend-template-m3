@@ -147,7 +147,7 @@ const OtherUserProfile = () => {
             />
           )}
           <div className="profile-projects">
-            <h3>Projects</h3>
+            <h3>Projects {otherUser.firstName} is working on</h3>
             {otherUserProjects.length > 0
               ? otherUserProjects.map((project) => {
                   return (
@@ -156,7 +156,7 @@ const OtherUserProfile = () => {
                 })
               : "This user has no active projects."}
           </div>
-          <h3>Reviews</h3>
+          <h3>Here's what people think about {otherUser.firstName}</h3>
           <div className="profile-reviews">
             {otherUserReviews.length > 0
               ? otherUserReviews.map((review) => {

@@ -162,7 +162,8 @@ h5 {
   font-size: 22px;
 }
 button {
-  background-color: var(--light-blue);
+  background-color: var(--dark-blue);
+  color: white;
   border: none;
   padding: 5px 10px;
   border-radius: var(--border-radius-classic);
@@ -271,10 +272,12 @@ textarea {
   padding: 5px;
   background-color: rgb(221, 221, 221);
 }
-
 select:focus,
 textarea:focus {
   background-color: rgb(221, 237, 241);
+}
+label {
+  font-weight: bold;
 }
 
 /*** SEARCH BAR ***/
@@ -320,6 +323,10 @@ textarea:focus {
   padding: 2px 5px;
   margin: 5px;
 }
+/* edit data form */
+.profile-edit-options {
+  text-align: center;
+}
 
 /*** REVIEWS ***/
 
@@ -357,4 +364,25 @@ textarea:focus {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+/*** PROJECT CREATION FORM ***/
+
+.add-proj-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.funding-button {
+  background-color: var(--light-blue);
+  color: white;
+}
+.funding-explanation {
+  width: 60%;
+  text-align: justify;
+}
+.funding-name {
+  color: var(--dark-blue);
+  font-weight: bold;
+  text-decoration: underline;
 }

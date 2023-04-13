@@ -98,14 +98,14 @@ const Profile = () => {
         />
       )}
       <div className="profile-projects">
-        <h3>Projects</h3>
+        <h3>Your active projects</h3>
         {userProjects && userProjects.length > 0
           ? userProjects.map((project) => {
               return <ProjectCard project={project} key={`${project._id}1`} />;
             })
           : "You haven't added any project yet."}
       </div>
-      <h3>Reviews</h3>
+      <h3>What people think about you</h3>
       <div className="profile-reviews">
         {userReviews && userReviews.length > 0 
           ? userReviews.map((review) => {
