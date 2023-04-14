@@ -2,7 +2,8 @@ import React, { useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import whiteLogoBlackLetter from "../images/investMate-white-logo-black-letter.png";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightToBracket, faRightFromBracket } from "@fortawesome/free-solid-svg-icons"; 
 
 const Navbar = () => {
   const { isLoggedIn, logOutUser } = useContext(AuthContext); 
@@ -27,7 +28,7 @@ const Navbar = () => {
         {!isLoggedIn && (
           <li>
             <NavLink to="/login" className="navbar-options">
-              Login
+              <FontAwesomeIcon icon={faRightToBracket} />
             </NavLink>
           </li>
         )}
@@ -69,7 +70,7 @@ const Navbar = () => {
         )}
         {isLoggedIn && (
           <li>
-            <button onClick={() => logOutUser()} className="logout-button">Log out</button>
+            <button onClick={() => logOutUser()} className="logout-button"><FontAwesomeIcon icon={faRightFromBracket} /></button>
           </li>
         )}
       </ul>

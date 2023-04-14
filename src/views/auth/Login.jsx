@@ -5,6 +5,8 @@ import { useNavigate, Link } from "react-router-dom";
 import authService from "../../services/authService";
 import profileService from "../../services/profileServices";
 import appLogo from "../../images/investMate-blue-logo-black-letter.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightToBracket, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons"; 
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -81,10 +83,16 @@ const Login = () => {
             value={user.password}
             onChange={handleChange}
           />
-          <button className="show-pass-button" onClick={togglePassword} type="button">Show password</button>
+          <span
+            className="show-pass-icon"
+            onClick={togglePassword}
+            type="button"
+          >
+            {passwordShown ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} /> }
+            </span>
         </div>
         <button className="basic-button" type="submit">
-          Log in{" "}
+          <FontAwesomeIcon icon={faRightToBracket} /> Log in
         </button>
         <p className="auth-phrase">
           Don't have an account?

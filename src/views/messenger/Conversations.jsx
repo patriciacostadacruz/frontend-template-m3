@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import Loading from "../../components/Loading";
 import messengerServices from "../../services/messengerServices";
 import { AuthContext } from "../../context/AuthContext";
-import checkmark from "../../images/checkmark.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faMagnifyingGlass,
+  faCheckDouble,
+} from "@fortawesome/free-solid-svg-icons"; 
 
 const Conversations = () => {
   const [loading, setLoading] = useState(true);
@@ -84,6 +88,7 @@ const Conversations = () => {
   return (
     <>
       <h2>Conversations</h2>
+      <FontAwesomeIcon icon={faMagnifyingGlass} />{" "}
       <input
         type="text"
         placeholder="Search by recipient's name"
@@ -92,7 +97,7 @@ const Conversations = () => {
       {loading && <Loading />}
       {errorMessage && <p>{errorMessage}</p>}
       {!loading && filteredConversations.length > 0 ? (
-        <div>
+        <div className="conv-container">
           {filteredConversations.map((conversation) => {
             const otherUser = getOtherUser(conversation);
             return (
@@ -111,8 +116,8 @@ const Conversations = () => {
                   </p>
                   <p>
                     {lastMessageSentByCurrentUser(conversation) && (
-                      <img width="20" src={checkmark} alt="Message checkmark" />
-                    )}
+                      <FontAwesomeIcon icon={faCheckDouble} />
+                    )}{" "}
                     {/* always displays last messsage because of how it is sorted when pulled form DB */}
                     {conversation.messages[0].content}
                   </p>

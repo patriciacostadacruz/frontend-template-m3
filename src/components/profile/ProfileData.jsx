@@ -5,6 +5,8 @@ import profileService from "../../services/profileServices";
 import authService from "../../services/authService";
 import { AuthContext } from "../../context/AuthContext";
 import linkedin from "../../images/linkedin.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons"; 
 
 const ProfileData = ({ user }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -66,7 +68,7 @@ const ProfileData = ({ user }) => {
               <p>
                 <strong>Password</strong> ********
               </p>
-              <button onClick={handleEdit}>Change password</button>
+              <button onClick={handleEdit}><FontAwesomeIcon icon={faPenToSquare} /> Change password</button>
             </>
           ) : (
             <EditPassword onUpdate={handleUpdate} onCancel={handleCancel} />

@@ -6,7 +6,7 @@ const ErrorPath = () => {
   const location = useLocation();
  
   return (
-    <div>
+    <div className="error-content">
       <img height="300" src={wrongPath} alt="GIF" />
       <p>
         There is no URL called <strong>{location.pathname}</strong> in this

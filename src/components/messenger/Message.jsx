@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import checkmark from "../../images/checkmark.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare, faTrash, faCheckDouble, faFloppyDisk, faBan, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons"; 
 
 const Message = ({ message, user, onDelete, onUpdate }) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [showOptions, setShowOptions] = useState(false);
   const [content, setContent] = useState(message.content);
   const style = {
     height: "50px",
@@ -18,6 +20,7 @@ const Message = ({ message, user, onDelete, onUpdate }) => {
     if (confirmation) {
       onDelete(message._id);
     }
+    setShowOptions(!showOptions);
   };
 
   const handleEdit = () => {
@@ -27,15 +30,21 @@ const Message = ({ message, user, onDelete, onUpdate }) => {
   const handleSave = async () => {
     await onUpdate(message._id, { content });
     setIsEditing(false);
+    setShowOptions(!showOptions);
   };
 
   const handleCancel = () => {
     setContent(message.content);
     setIsEditing(false);
+    setShowOptions(!showOptions);
   };
 
   const handleContentChange = (e) => {
     setContent(e.target.value);
+  };
+
+  const handleEllipsisClick = () => {
+    setShowOptions(!showOptions);
   };
 
   const formatMessageDate = (date) => {
@@ -59,36 +68,61 @@ const Message = ({ message, user, onDelete, onUpdate }) => {
   };
 
   return (
-    <span
+    <div
       className={
-        message.sender._id === user._id ? "sent-by-me" : "sent-by-other"
+        message.sender._id === user._id
+          ? "message-card sent-by-me"
+          : "message-card sent-by-other"
       }
     >
       <img src={message.sender.image} alt="Sender pic" style={style} />
       {isEditing ? (
-        <>
+        <div className="message-edit">
           <textarea value={content} onChange={handleContentChange} />
-          <button onClick={handleSave}>Save</button>
-          <button onClick={handleCancel}>Cancel</button>
-        </>
+          <button onClick={handleSave}>
+            <FontAwesomeIcon icon={faFloppyDisk} /> Save
+          </button>
+          <button onClick={handleCancel}>
+            <FontAwesomeIcon icon={faBan} /> Cancel
+          </button>
+        </div>
       ) : (
         <>
-          <p>
-            {message.sender._id === user._id && (
-              <img width="20" src={checkmark} alt="Message checkmark" />
+          <div className="message-details">
+            <p>
+              {message.sender._id === user._id && (
+                <FontAwesomeIcon icon={faCheckDouble} />
+              )}{" "}
+              {message.content}
+            </p>
+            <p className="message-date">
+              {formatMessageDate(message.createdAt)}
+            </p>
+          </div>
+          <div className="message-options">
+            <FontAwesomeIcon
+              icon={faEllipsisVertical}
+              onClick={handleEllipsisClick}
+            />
+            {showOptions && (
+              <div className="message-options-dropdown">
+                {message.sender._id ===
+                  user._id && (
+                    <>
+                      <button onClick={handleDelete}>
+                        <FontAwesomeIcon icon={faTrash} /> Delete
+                      </button>
+                      <button onClick={handleEdit}>
+                        <FontAwesomeIcon icon={faPenToSquare} /> Edit
+                      </button>
+                    </>
+                  )}
+              </div>
             )}
-            {message.content}
-          </p>
-          <p>{formatMessageDate(message.createdAt)}</p>
-          {message.sender._id === user._id && (
-            <>
-              <button onClick={handleDelete}>Delete</button>
-              <button onClick={handleEdit}>Edit</button>
-            </>
-          )}
+          </div>
         </>
       )}
-    </span>
+    </div>
   );
 };
 

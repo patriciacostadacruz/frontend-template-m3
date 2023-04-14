@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import toast from "react-hot-toast";
@@ -10,6 +9,8 @@ import indexServices from "../../services/indexServices";
 import messengerServices from "../../services/messengerServices";
 import profileService from "../../services/profileServices";
 import { AuthContext } from "../../context/AuthContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; 
+import { faPenToSquare, faTrash, faInbox } from "@fortawesome/free-solid-svg-icons"; 
 
 const Project = () => {
   const [project, setProject] = useState(null);
@@ -130,13 +131,19 @@ const Project = () => {
           />
           {isOwner && (
             <div>
-              <button onClick={handleEdit}>Edit project</button>
-              <button onClick={handleDelete}>Delete project</button>
+              <button onClick={handleEdit}>
+                <FontAwesomeIcon icon={faPenToSquare} /> Edit project
+              </button>
+              <button onClick={handleDelete}>
+                <FontAwesomeIcon icon={faTrash} /> Delete project
+              </button>
             </div>
           )}
           {!isOwner && (
             <div>
-              <button onClick={handleCreateConversation}>Send message</button>
+              <button onClick={handleCreateConversation}>
+                <FontAwesomeIcon icon={faInbox} /> Send message
+              </button>
             </div>
           )}
         </>

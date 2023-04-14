@@ -118,7 +118,7 @@ const ConvMessages = () => {
   }, [messages]);
 
   return (
-    <>
+    <div className="messages-UI">
       <h2>
         {messages &&
           messages.length > 0 &&
@@ -132,21 +132,23 @@ const ConvMessages = () => {
             </Link>
           ))}
       </h2>
-      {messages && messages.length > 0 ? (
-        <div>
-          {messages.map((message) => (
-            <Message
-              key={message._id}
-              message={message}
-              user={user}
-              onDelete={handleDeleteMessage}
-              onUpdate={handleUpdateMessage}
-            />
-          ))}
-        </div>
-      ) : (
-        "No messages to show."
-      )}
+      <div className="messages-container">
+        {messages && messages.length > 0 ? (
+          <div>
+            {messages.map((message) => (
+              <Message
+                key={message._id}
+                message={message}
+                user={user}
+                onDelete={handleDeleteMessage}
+                onUpdate={handleUpdateMessage}
+              />
+            ))}
+          </div>
+        ) : (
+          "No messages to show."
+        )}
+      </div>
         <input
           type="text"
           placeholder="Type your message here."
@@ -156,7 +158,7 @@ const ConvMessages = () => {
           ref={inputRef}
         />
       <div ref={messagesEndRef} />
-    </>
+    </div>
   );
 }
 

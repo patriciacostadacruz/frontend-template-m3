@@ -9,7 +9,8 @@ import profileServices from "../../services/profileServices";
 import reviewService from "../../services/reviewServices";
 import messengerServices from "../../services/messengerServices";
 import linkedin from "../../images/linkedin.png";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInbox, faStar } from "@fortawesome/free-solid-svg-icons"; 
 
 const OtherUserProfile = () => {
   const [otherUser, setOtherUser] = useState(null);
@@ -134,9 +135,13 @@ const OtherUserProfile = () => {
             </div>
           </div>
           <div className="profile-options">
-            <button onClick={handleCreateConversation}>Send message</button>
+            <button onClick={handleCreateConversation}>
+              <FontAwesomeIcon icon={faInbox} /> Send message
+            </button>
             {!isRating && otherUser && (
-              <button onClick={handleShowReviewForm}>Rate user</button>
+              <button onClick={handleShowReviewForm}>
+                <FontAwesomeIcon icon={faStar} /> Rate user
+              </button>
             )}
           </div>
           {isRating && otherUser && (

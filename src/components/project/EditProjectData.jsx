@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFloppyDisk, faBan, faXmark, faPlus } from "@fortawesome/free-solid-svg-icons"; 
 
 const EditProjectData = ({ project, onUpdate, onCancel, investors }) => {
   const [selectedInvestors, setSelectedInvestors] = useState(project.investors);
@@ -270,7 +272,7 @@ const EditProjectData = ({ project, onUpdate, onCancel, investors }) => {
                         type="button"
                         onClick={() => handleInvestorClick(investor)}
                       >
-                        Remove
+                        <FontAwesomeIcon icon={faXmark} />
                       </button>
                     </div>
                   ))}
@@ -293,7 +295,7 @@ const EditProjectData = ({ project, onUpdate, onCancel, investors }) => {
                         type="button"
                         onClick={() => handleInvestorClick(investor)}
                       >
-                        Add
+                        <FontAwesomeIcon icon={faPlus} />
                       </button>
                     </div>
                   ))}
@@ -304,9 +306,11 @@ const EditProjectData = ({ project, onUpdate, onCancel, investors }) => {
         </div>
       </div>
       <div className="edit-options">
-        <button type="submit">Save changes</button>
+        <button type="submit">
+          <FontAwesomeIcon icon={faFloppyDisk} /> Save changes
+        </button>
         <button type="button" onClick={onCancel}>
-          Cancel
+          <FontAwesomeIcon icon={faBan} /> Cancel
         </button>
       </div>
     </form>

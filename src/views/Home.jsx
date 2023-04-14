@@ -8,9 +8,6 @@ import landingImage from "../images/landingImage.jpg";
 import homePage1 from "../images/home-page-1.png";
 import homePage2 from "../images/home-page-2.png";
 import homePage3 from "../images/home-page-3.png";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faBars, faRightToBracket } from "@fortawesome/free-solid-svg-icons";
-// <FontAwesomeIcon icon={faRightToBracket} />;
 
 const Home = () => {
   const [projects, setProjects] = useState(null);

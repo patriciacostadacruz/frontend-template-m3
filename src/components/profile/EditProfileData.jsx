@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFloppyDisk, faBan } from "@fortawesome/free-solid-svg-icons"; 
 
 const EditProfileData = ({ user, onUpdate, onCancel }) => {
   const style = { height: "300px", width: "300px", objectFit: "cover" };
@@ -237,9 +239,11 @@ const EditProfileData = ({ user, onUpdate, onCancel }) => {
           </div>
         </div>
         <div className="edit-options">
-          <button type="submit">Save changes</button>
+          <button type="submit">
+            <FontAwesomeIcon icon={faFloppyDisk} /> Save changes
+          </button>
           <button type="button" onClick={onCancel}>
-            Cancel
+            <FontAwesomeIcon icon={faBan} /> Cancel
           </button>
         </div>
       </form>

@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import peopleCount from "../../images/peopleCount.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons"; 
 
 const ProjectData = ({ project, isOwner, isInvestor }) => {
   const { user } = useContext(AuthContext);
@@ -38,7 +40,7 @@ const ProjectData = ({ project, isOwner, isInvestor }) => {
             <strong>Status</strong> {project.status}
           </p>
           <p>
-            <strong>Location</strong> {project.location}
+            <strong>Location</strong> <FontAwesomeIcon icon={faLocationDot} />{" "}{project.location}
           </p>
           <p>
             <strong>Funding needed</strong> {project.fundingNeeded}

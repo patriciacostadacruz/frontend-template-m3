@@ -3,6 +3,8 @@ import toast from "react-hot-toast";
 import { useNavigate, Link } from 'react-router-dom';
 import authService from "../../services/authService";
 import appLogo from "../../images/investMate-blue-logo-black-letter.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserPlus } from "@fortawesome/free-solid-svg-icons"; 
 
 const Signup = () => {
   const [user, setUser] = useState({
@@ -209,7 +211,7 @@ const Signup = () => {
           </div>
         </div>
         <button className="basic-button" type="submit">
-          Sign up
+         <FontAwesomeIcon icon={faUserPlus} /> Sign up
         </button>
         <p className="auth-phrase">
           Don't have an account?

@@ -184,6 +184,13 @@ hr {
   margin: 50px 100px;
   border: 2px solid var(--light-grey);
 }
+.error-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
 
 /*** LOG IN AND SIGN UP ***/
 
@@ -208,6 +215,9 @@ hr {
 }
 .signup-section-title {
   font-size: 28px;
+}
+.show-pass-icon:hover {
+  cursor: pointer;
 }
 /* title animation */
 .title-word {
@@ -462,6 +472,11 @@ label {
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+}
+.create-button {
+  display: inline;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /*** PROJECT/USER VIEW & CARDS ***/

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFloppyDisk, faBan } from "@fortawesome/free-solid-svg-icons"; 
 
 const EditPassword = ({ onUpdate, onCancel }) => {
 	const [passwordForm, setPasswordForm] = useState({
@@ -65,9 +67,11 @@ const EditPassword = ({ onUpdate, onCancel }) => {
         onChange={handleInputChange}
         name="passwordConfirmation"
       />
-      <button type="submit">Save password</button>
+      <button type="submit">
+        <FontAwesomeIcon icon={faFloppyDisk} /> Save password
+      </button>
       <button type="button" onClick={onCancel}>
-        Cancel
+        <FontAwesomeIcon icon={faBan} /> Cancel
       </button>
     </form>
   );

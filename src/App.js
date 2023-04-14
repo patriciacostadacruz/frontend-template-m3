@@ -14,7 +14,6 @@ import AddProject from "./views/projects/AddProject";
 import Projects from "./views/projects/Projects";
 import Users from "./views/Users";
 import Conversations from "./views/messenger/Conversations";
-import AllReviews from "./views/AllReviews";
 import IsPrivate from './components/IsPrivate';
 import ConvContainer from "./views/messenger/ConvContainer.jsx";
 
@@ -70,14 +69,6 @@ function App() {
           element={
             <IsPrivate>
               <Profile />
-            </IsPrivate>
-          }
-        />
-        <Route
-          path="/reviews/all"
-          element={
-            <IsPrivate>
-              <AllReviews />
             </IsPrivate>
           }
         />

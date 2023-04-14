@@ -1,6 +1,8 @@
 import { useState, useContext } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../context/AuthContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar, faBan } from "@fortawesome/free-solid-svg-icons"; 
 
 const AddReview = ({ personRated, onCreation, onCancel }) => {
   const { user } = useContext(AuthContext);
@@ -76,9 +78,11 @@ const AddReview = ({ personRated, onCreation, onCancel }) => {
           />
         </div>
         <div className="review-buttons">
-          <button type="submit">Add review</button>
+          <button type="submit">
+            <FontAwesomeIcon icon={faStar} /> Add review
+          </button>
           <button type="button" onClick={onCancel}>
-            Cancel
+            <FontAwesomeIcon icon={faBan} /> Cancel
           </button>
         </div>
       </form>

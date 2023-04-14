@@ -11,6 +11,8 @@ import { AuthContext } from "../../context/AuthContext";
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import { Pie } from "react-chartjs-2";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare, faUserSlash } from "@fortawesome/free-solid-svg-icons"; 
 
 Chart.register(CategoryScale);
 
@@ -124,8 +126,12 @@ const Profile = () => {
         <>
           <ProfileData user={user} />
           <div className="profile-options">
-            <button onClick={handleEdit}>Edit profile</button>
-            <button onClick={handleDisable}>Disable account</button>
+            <button onClick={handleEdit}>
+              <FontAwesomeIcon icon={faPenToSquare} /> Edit profile
+            </button>
+            <button onClick={handleDisable}>
+              <FontAwesomeIcon icon={faUserSlash} /> Disable account
+            </button>
           </div>
         </>
       )}
