@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrash, faCheckDouble, faFloppyDisk, faBan, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons"; 
 
@@ -12,6 +12,7 @@ const Message = ({ message, user, onDelete, onUpdate }) => {
     objectFit: "cover",
     borderRadius: "50px",
   };
+  const dropdownRef = useRef(null);
 
   const handleDelete = () => {
     const confirmation = window.confirm(
@@ -47,6 +48,12 @@ const Message = ({ message, user, onDelete, onUpdate }) => {
     setShowOptions(!showOptions);
   };
 
+  const handleClickOutside = (e) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+      setShowOptions(false);
+    }
+  };
+
   const formatMessageDate = (date) => {
     const messageDate = new Date(date);
     const currentDate = new Date();
@@ -67,22 +74,35 @@ const Message = ({ message, user, onDelete, onUpdate }) => {
     }
   };
 
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div
       className={
         message.sender._id === user._id
-          ? "message-card sent-by-me"
-          : "message-card sent-by-other"
+          ? "message sent-by-me"
+          : "message sent-by-other"
       }
     >
       <img src={message.sender.image} alt="Sender pic" style={style} />
       {isEditing ? (
-        <div className="message-edit">
+        <div className="message-options-dropdown" >
           <textarea value={content} onChange={handleContentChange} />
-          <button onClick={handleSave}>
+          <button
+            onClick={handleSave}
+            className="message-edit-buttons"
+          >
             <FontAwesomeIcon icon={faFloppyDisk} /> Save
           </button>
-          <button onClick={handleCancel}>
+          <button
+            onClick={handleCancel}
+            className="message-edit-buttons"
+          >
             <FontAwesomeIcon icon={faBan} /> Cancel
           </button>
         </div>
@@ -100,23 +120,25 @@ const Message = ({ message, user, onDelete, onUpdate }) => {
             </p>
           </div>
           <div className="message-options">
-            <FontAwesomeIcon
-              icon={faEllipsisVertical}
-              onClick={handleEllipsisClick}
-            />
+            {message.sender._id === user._id && (
+              <FontAwesomeIcon
+                icon={faEllipsisVertical}
+                onClick={handleEllipsisClick}
+                className="ellipsis"
+              />
+            )}
             {showOptions && (
-              <div className="message-options-dropdown">
-                {message.sender._id ===
-                  user._id && (
-                    <>
-                      <button onClick={handleDelete}>
-                        <FontAwesomeIcon icon={faTrash} /> Delete
-                      </button>
-                      <button onClick={handleEdit}>
-                        <FontAwesomeIcon icon={faPenToSquare} /> Edit
-                      </button>
-                    </>
-                  )}
+              <div className="message-options-dropdown" ref={dropdownRef}>
+                {message.sender._id === user._id && (
+                  <>
+                    <button onClick={handleDelete}>
+                      <FontAwesomeIcon icon={faTrash} /> Delete
+                    </button>
+                    <button onClick={handleEdit}>
+                      <FontAwesomeIcon icon={faPenToSquare} /> Edit
+                    </button>
+                  </>
+                )}
               </div>
             )}
           </div>

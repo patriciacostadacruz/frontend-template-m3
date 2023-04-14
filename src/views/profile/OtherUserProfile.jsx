@@ -10,7 +10,7 @@ import reviewService from "../../services/reviewServices";
 import messengerServices from "../../services/messengerServices";
 import linkedin from "../../images/linkedin.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInbox, faStar } from "@fortawesome/free-solid-svg-icons"; 
+import { faComments, faStar, faUserCheck } from "@fortawesome/free-solid-svg-icons"; 
 
 const OtherUserProfile = () => {
   const [otherUser, setOtherUser] = useState(null);
@@ -97,6 +97,9 @@ const OtherUserProfile = () => {
                 <h4>
                   {otherUser.firstName} {otherUser.lastName}
                 </h4>
+                {otherUser.role && otherUser.role === "investor" && (
+                  <FontAwesomeIcon icon={faUserCheck} />
+                )}
                 {otherUser.linkedIn && (
                   // using anchor to open page in new tab with blank target
                   <a href={otherUser.linkedIn} target="_blank" rel="noreferrer">
@@ -136,7 +139,7 @@ const OtherUserProfile = () => {
           </div>
           <div className="profile-options">
             <button onClick={handleCreateConversation}>
-              <FontAwesomeIcon icon={faInbox} /> Send message
+              <FontAwesomeIcon icon={faComments} /> Send message
             </button>
             {!isRating && otherUser && (
               <button onClick={handleShowReviewForm}>

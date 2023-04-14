@@ -10,7 +10,11 @@ import messengerServices from "../../services/messengerServices";
 import profileService from "../../services/profileServices";
 import { AuthContext } from "../../context/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; 
-import { faPenToSquare, faTrash, faInbox } from "@fortawesome/free-solid-svg-icons"; 
+import {
+  faPenToSquare,
+  faTrash,
+  faComments,
+} from "@fortawesome/free-solid-svg-icons"; 
 
 const Project = () => {
   const [project, setProject] = useState(null);
@@ -77,7 +81,7 @@ const Project = () => {
     const recipientId = project.owner._id;
     try {
       const recipient = await profileService.getOtherUser(recipientId);
-      if (recipient.status !== "active") {
+      if (recipient.status === "inactive") {
         toast.error("You cannot reach out to this user, this account is disabled or in maintenance.")
       } else {
         const conversation = await messengerServices.createConversation(
@@ -130,7 +134,7 @@ const Project = () => {
             isInvestor={isInvestor}
           />
           {isOwner && (
-            <div>
+            <div className="proj-options">
               <button onClick={handleEdit}>
                 <FontAwesomeIcon icon={faPenToSquare} /> Edit project
               </button>
@@ -140,9 +144,9 @@ const Project = () => {
             </div>
           )}
           {!isOwner && (
-            <div>
+            <div className="proj-options">
               <button onClick={handleCreateConversation}>
-                <FontAwesomeIcon icon={faInbox} /> Send message
+                <FontAwesomeIcon icon={faComments} /> Send message
               </button>
             </div>
           )}

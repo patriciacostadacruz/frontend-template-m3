@@ -19,7 +19,7 @@ const ProjectData = ({ project, isOwner, isInvestor }) => {
       <h2>Project detail</h2>
       {project && (
         <div>
-          <div>
+          <div className="project-intro">
             <h3>{project.title}</h3>
             <p>
               <strong>Added by</strong>{" "}

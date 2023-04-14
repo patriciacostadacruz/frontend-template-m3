@@ -4,8 +4,7 @@
 
 This application is called investMate. It allows to connect people with project ideas with the investors having the knowledge and funds to finance its creation.
 
-> Add a picture (logo, design, actual screen, gif, etc, whichever you prefer.)
-> ![](picture.png)
+![](/src//images/investMate-screenshot.png)
 
 ---
 

@@ -214,7 +214,7 @@ const Signup = () => {
          <FontAwesomeIcon icon={faUserPlus} /> Sign up
         </button>
         <p className="auth-phrase">
-          Don't have an account?
+          Have an account?
           <Link to="/login"> Log in</Link>
         </p>
       </form>

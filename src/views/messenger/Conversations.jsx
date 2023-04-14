@@ -88,12 +88,14 @@ const Conversations = () => {
   return (
     <>
       <h2>Conversations</h2>
-      <FontAwesomeIcon icon={faMagnifyingGlass} />{" "}
-      <input
-        type="text"
-        placeholder="Search by recipient's name"
-        onChange={(e) => setSearch(e.target.value)}
-      />
+      <div className="search-conv">
+        <FontAwesomeIcon icon={faMagnifyingGlass} />{" "}
+        <input
+          type="text"
+          placeholder="Search by recipient's name"
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
       {loading && <Loading />}
       {errorMessage && <p>{errorMessage}</p>}
       {!loading && filteredConversations.length > 0 ? (
@@ -104,24 +106,27 @@ const Conversations = () => {
               <Link
                 to={`/messages/${conversation._id}`}
                 key={`${conversation._id}2`}
+                className="conversation"
               >
-                <div className="small-profile-picture">
+                <div>
                   <img style={style} src={otherUser.image} alt="Small avatar" />
                 </div>
                 <div className="conversation-last-message">
-                  <p>
-                    <strong>
-                      {otherUser.firstName} {otherUser.lastName}
-                    </strong>
-                  </p>
-                  <p>
+                  <div className="conversation-header">
+                    <p>
+                      <strong>
+                        {otherUser.firstName} {otherUser.lastName}
+                      </strong>
+                    </p>
+                    <p>{formatMessageDate(conversation.messages[0].createdAt)}</p>
+                  </div>
+                  <p className="message-preview">
                     {lastMessageSentByCurrentUser(conversation) && (
                       <FontAwesomeIcon icon={faCheckDouble} />
                     )}{" "}
                     {/* always displays last messsage because of how it is sorted when pulled form DB */}
                     {conversation.messages[0].content}
                   </p>
-                  <p>{formatMessageDate(conversation.messages[0].createdAt)}</p>
                 </div>
               </Link>
             );

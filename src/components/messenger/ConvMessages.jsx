@@ -123,11 +123,17 @@ const ConvMessages = () => {
         {messages &&
           messages.length > 0 &&
           (messages[0].sender._id === user._id ? (
-            <Link to={`/profile/${messages[0].recipient._id}`}>
+            <Link
+              to={`/profile/${messages[0].recipient._id}`}
+              className="recipient-name"
+            >
               {messages[0].recipient.firstName} {messages[0].recipient.lastName}
             </Link>
           ) : (
-            <Link to={`/profile/${messages[0].sender._id}`}>
+            <Link
+              to={`/profile/${messages[0].sender._id}`}
+              className="recipient-name"
+            >
               {messages[0].sender.firstName} {messages[0].sender.lastName}
             </Link>
           ))}
@@ -146,17 +152,18 @@ const ConvMessages = () => {
             ))}
           </div>
         ) : (
-          "No messages to show."
+          "No messages to show. Start typing to exchange with this user."
         )}
       </div>
-        <input
-          type="text"
-          placeholder="Type your message here."
-          value={newMessage}
-          onChange={handleNewMessageChange}
-          onKeyDown={handleKeyDown}
-          ref={inputRef}
-        />
+      <input
+        type="text"
+        placeholder="Type your message here."
+        value={newMessage}
+        onChange={handleNewMessageChange}
+        onKeyDown={handleKeyDown}
+        ref={inputRef}
+        className="message-input"
+      />
       <div ref={messagesEndRef} />
     </div>
   );

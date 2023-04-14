@@ -6,7 +6,7 @@ import authService from "../../services/authService";
 import { AuthContext } from "../../context/AuthContext";
 import linkedin from "../../images/linkedin.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons"; 
+import { faPenToSquare, faUserCheck } from "@fortawesome/free-solid-svg-icons"; 
 
 const ProfileData = ({ user }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -50,12 +50,15 @@ const ProfileData = ({ user }) => {
         <div className="profile-data-personal">
           <div className="name-linkedin">
             <h4>
-            {user.firstName} {user.lastName}
+              {user.firstName} {user.lastName}
             </h4>
+            {user.role && user.role === "investor" && (
+              <FontAwesomeIcon icon={faUserCheck} />
+            )}
             {user.linkedIn && (
               // using anchor to open page in new tab with blank target
               <a href={user.linkedIn} target="_blank" rel="noreferrer">
-              <img width="30" src={linkedin} alt="Linkedin profile" />
+                <img width="30" src={linkedin} alt="Linkedin profile" />
               </a>
             )}
           </div>
@@ -68,7 +71,9 @@ const ProfileData = ({ user }) => {
               <p>
                 <strong>Password</strong> ********
               </p>
-              <button onClick={handleEdit}><FontAwesomeIcon icon={faPenToSquare} /> Change password</button>
+              <button onClick={handleEdit}>
+                <FontAwesomeIcon icon={faPenToSquare} /> Change password
+              </button>
             </>
           ) : (
             <EditPassword onUpdate={handleUpdate} onCancel={handleCancel} />
@@ -86,7 +91,14 @@ const ProfileData = ({ user }) => {
           <p>
             <strong>Industry </strong>
             {user.industry.map((elem) => {
-              return <span key={user.industry.indexOf(elem)} className="industry-tag">{elem}</span>;
+              return (
+                <span
+                  key={user.industry.indexOf(elem)}
+                  className="industry-tag"
+                >
+                  {elem}
+                </span>
+              );
             })}
           </p>
           <p className="bio">"{user.bio}"</p>
