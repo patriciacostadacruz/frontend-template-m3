@@ -25,6 +25,7 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
+    setPasswordShown(false);
     e.preventDefault();
     try {
       const response = await authService.login(user);
@@ -80,7 +81,7 @@ const Login = () => {
             value={user.password}
             onChange={handleChange}
           />
-          <button className="show-pass-button" onClick={togglePassword}>Show password</button>
+          <button className="show-pass-button" onClick={togglePassword} type="button">Show password</button>
         </div>
         <button className="basic-button" type="submit">
           Log in{" "}

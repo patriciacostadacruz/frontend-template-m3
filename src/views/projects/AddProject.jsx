@@ -83,7 +83,7 @@ const AddProject = () => {
   return (
     <div>
       <h2>Create a new project</h2>
-      <form className="add-proj-form" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         {!showTips && (
           <button className="explanation-button" onClick={handleToggleTips}>
             Best practices
@@ -125,83 +125,101 @@ const AddProject = () => {
             </p>
           </>
         )}
-        <label>Title</label>
-        <input
-          type="text"
-          name="title"
-          value={formData.title}
-          onChange={handleInputChange}
-        />
-        <label>Status</label>
-        <select value={formData.status} onChange={handleStatusChange}>
-          <option value="">Select status</option>
-          <option value="active">Active</option>
-          <option value="initiation">Initiation</option>
-          <option value="planning">Planning</option>
-          <option value="execution">Execution</option>
-          <option value="on hold">On hold</option>
-          <option value="closure stage">Closure stage</option>
-          <option value="closed">Closed</option>
-        </select>
-        <label>Location</label>
-        <input
-          type="text"
-          name="location"
-          placeholder="Paris, France"
-          value={formData.location}
-          onChange={handleInputChange}
-        />
-        <label>Description</label>
-        <textarea
-          name="description"
-          cols="50"
-          rows="10"
-          value={formData.description}
-          onChange={handleInputChange}
-          placeholder="Add your project description with as many details as you wish to share with potential investors."
-        />
-        <label>Industry</label>
-        <select
-          value={formData.industry}
-          onChange={handleSelectChange}
-          multiple
-        >
-          <option value="">-- Select an option --</option>
-          <option value="All">All</option>
-          <option value="Agriculture">Agriculture</option>
-          <option value="Chems and materials">Chems and materials</option>
-          <option value="Communication">Communication</option>
-          <option value="Construction">Construction</option>
-          <option value="Consumer goods and retail">
-            Consumer goods and retail
-          </option>
-          <option value="Consumer services">Consumer services</option>
-          <option value="Energy and environment">Energy and environment</option>
-          <option value="Financial services">Financial services</option>
-          <option value="Infrastructures">Infrastructures</option>
-          <option value="Life science">Life science</option>
-          <option value="Real estate">Real estate</option>
-          <option value="Transportation">Transportation</option>
-          <option value="Digital mark">Digital mark</option>
-          <option value="IT/Tech">IT/Tech</option>
-          <option value="Electronics">Electronics</option>
-          <option value="Education">Education</option>
-          <option value="Food and beverage">Food and beverage</option>
-          <option value="Other">Other</option>
-        </select>
-        <label>Funding needed</label>
-        <select
-          name="fundingNeeded"
-          value={formData.fundingNeeded}
-          onChange={handleInputChange}
-        >
-          <option value="">Select funding</option>
-          <option value="pre-seed">Pre-seed</option>
-          <option value="angel">Angel</option>
-          <option value="seed">Seed</option>
-          <option value="serie A, B or C">Serie A, B or C</option>
-          <option value="none">None</option>
-        </select>
+        <div className="proj-form">
+          <div>
+            <div className="proj-section">
+              <label>Title</label>
+              <input
+                type="text"
+                name="title"
+                value={formData.title}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="proj-section">
+              <label>Status</label>
+              <select value={formData.status} onChange={handleStatusChange}>
+                <option value="">Select status</option>
+                <option value="active">Active</option>
+                <option value="initiation">Initiation</option>
+                <option value="planning">Planning</option>
+                <option value="execution">Execution</option>
+                <option value="on hold">On hold</option>
+                <option value="closure stage">Closure stage</option>
+                <option value="closed">Closed</option>
+              </select>
+            </div>
+            <div className="proj-section">
+              <label>Location</label>
+              <input
+                type="text"
+                name="location"
+                placeholder="Paris, France"
+                value={formData.location}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="proj-section">
+              <label>Description</label>
+              <textarea
+                name="description"
+                cols="50"
+                rows="10"
+                value={formData.description}
+                onChange={handleInputChange}
+                placeholder="Add your project description with as many details as you wish to share with potential investors."
+              />
+            </div>
+            <div className="proj-section">
+              <label>Funding needed</label>
+              <select
+                name="fundingNeeded"
+                value={formData.fundingNeeded}
+                onChange={handleInputChange}
+              >
+                <option value="">Select funding</option>
+                <option value="pre-seed">Pre-seed</option>
+                <option value="angel">Angel</option>
+                <option value="seed">Seed</option>
+                <option value="serie A, B or C">Serie A, B or C</option>
+                <option value="none">None</option>
+              </select>
+            </div>
+            <div className="proj-section">
+              <label>Industry</label>
+              <select
+                value={formData.industry}
+                onChange={handleSelectChange}
+                multiple
+              >
+                <option value="">-- Select an option --</option>
+                <option value="All">All</option>
+                <option value="Agriculture">Agriculture</option>
+                <option value="Chems and materials">Chems and materials</option>
+                <option value="Communication">Communication</option>
+                <option value="Construction">Construction</option>
+                <option value="Consumer goods and retail">
+                  Consumer goods and retail
+                </option>
+                <option value="Consumer services">Consumer services</option>
+                <option value="Energy and environment">
+                  Energy and environment
+                </option>
+                <option value="Financial services">Financial services</option>
+                <option value="Infrastructures">Infrastructures</option>
+                <option value="Life science">Life science</option>
+                <option value="Real estate">Real estate</option>
+                <option value="Transportation">Transportation</option>
+                <option value="Digital mark">Digital mark</option>
+                <option value="IT/Tech">IT/Tech</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Education">Education</option>
+                <option value="Food and beverage">Food and beverage</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+        </div>
         {!showFunding && (
           <button className="explanation-button" onClick={handleToggleFunding}>
             What type of funding does my project need?

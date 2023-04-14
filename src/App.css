@@ -334,7 +334,7 @@ label {
   margin: 5px;
 }
 /* edit data form */
-.profile-edit-options {
+.edit-options {
   text-align: center;
 }
 .projects-section {
@@ -402,16 +402,14 @@ label {
   align-items: center;
 }
 
-/*** PROJECT CREATION FORM ***/
+/*** PROJECT CREATION AND EDIT FORMS ***/
 
-.add-proj-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 .explanation-button {
   background-color: var(--light-blue);
   color: white;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
 }
 .explanation {
   width: 60%;
@@ -422,6 +420,22 @@ label {
   color: var(--dark-blue);
   font-weight: bold;
   text-decoration: underline;
+}
+.proj-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 100px;
+}
+.proj-section {
+  display: flex;
+  flex-direction: column;
+}
+.proj-form input {
+  text-align: left;
+}
+.proj-form label {
+  margin-bottom: 10px;
 }
 
 /*** PROJECT/USER VIEW & CARDS ***/

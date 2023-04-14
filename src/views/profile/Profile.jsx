@@ -50,7 +50,7 @@ const Profile = () => {
   const handleUpdate = async (updatedUser) => {
     try {
       const updatedMe = await profileService.editProfile(updatedUser);
-      setUser(updatedMe);
+      console.log('Frontend talking', updatedMe)
       if (updatedMe.authToken) {
         removeToken();
         storeToken(updatedMe.authToken);
@@ -115,6 +115,7 @@ const Profile = () => {
         ],
       });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userProjects]);
 
   return (

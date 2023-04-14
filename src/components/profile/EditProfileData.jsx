@@ -236,7 +236,7 @@ const EditProfileData = ({ user, onUpdate, onCancel }) => {
             </div>
           </div>
         </div>
-        <div className="profile-edit-options">
+        <div className="edit-options">
           <button type="submit">Save changes</button>
           <button type="button" onClick={onCancel}>
             Cancel
