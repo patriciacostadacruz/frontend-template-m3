@@ -17,6 +17,7 @@ Then, run:
 
 ```bash
 npm install
+npm install chart.js
 ```
 
 To start the project run:
@@ -41,7 +42,7 @@ npm run start
 - User can edit and delete a project
 - User can see all projects
 - User can also see all users
-- User can be added as a project's investor by being added ot this project's investor field and see this project in his/her profile
+- User can be added as a project's investor and see this project in his/her profile
 - User can review other users
 - User's reviews are visible in the profile section
 
@@ -49,12 +50,11 @@ npm run start
 
 - User will see an error page if he/she tries to access a path wich doesn't exist or a page where no data is pulled
 - Logged in users can search for users and projects with filters
-- User can edit profile picture
 - User can send messages to other users
 - User can edit and delete messages
 - User can see a page with all his/her messages listed
 - User can also see a chat UI with all messages per conversation
-- User can add projects to favorites
+- User can see a graph is his/her profile with metrics based on project status
 - App is responsive
 
 ---
