@@ -50,7 +50,6 @@ const Profile = () => {
   const handleUpdate = async (updatedUser) => {
     try {
       const updatedMe = await profileService.editProfile(updatedUser);
-      console.log('Frontend talking', updatedMe)
       if (updatedMe.authToken) {
         removeToken();
         storeToken(updatedMe.authToken);

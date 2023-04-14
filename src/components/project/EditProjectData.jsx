@@ -14,6 +14,7 @@ const EditProjectData = ({ project, onUpdate, onCancel, investors }) => {
     description: project.description,
     investors: selectedInvestors,
   });
+  const style = { height: "50px", width: "50px", objectFit: "cover", borderRadius: "50px" };
 
   const handleInputChange = (e) => {
     setFormState((prev) => ({
@@ -40,7 +41,6 @@ const EditProjectData = ({ project, onUpdate, onCancel, investors }) => {
     if (selectedInvestors.includes(investor)) {
       setSelectedInvestors(selectedInvestors.filter((inv) => inv !== investor));
       setAvailableInvestors([...availableInvestors, investor]);
-      console.log(selectedInvestors);
     } else {
       setSelectedInvestors([...selectedInvestors, investor]);
       console.log(selectedInvestors);
@@ -253,33 +253,51 @@ const EditProjectData = ({ project, onUpdate, onCancel, investors }) => {
           <div className="proj-section">
             <label>Investors</label>
             <div className="investor-list">
-              <div className="investor-column">
-                <h4 className="investor-header">Selected investors</h4>
-                {selectedInvestors.map((investor) => (
-                  <div key={investor._id}>
-                    {investor.firstName} {investor.lastName}{" "}
-                    <button
-                      type="button"
-                      onClick={() => handleInvestorClick(investor)}
-                    >
-                      Remove
-                    </button>
-                  </div>
-                ))}
+              <div>
+                <h4 className="investor-title">Selected investors</h4>
+                <div className="investors-container">
+                  {selectedInvestors.map((investor) => (
+                    <div key={investor._id} className="investor-entry">
+                      <img
+                        src={investor.image}
+                        alt="Investor avatar"
+                        style={style}
+                      />
+                      <p>
+                        {investor.firstName} {investor.lastName}{" "}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => handleInvestorClick(investor)}
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className="investor-column">
-                <h4 className="investor-header">Available investors</h4>
-                {availableInvestors.map((investor) => (
-                  <div key={investor._id}>
-                    {investor.firstName} {investor.lastName}{" "}
-                    <button
-                      type="button"
-                       onClick={() => handleInvestorClick(investor)}
-                    >
-                      Add
-                    </button>
-                  </div>
-                ))}
+              <div>
+                <h4 className="investor-title">Available investors</h4>
+                <div className="investors-container">
+                  {availableInvestors.map((investor) => (
+                    <div key={investor._id} className="investor-entry">
+                      <img
+                        src={investor.image}
+                        alt="Investor avatar"
+                        style={style}
+                      />
+                      <p>
+                        {investor.firstName} {investor.lastName}{" "}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => handleInvestorClick(investor)}
+                      >
+                        Add
+                      </button>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

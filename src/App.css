@@ -344,6 +344,13 @@ label {
   align-items: center;
   margin: 0 100px;
 }
+.projects-list {
+  height: 600px;
+  padding: 50px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
 
 /*** CHARTS ***/
 
@@ -384,12 +391,15 @@ label {
   flex-direction: row;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  height: 450px;
+  overflow: auto;
 }
 .review-card {
   display: flex;
   flex-direction: column;
   gap: 20px;
   width: 450px;
+  height: 300px;
   border: 2px solid var(--base-blue);
   border-radius: 5px;
   padding: 15px;
@@ -436,6 +446,22 @@ label {
 }
 .proj-form label {
   margin-bottom: 10px;
+}
+.investors-container {
+  height: 180px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+.investor-title {
+  margin: 10px 0;
+}
+.investor-entry {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
 }
 
 /*** PROJECT/USER VIEW & CARDS ***/
