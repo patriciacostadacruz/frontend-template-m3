@@ -2,14 +2,9 @@ import { useState, useEffect } from "react";
 
 const EditProjectData = ({ project, onUpdate, onCancel, investors }) => {
   const [selectedInvestors, setSelectedInvestors] = useState(project.investors);
-  // check if the id of each investor isn't in the selected investors - if it isn't, investor included in avail inv, if it is, excluded
   const [availableInvestors, setAvailableInvestors] = useState(
-    investors.filter(
-      (inv) =>
-        !selectedInvestors.some((selectedInv) => selectedInv.id === inv.id)
-    )
+    investors.filter((inv) => !selectedInvestors.includes(inv))
   );
-
   const [formState, setFormState] = useState({
     title: project.title,
     status: project.status,
@@ -42,38 +37,34 @@ const EditProjectData = ({ project, onUpdate, onCancel, investors }) => {
   };
 
   const handleInvestorClick = (investor) => {
-    if (
-      selectedInvestors.some((selectedInv) => selectedInv.id === investor.id)
-    ) {
-      setSelectedInvestors(
-        selectedInvestors.filter((inv) => inv.id !== investor.id)
-      );
+    if (selectedInvestors.includes(investor)) {
+      setSelectedInvestors(selectedInvestors.filter((inv) => inv !== investor));
+      setAvailableInvestors([...availableInvestors, investor]);
+      console.log(selectedInvestors);
     } else {
       setSelectedInvestors([...selectedInvestors, investor]);
+      console.log(selectedInvestors);
+      setAvailableInvestors(
+        availableInvestors.filter((inv) => inv !== investor)
+      );
     }
-    setAvailableInvestors(
-      investors.filter(
-        (inv) =>
-          !selectedInvestors.some((selectedInv) => selectedInv.id === inv.id)
-      )
-    );
   };
-
-  useEffect(() => {
-    setAvailableInvestors(
-      investors.filter((inv) => !selectedInvestors.includes(inv))
-    );
-  }, [selectedInvestors, investors]);
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormState((prev) => ({
-      ...prev,
+    const updatedFormState = {
+      ...formState,
       investors: selectedInvestors,
-    }));
-    onUpdate(formState);
+    };
+    onUpdate(updatedFormState);
   };
+
+
+  useEffect(() => {
+    console.log(selectedInvestors);
+    console.log(availableInvestors);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedInvestors, availableInvestors]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -267,7 +258,10 @@ const EditProjectData = ({ project, onUpdate, onCancel, investors }) => {
                 {selectedInvestors.map((investor) => (
                   <div key={investor._id}>
                     {investor.firstName} {investor.lastName}{" "}
-                    <button onClick={() => handleInvestorClick(investor)}>
+                    <button
+                      type="button"
+                      onClick={() => handleInvestorClick(investor)}
+                    >
                       Remove
                     </button>
                   </div>
@@ -278,7 +272,10 @@ const EditProjectData = ({ project, onUpdate, onCancel, investors }) => {
                 {availableInvestors.map((investor) => (
                   <div key={investor._id}>
                     {investor.firstName} {investor.lastName}{" "}
-                    <button onClick={() => handleInvestorClick(investor)}>
+                    <button
+                      type="button"
+                       onClick={() => handleInvestorClick(investor)}
+                    >
                       Add
                     </button>
                   </div>
