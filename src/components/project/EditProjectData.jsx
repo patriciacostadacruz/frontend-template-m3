@@ -51,7 +51,6 @@ const EditProjectData = ({ project, onUpdate, onCancel, investors }) => {
       setAvailableInvestors([...availableInvestors, investor]);
     } else {
       setSelectedInvestors([...selectedInvestors, investor]);
-      console.log(selectedInvestors);
       setAvailableInvestors(
         availableInvestors.filter((inv) => inv !== investor)
       );
@@ -66,13 +65,6 @@ const EditProjectData = ({ project, onUpdate, onCancel, investors }) => {
     };
     onUpdate(updatedFormState);
   };
-
-
-  useEffect(() => {
-    console.log(selectedInvestors);
-    console.log(availableInvestors);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedInvestors, availableInvestors]);
 
   return (
     <form onSubmit={handleSubmit}>

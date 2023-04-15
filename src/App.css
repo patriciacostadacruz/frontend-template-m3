@@ -438,9 +438,13 @@ label {
   margin-right: auto;
 }
 .explanation {
-  width: 60%;
+  width: 50%;
   text-align: justify;
   margin: 50px 0;
+}
+.explanation-div {
+  display: flex;
+  justify-content: center;
 }
 .highlighted-name {
   color: var(--dark-blue);
