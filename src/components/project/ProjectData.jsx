@@ -18,7 +18,7 @@ const ProjectData = ({ project, isOwner, isInvestor }) => {
     <div className="project-detail">
       <h2>Project detail</h2>
       {project && (
-        <div>
+        <div className="proj-container">
           <div className="project-intro">
             <h3>{project.title}</h3>
             <p>

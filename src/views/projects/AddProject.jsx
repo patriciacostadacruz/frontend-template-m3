@@ -94,35 +94,37 @@ const AddProject = () => {
             <button className="explanation-button" onClick={handleToggleTips}>
               Hide best practices
             </button>
-            <p className="explanation">
-              <strong>
-                What is important when presenting a project to potential
-                investors?
-              </strong>
-              <br />
-              <span className="highlighted-name">Credibility.</span> Your
-              presentation to investors must above all be credible, because they
-              are going to invest in you, in your idea, in your project. The
-              challenge is to convince them to choose you.
-              <br />
-              <span className="highlighted-name">
-                Create an attractive proposal.
-              </span>{" "}
-              One way of convincing them is to be attractive. It's not only a
-              question of presenting a solid project in business terms, but to
-              transmit the reason why your project is necessary, what problem it
-              resolves that makes it sellable or consumable by end users.
-              <br />
-              <span className="highlighted-name">Training.</span> Most investors
-              take a good look at your team and its training, because although
-              your idea may be great, if you don't have the right human
-              resources for executing it they will usually reject it.
-              <br />
-              <span className="highlighted-name">Visibility.</span> The project
-              has to be promoted very well and publicized so that it is talked
-              about and this information reaches the possible investors.
-              Marketing is a good tool.
-            </p>
+            <div className="explanation-div">
+              <p className="explanation">
+                <strong>
+                  What is important when presenting a project to potential
+                  investors?
+                </strong>
+                <br />
+                <span className="highlighted-name">Credibility.</span> Your
+                presentation to investors must above all be credible, because they
+                are going to invest in you, in your idea, in your project. The
+                challenge is to convince them to choose you.
+                <br />
+                <span className="highlighted-name">
+                  Create an attractive proposal.
+                </span>{" "}
+                One way of convincing them is to be attractive. It's not only a
+                question of presenting a solid project in business terms, but to
+                transmit the reason why your project is necessary, what problem it
+                resolves that makes it sellable or consumable by end users.
+                <br />
+                <span className="highlighted-name">Training.</span> Most investors
+                take a good look at your team and its training, because although
+                your idea may be great, if you don't have the right human
+                resources for executing it they will usually reject it.
+                <br />
+                <span className="highlighted-name">Visibility.</span> The project
+                has to be promoted very well and publicized so that it is talked
+                about and this information reaches the possible investors.
+                Marketing is a good tool.
+              </p>
+            </div>
           </>
         )}
         <div className="proj-form">
@@ -233,38 +235,40 @@ const AddProject = () => {
             >
               Hide explanation
             </button>
-            <p className="explanation">
-              In the context of startups and entrepreneurship,{" "}
-              <strong>
-                funding refers to the process of raising money to finance a new
-                business or project
-              </strong>
-              .
-              <br />
-              <span className="highlighted-name">Pre-seed</span> funding
-              typically involves small amounts of capital raised from friends
-              and family, or from the founders' own savings. This funding is
-              usually used to develop an idea into a viable business plan and
-              prototype. <br />
-              <span className="highlighted-name">Angel</span> funding is usually
-              the first external funding raised by a startup, and comes from
-              individual investors, or groups of investors, who believe in the
-              potential of the business. This funding can range from tens of
-              thousands to a few hundred thousand dollars, and is usually used
-              to build out a product and start generating revenue. <br />
-              <span className="highlighted-name">Seed</span> funding is the next
-              stage of funding, and typically comes from venture capital firms
-              or angel investors. Seed funding can range from a few hundred
-              thousand dollars to a few million dollars, and is usually used to
-              scale the business and grow the team. <br />
-              <span className="highlighted-name">Series A, B, and C </span>
-              funding rounds are later-stage funding rounds for startups that
-              have already achieved significant growth and revenue. Series A
-              funding usually ranges from $2-15 million, Series B from $10-60
-              million, and Series C from $30-100 million or more. These funding
-              rounds are used to fuel continued growth, expand into new markets,
-              and potentially prepare for an IPO or acquisition.
-            </p>
+            <div className="explanation-div">
+              <p className="explanation">
+                In the context of startups and entrepreneurship,{" "}
+                <strong>
+                  funding refers to the process of raising money to finance a new
+                  business or project
+                </strong>
+                .
+                <br />
+                <span className="highlighted-name">Pre-seed</span> funding
+                typically involves small amounts of capital raised from friends
+                and family, or from the founders' own savings. This funding is
+                usually used to develop an idea into a viable business plan and
+                prototype. <br />
+                <span className="highlighted-name">Angel</span> funding is usually
+                the first external funding raised by a startup, and comes from
+                individual investors, or groups of investors, who believe in the
+                potential of the business. This funding can range from tens of
+                thousands to a few hundred thousand dollars, and is usually used
+                to build out a product and start generating revenue. <br />
+                <span className="highlighted-name">Seed</span> funding is the next
+                stage of funding, and typically comes from venture capital firms
+                or angel investors. Seed funding can range from a few hundred
+                thousand dollars to a few million dollars, and is usually used to
+                scale the business and grow the team. <br />
+                <span className="highlighted-name">Series A, B, and C </span>
+                funding rounds are later-stage funding rounds for startups that
+                have already achieved significant growth and revenue. Series A
+                funding usually ranges from $2-15 million, Series B from $10-60
+                million, and Series C from $30-100 million or more. These funding
+                rounds are used to fuel continued growth, expand into new markets,
+                and potentially prepare for an IPO or acquisition.
+              </p>
+            </div>
           </>
         )}
         <button className="create-button" type="submit">Create project</button>

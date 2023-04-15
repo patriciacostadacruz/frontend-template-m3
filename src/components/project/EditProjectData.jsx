@@ -5,7 +5,13 @@ import { faFloppyDisk, faBan, faXmark, faPlus } from "@fortawesome/free-solid-sv
 const EditProjectData = ({ project, onUpdate, onCancel, investors }) => {
   const [selectedInvestors, setSelectedInvestors] = useState(project.investors);
   const [availableInvestors, setAvailableInvestors] = useState(
-    investors.filter((inv) => !selectedInvestors.includes(inv))
+    investors.filter((inv) => {
+      return (
+        selectedInvestors.filter((selectedInv) => {
+          return selectedInv._id === inv._id;
+        }).length === 0
+      );
+    })
   );
   const [formState, setFormState] = useState({
     title: project.title,
