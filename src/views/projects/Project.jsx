@@ -52,7 +52,7 @@ const Project = () => {
         )
       );
     } catch (error) {
-      console.error(error);
+      setErrorMessage("We could not retrieve the investors.");
     }
   }
 

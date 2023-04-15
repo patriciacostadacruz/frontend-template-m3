@@ -20,6 +20,8 @@ const Profile = () => {
   const [user, setUser] = useState(null);
   const [userProjects, setUserProjects] = useState(null);
   const [userReviews, setUserReviews] = useState(null);
+  // eslint-disable-next-line no-unused-vars
+  const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [chartData, setChartData] = useState({datasets: []});
@@ -37,7 +39,7 @@ const Profile = () => {
       setUserReviews(response.userReviews);
       setLoading(false);
     } catch (error) {
-      console.log(error)
+      setErrorMessage("We could not get your profile.");
     }
   }
 
