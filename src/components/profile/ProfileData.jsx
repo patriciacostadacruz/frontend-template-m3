@@ -67,14 +67,14 @@ const ProfileData = ({ user }) => {
             {user.email}
           </p>
           {!isEditing ? (
-            <>
+            <div className="change-pass-section">
               <p>
                 <strong>Password</strong> ********
               </p>
               <button onClick={handleEdit}>
-                <FontAwesomeIcon icon={faPenToSquare} /> Change password
+                <FontAwesomeIcon icon={faPenToSquare} />
               </button>
-            </>
+            </div>
           ) : (
             <EditPassword onUpdate={handleUpdate} onCancel={handleCancel} />
           )}

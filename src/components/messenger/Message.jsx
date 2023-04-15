@@ -91,34 +91,28 @@ const Message = ({ message, user, onDelete, onUpdate }) => {
     >
       <img src={message.sender.image} alt="Sender pic" style={style} />
       {isEditing ? (
-        <div className="message-options-dropdown" >
+        <>
           <textarea value={content} onChange={handleContentChange} />
-          <button
-            onClick={handleSave}
-            className="message-edit-buttons"
-          >
-            <FontAwesomeIcon icon={faFloppyDisk} /> Save
-          </button>
-          <button
-            onClick={handleCancel}
-            className="message-edit-buttons"
-          >
-            <FontAwesomeIcon icon={faBan} /> Cancel
-          </button>
-        </div>
+          <div className="message-options-dropdown">
+            <button onClick={handleSave} className="message-edit-buttons">
+              <FontAwesomeIcon icon={faFloppyDisk} />
+            </button>
+            <button onClick={handleCancel} className="message-edit-buttons">
+              <FontAwesomeIcon icon={faBan} />
+            </button>
+          </div>
+        </>
       ) : (
         <>
           <div className="message-details">
             <p>
               {message.sender._id === user._id && (
                 <FontAwesomeIcon icon={faCheckDouble} />
-              )}{" "}
-              {message.content}
-            </p>
-            <p className="message-date">
-              {formatMessageDate(message.createdAt)}
+              )}
+              {" "}{message.content}
             </p>
           </div>
+          <p className="message-date">{formatMessageDate(message.createdAt)}</p>
           <div className="message-options">
             {message.sender._id === user._id && (
               <FontAwesomeIcon
@@ -132,10 +126,10 @@ const Message = ({ message, user, onDelete, onUpdate }) => {
                 {message.sender._id === user._id && (
                   <>
                     <button onClick={handleDelete}>
-                      <FontAwesomeIcon icon={faTrash} /> Delete
+                      <FontAwesomeIcon icon={faTrash} />
                     </button>
                     <button onClick={handleEdit}>
-                      <FontAwesomeIcon icon={faPenToSquare} /> Edit
+                      <FontAwesomeIcon icon={faPenToSquare} />
                     </button>
                   </>
                 )}

@@ -6,6 +6,8 @@
   --light-blue: #b4c2ff;
   --light-grey: #a6a6a6;
   --placeholder: #c0c0c0;
+  --very-light-grey: #e0e0e0;
+  --very-very-light-grey: #f0f0f0;
   --base-text-color: rgb(43, 43, 43);
   --border-radius-classic: 15px;
 }
@@ -41,7 +43,8 @@
 }
 
 body {
-  margin-top: 65px;
+  margin: 80px 0 100px 0;
+  min-height: 100%;
 }
 
 /*** NAVBAR ***/
@@ -86,16 +89,15 @@ body {
 .footer {
   background-color: var(--light-grey);
   color: white;
-  position: relative;
-  bottom: 0vh;
+  position: fixed;
+  bottom: 0;
   width: 100%;
-  height: 70px;
+  height: 60px;
   padding: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
 }
 .footer-links {
   display: flex;
@@ -351,6 +353,11 @@ label {
   margin: 5px;
 }
 /* edit data form */
+.change-pass-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .edit-options {
   text-align: center;
 }
@@ -367,6 +374,7 @@ label {
   overflow: auto;
   display: flex;
   flex-direction: column;
+  gap: 15px;
 }
 
 /*** CHARTS ***/
@@ -407,7 +415,7 @@ label {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  height: 450px;
+  max-height: 450px;
   overflow: auto;
 }
 .review-card {
@@ -556,8 +564,25 @@ label {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-left: 20%;
-  margin-right: 20%;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+.project-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 30px 0;
+  box-shadow: 0px 0px 15px var(--light-grey);
+  padding: 20px;
+  border-radius: 5px;
+}
+.project-info-section {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  width: 75%;
 }
 
 /*** CONV & MESSAGES ***/
@@ -576,6 +601,7 @@ label {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  word-wrap: break-word;
 }
 .conversation {
   display: flex;
@@ -611,13 +637,23 @@ label {
   align-items: center;
   justify-content: center;
   height: 100%;
+  min-height: 100%;
+  max-width: 100%;
+  width: 100%;
+  margin-top: -25px;
 }
 .messages-container {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   width: 35%;
-  max-height: 100%;
+  max-width: 35%;
+  max-height: 65vh;
+  min-height: 65vh;
   overflow-y: auto;
+  scroll-behavior: smooth;
+  box-shadow: 0 0 20px var(--base-blue);
+  border-radius: 5px;
 }
 .recipient-name {
   font-size: 28px;
@@ -628,6 +664,7 @@ label {
 }
 .message {
   max-width: 75%;
+  min-width: 50%;
   margin: 10px;
   padding: 5px;
   border-radius: 20px;
@@ -642,13 +679,17 @@ label {
   font-size: 14px;
   float: right;
 }
+.message-details {
+  max-width: 68%;
+  word-wrap: break-word;
+}
 .sent-by-me {
   float: right;
-  background-color: #f0f0f0;
+  background-color: var(--very-very-light-grey);
 }
 .sent-by-other {
   float: left;
-  background-color: #e0e0e0;
+  background-color: var(--very-light-grey);
 }
 .sent-by-me:before,
 .sent-by-other:before {
@@ -660,7 +701,7 @@ label {
 .sent-by-me:before {
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
-  border-left: 10px solid #f0f0f0;
+  border-left: 10px solid var(--very-very-light-grey);
   right: -10px;
   top: 50%;
   transform: translateY(-50%);
@@ -668,7 +709,7 @@ label {
 .sent-by-other:before {
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
-  border-right: 10px solid #e0e0e0;
+  border-right: 10px solid var(--very-light-grey);
   left: -10px;
   top: 50%;
   transform: translateY(-50%);
@@ -677,8 +718,9 @@ label {
   border: none;
   border-top: 1px solid var(--placeholder);
   width: 35%;
-  padding: 10px;
+  padding: 5px;
   font-size: 18px;
+  height: 30px;
   margin-top: auto;
 }
 .message-input[type="text"]:focus {
@@ -693,17 +735,18 @@ label {
 }
 .message-options-dropdown {
   position: relative;
-  right: 20;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24);
-  padding: 8px 0;
-  z-index: 1;
-  min-width: 100px;
+  width: 40px;
+  right: 5px;
+  background-color: white;
+  border-radius: var(--border-radius-classic);
+  box-shadow: 0 1px 4px var(--light-grey);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .ellipsis {
   position: relative;
-  right: 5px;
   background-color: var(--light-grey);
   padding: 5px;
   border-radius: 5px;
@@ -711,11 +754,10 @@ label {
 .message-options-dropdown button {
   background-color: transparent;
   border: none;
-  padding: 8px 16px;
   width: 100%;
-  text-align: left;
-  color: #000;
-  font-size: 14px;
+  text-align: center;
+  color: var(--base-text-color);
+  font-size: 12px;
   cursor: pointer;
 }
 .message-options-dropdown button:hover {

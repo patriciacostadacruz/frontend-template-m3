@@ -25,7 +25,6 @@ const Profile = () => {
   const [loading, setLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [chartData, setChartData] = useState({datasets: []});
-  // const [selectedLabel, setSelectedLabel] = useState(null);
   const chartContainer = useRef(null);
   const { storeToken, removeToken, authenticateUser, logOutUser } =
     useContext(AuthContext);

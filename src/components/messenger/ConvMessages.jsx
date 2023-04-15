@@ -63,6 +63,7 @@ const ConvMessages = () => {
       } else {
         setNewMessage("");
         getMessages();
+        scrollToBottom();
       }
     } catch (error) {
       toast.error("Failed to send message.");
@@ -79,6 +80,7 @@ const ConvMessages = () => {
         toast.error(response.error);
       } else {
         getMessages();
+        scrollToBottom();
       }
     } catch (error) {
       toast.error("Failed to update message.");
@@ -93,6 +95,7 @@ const ConvMessages = () => {
       } else {
         getMessages();
         toast.success("Message deleted successfully!");
+        scrollToBottom();
       }
     } catch (error) {
       toast.error("Failed to delete message.");
@@ -104,6 +107,7 @@ const ConvMessages = () => {
   };
 
   useEffect(() => {
+    scrollToBottom();
     getMessages();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -112,7 +116,6 @@ const ConvMessages = () => {
     const interval = setInterval(() => {
       getMessages();
     }, 2000);
-    scrollToBottom();
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [messages]);
@@ -155,6 +158,7 @@ const ConvMessages = () => {
           "No messages to show. Start typing to exchange with this user."
         )}
       </div>
+      <div ref={messagesEndRef} />
       <input
         type="text"
         placeholder="Type your message here."
@@ -164,7 +168,6 @@ const ConvMessages = () => {
         ref={inputRef}
         className="message-input"
       />
-      <div ref={messagesEndRef} />
     </div>
   );
 }
