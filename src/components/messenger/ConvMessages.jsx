@@ -8,6 +8,7 @@ import { AuthContext } from "../../context/AuthContext";
 const ConvMessages = () => {
   const [messages, setMessages] = useState(null);
   const [newMessage, setNewMessage] = useState("");
+  const [isFirstRender, setIsFirstRender] = useState(true);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
   const { conversationId } = useParams();
@@ -61,9 +62,9 @@ const ConvMessages = () => {
       if (response.error) {
         toast.error(response.error);
       } else {
+        setIsFirstRender(true);
         setNewMessage("");
         getMessages();
-        scrollToBottom();
       }
     } catch (error) {
       toast.error("Failed to send message.");
@@ -80,7 +81,7 @@ const ConvMessages = () => {
         toast.error(response.error);
       } else {
         getMessages();
-        scrollToBottom();
+        setIsFirstRender(false);
       }
     } catch (error) {
       toast.error("Failed to update message.");
@@ -95,7 +96,7 @@ const ConvMessages = () => {
       } else {
         getMessages();
         toast.success("Message deleted successfully!");
-        scrollToBottom();
+        setIsFirstRender(false);
       }
     } catch (error) {
       toast.error("Failed to delete message.");
@@ -107,7 +108,6 @@ const ConvMessages = () => {
   };
 
   useEffect(() => {
-    scrollToBottom();
     getMessages();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -115,10 +115,17 @@ const ConvMessages = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       getMessages();
+      setIsFirstRender(false);
     }, 2000);
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [messages]);
+
+  useEffect(() => {
+    if (isFirstRender) {
+      scrollToBottom();
+    }
+  }, [messages, isFirstRender]);
 
   return (
     <div className="messages-UI">
@@ -157,8 +164,8 @@ const ConvMessages = () => {
         ) : (
           "No messages to show. Start typing to exchange with this user."
         )}
+        <div ref={messagesEndRef} />
       </div>
-      <div ref={messagesEndRef} />
       <input
         type="text"
         placeholder="Type your message here."
