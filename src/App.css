@@ -196,6 +196,11 @@ hr {
   align-items: center;
   gap: 50px;
 }
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 /*** LOG IN AND SIGN UP ***/
 
@@ -602,6 +607,9 @@ label {
   justify-content: center;
   align-items: center;
   word-wrap: break-word;
+  height: 70%;
+  max-height: 70%;
+  overflow-y: auto;
 }
 .conversation {
   display: flex;

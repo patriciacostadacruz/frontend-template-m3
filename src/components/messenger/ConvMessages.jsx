@@ -122,7 +122,7 @@ const ConvMessages = () => {
   }, [messages]);
 
   useEffect(() => {
-    if (isFirstRender) {
+    if (messages && messages.length > 6 && isFirstRender) {
       scrollToBottom();
     }
   }, [messages, isFirstRender]);
