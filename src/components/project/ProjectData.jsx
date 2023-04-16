@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import peopleCount from "../../images/peopleCount.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons"; 
+import { faLocationDot, faMagnifyingGlassDollar, faIndustry, faSpinner } from "@fortawesome/free-solid-svg-icons"; 
 
 const ProjectData = ({ project, isOwner, isInvestor }) => {
   const { user } = useContext(AuthContext);
@@ -39,17 +39,28 @@ const ProjectData = ({ project, isOwner, isInvestor }) => {
           <div className="project-info">
             <div className="project-info-section">
               <p>
-                <strong>Status</strong> {project.status}
+                <strong>
+                  <FontAwesomeIcon icon={faSpinner} /> Status{" "}
+                </strong>{" "}
+                {project.status}
               </p>
               <p>
-                <strong>Location</strong> <FontAwesomeIcon icon={faLocationDot} />{" "}
+                <strong>
+                  <FontAwesomeIcon icon={faLocationDot} /> Location{" "}
+                </strong>{" "}
                 {project.location}
               </p>
               <p>
-                <strong>Funding needed</strong> {project.fundingNeeded}
+                <strong>
+                  <FontAwesomeIcon icon={faMagnifyingGlassDollar} /> Funding
+                  needed{" "}
+                </strong>{" "}
+                {project.fundingNeeded}
               </p>
               <p>
-                <strong>Industry </strong>
+                <strong>
+                  <FontAwesomeIcon icon={faIndustry} /> Industry{" "}
+                </strong>
                 {project.industry.map((elem) => {
                   return (
                     <span
@@ -69,12 +80,20 @@ const ProjectData = ({ project, isOwner, isInvestor }) => {
                     <span key={investor._id}>
                       {(isOwner || isInvestor) && user._id === investor._id && (
                         <Link to="/profile">
-                          <img src={investor.image} style={style} alt="Avatar" />
+                          <img
+                            src={investor.image}
+                            style={style}
+                            alt="Avatar"
+                          />
                         </Link>
                       )}
                       {(isOwner || isInvestor) && user._id !== investor._id && (
                         <Link to={`/profile/${investor._id}`}>
-                          <img src={investor.image} style={style} alt="Avatar" />
+                          <img
+                            src={investor.image}
+                            style={style}
+                            alt="Avatar"
+                          />
                         </Link>
                       )}
                       {!isInvestor && !isOwner && (

@@ -6,7 +6,14 @@ import authService from "../../services/authService";
 import { AuthContext } from "../../context/AuthContext";
 import linkedin from "../../images/linkedin.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faUserCheck } from "@fortawesome/free-solid-svg-icons"; 
+import {
+  faPenToSquare,
+  faUserCheck,
+  faEnvelope,
+  faKey,
+  faQuoteLeft,
+  faQuoteRight,
+} from "@fortawesome/free-solid-svg-icons"; 
 
 const ProfileData = ({ user }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -63,13 +70,18 @@ const ProfileData = ({ user }) => {
             )}
           </div>
           <p>
-            <strong>Email </strong>
+            <strong>
+              <FontAwesomeIcon icon={faEnvelope} />{" "}
+            </strong>
             {user.email}
           </p>
           {!isEditing ? (
             <div className="change-pass-section">
               <p>
-                <strong>Password</strong> ********
+                <strong>
+                  <FontAwesomeIcon icon={faKey} />
+                </strong>{" "}
+                Password ********
               </p>
               <button onClick={handleEdit}>
                 <FontAwesomeIcon icon={faPenToSquare} />
@@ -92,16 +104,22 @@ const ProfileData = ({ user }) => {
             <strong>Industry </strong>
             {user.industry.map((elem) => {
               return (
-                <span
-                  key={user.industry.indexOf(elem)}
-                  className="industry-tag"
-                >
-                  {elem}
-                </span>
+                <div>
+                  <span
+                    key={user.industry.indexOf(elem)}
+                    className="industry-tag"
+                  >
+                    {elem}
+                  </span>
+                  <br />
+                </div>
               );
             })}
           </p>
-          <p className="bio">"{user.bio}"</p>
+          <p className="bio">
+            <FontAwesomeIcon icon={faQuoteLeft} /> {user.bio}{" "}
+            <FontAwesomeIcon icon={faQuoteRight} />{" "}
+          </p>
         </div>
       </div>
     </>

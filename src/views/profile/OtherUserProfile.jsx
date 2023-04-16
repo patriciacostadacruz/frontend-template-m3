@@ -10,7 +10,7 @@ import reviewService from "../../services/reviewServices";
 import messengerServices from "../../services/messengerServices";
 import linkedin from "../../images/linkedin.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComments, faStar, faUserCheck } from "@fortawesome/free-solid-svg-icons"; 
+import { faComments, faStar, faUserCheck, faEnvelope, faQuoteLeft, faQuoteRight } from "@fortawesome/free-solid-svg-icons"; 
 
 const OtherUserProfile = () => {
   const [otherUser, setOtherUser] = useState(null);
@@ -108,7 +108,9 @@ const OtherUserProfile = () => {
                 )}
               </div>
               <p>
-                <strong>Email </strong>
+                <strong>
+                  <FontAwesomeIcon icon={faEnvelope} />{" "}
+                </strong>
                 {otherUser.email}
               </p>
               <p>
@@ -125,16 +127,22 @@ const OtherUserProfile = () => {
                 <strong>Industry </strong>
                 {otherUser.industry.map((elem) => {
                   return (
-                    <span
-                      key={otherUser.industry.indexOf(elem)}
-                      className="industry-tag"
-                    >
-                      {elem}
-                    </span>
+                    <>
+                      <span
+                        key={otherUser.industry.indexOf(elem)}
+                        className="industry-tag"
+                      >
+                        {elem}
+                      </span>
+                      <br />
+                    </>
                   );
                 })}
               </p>
-              <p>"{otherUser.bio}"</p>
+              <p>
+                <FontAwesomeIcon icon={faQuoteLeft} /> {otherUser.bio}{" "}
+                <FontAwesomeIcon icon={faQuoteRight} />
+              </p>
             </div>
           </div>
           <div className="profile-options">

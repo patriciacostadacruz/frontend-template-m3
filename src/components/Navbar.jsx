@@ -12,10 +12,13 @@ const Navbar = () => {
   return (
     <div className="navbar-container">
       <ul className="navbar-items">
-        <img className="navbar-app-logo" src={whiteLogoBlackLetter} alt="" />
         <li>
           <NavLink to="/" className="navbar-options">
-            Home
+            <img
+              className="navbar-app-logo"
+              src={whiteLogoBlackLetter}
+              alt=""
+            />
           </NavLink>
         </li>
         {!isLoggedIn && (
@@ -70,11 +73,15 @@ const Navbar = () => {
         )}
         {isLoggedIn && (
           <li>
-            <button onClick={() => logOutUser()} className="logout-button"><FontAwesomeIcon icon={faRightFromBracket} /></button>
+            <button onClick={() => logOutUser()} className="logout-button">
+              <FontAwesomeIcon icon={faRightFromBracket} />
+            </button>
           </li>
         )}
       </ul>
-      <button className="go-back-button" onClick={() => navigate(-1)}>Go back</button>
+      <button className="go-back-button" onClick={() => navigate(-1)}>
+        Go back
+      </button>
     </div>
   );
 }

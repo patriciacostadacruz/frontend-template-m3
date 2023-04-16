@@ -356,6 +356,7 @@ label {
   border-radius: 5px;
   padding: 2px 5px;
   margin: 5px;
+  line-height: 40px;
 }
 /* edit data form */
 .change-pass-section {

@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMagnifyingGlass,
   faCheckDouble,
-  faArrowsRotate
+  faRotateRight
 } from "@fortawesome/free-solid-svg-icons"; 
 
 const Conversations = () => {
@@ -119,7 +119,9 @@ const Conversations = () => {
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>
-            <button type="button" onClick={handleRefresh}><FontAwesomeIcon icon={faArrowsRotate} /> Reload conversations</button>
+            <button type="button" onClick={handleRefresh}>
+              <FontAwesomeIcon icon={faRotateRight} /> Reload conversations
+            </button>
             <div className="conv-summary">
               {filteredConversations.map((conversation) => {
                 const otherUser = getOtherUser(conversation);
