@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFloppyDisk, faBan } from "@fortawesome/free-solid-svg-icons"; 
 
 const EditProfileData = ({ user, onUpdate, onCancel }) => {
-  const style = { height: "300px", width: "300px", objectFit: "cover" };
+  const style = { height: "300px", width: "300px", objectFit: "cover", display: "block", marginLeft: "auto", marginRight: "auto" };
   const [formState, setFormState] = useState({
     firstName: user.firstName,
     lastName: user.lastName,

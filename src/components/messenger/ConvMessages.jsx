@@ -1,22 +1,24 @@
 import { useState, useEffect, useContext, useRef } from "react";
-import { useParams, Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import Message from "./Message";
 import messengerServices from "../../services/messengerServices";
 import { AuthContext } from "../../context/AuthContext";
 
-const ConvMessages = () => {
+const ConvMessages = ({ convId }) => {
   const [messages, setMessages] = useState(null);
   const [newMessage, setNewMessage] = useState("");
   const [isFirstRender, setIsFirstRender] = useState(true);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
-  const { conversationId } = useParams();
+  const paramsConvId = useParams;
   const { user } = useContext(AuthContext);
 
   const getMessages = async () => {
     try {
-      const response = await messengerServices.getConvMessages(conversationId);
+      let id;
+      convId ? id = convId : id = paramsConvId;
+      const response = await messengerServices.getConvMessages(id);
       if (response.error) {
         toast.error(response.error);
       } else {
@@ -50,12 +52,12 @@ const ConvMessages = () => {
     try {
       const conversations = await messengerServices.getConversations();
       const thisConversation = conversations.filter((conversation) => {
-        return conversation._id === conversationId;
+        return conversation._id === convId;
       });
       let recipientId = thisConversation[0].users.find((elem) => {
         return elem._id !== user._id;
       })._id;
-      const response = await messengerServices.sendMessage(conversationId, {
+      const response = await messengerServices.sendMessage(convId, {
         recipientId,
         content: newMessage,
       });
