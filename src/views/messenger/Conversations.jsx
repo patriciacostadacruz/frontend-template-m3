@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
+import toast from "react-hot-toast";
 import Loading from "../../components/Loading";
 import messengerServices from "../../services/messengerServices";
 import { AuthContext } from "../../context/AuthContext";
@@ -89,6 +90,16 @@ const Conversations = () => {
     window.location.reload(false);
   }
 
+  // function created to warn user fetching conv can take some time - to be a loading component in the future
+  const handleLoadingWarning = () => {
+    toast(
+      "We are fetching this conversation for you, it might take a few seconds. Do not navigate to another page in the meantime.",
+      {
+        icon: "✋",
+      }
+    );
+  }
+
   useEffect(() => {
     getConversations();
   }, []);
@@ -116,6 +127,7 @@ const Conversations = () => {
                   <Link
                     to={`/conversations/${conversation._id}`}
                     key={`${conversation._id}2`}
+                    onClick={handleLoadingWarning}
                     className="conversation"
                   >
                     <div>

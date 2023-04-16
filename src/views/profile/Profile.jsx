@@ -24,6 +24,7 @@ const Profile = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+
   const [chartData, setChartData] = useState({datasets: []});
   const chartContainer = useRef(null);
   const { storeToken, removeToken, authenticateUser, logOutUser } =
@@ -180,14 +181,17 @@ const Profile = () => {
           )}
         </div>
       </div>
-      <hr />
-      <h3>What people think about you</h3>
+      {userReviews && userReviews.length > 0 && (
+        <div>
+          <hr />
+          <h3>Here's what people think about you</h3>
+        </div>
+      )}
       <div className="profile-reviews">
         {userReviews && userReviews.length > 0
-          ? userReviews.map((review) => {
+          && userReviews.map((review) => {
               return <ReviewCard review={review} key={`${review._id}1`} />;
-            })
-          : "You haven't been reviewed by other users yet."}
+            })}
       </div>
     </div>
   );

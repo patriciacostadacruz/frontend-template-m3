@@ -20,7 +20,7 @@ import ConvMessages from './components/messenger/ConvMessages';
 function App() {
   return (
     <div className="App">
-      <Toaster />
+      <Toaster position="bottom-right" reverseOrder={false} />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

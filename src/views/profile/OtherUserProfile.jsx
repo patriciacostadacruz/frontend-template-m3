@@ -165,14 +165,18 @@ const OtherUserProfile = () => {
                 })
               : "This user has no active projects."}
           </div>
-          <hr />
-          <h3>Here's what people think about {otherUser.firstName}</h3>
+          {otherUserReviews && otherUserReviews.length > 0 && (
+            <div>
+              <hr />
+              <h3>Here's what people think about {otherUser.firstName}</h3>
+            </div>
+          )}
           <div className="profile-reviews">
-            {otherUserReviews.length > 0
-              ? otherUserReviews.map((review) => {
-                  return <ReviewCard review={review} key={`${review._id}1`} />;
-                })
-              : "This user has no ratings."}
+            {otherUserReviews &&
+              otherUserReviews.length > 0 &&
+              otherUserReviews.map((review) => {
+                return <ReviewCard review={review} key={`${review._id}1`} />;
+              })}
           </div>
         </>
       )}

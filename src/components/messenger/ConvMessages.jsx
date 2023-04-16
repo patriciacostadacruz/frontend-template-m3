@@ -176,7 +176,8 @@ const ConvMessages = () => {
         onKeyDown={handleKeyDown}
         ref={inputRef}
         className="message-input"
-      /><FontAwesomeIcon icon={faPaperPlane} className="send-icon"/>
+      />
+      <FontAwesomeIcon icon={faPaperPlane} className="send-icon" onClick={handleSendMessage}/>
     </div>
   );
 }
