@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { Link, Outlet } from "react-router-dom";
 import Loading from "../../components/Loading";
 import messengerServices from "../../services/messengerServices";
 import { AuthContext } from "../../context/AuthContext";
@@ -6,14 +7,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMagnifyingGlass,
   faCheckDouble,
+  faArrowsRotate
 } from "@fortawesome/free-solid-svg-icons"; 
-import ConvMessages from "../../components/messenger/ConvMessages";
 
 const Conversations = () => {
   const [loading, setLoading] = useState(true);
   const [conversations, setConversations] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [convId, setConvId] = useState(null);
   const [search, setSearch] = useState("");
   const { user } = useContext(AuthContext);
   const style = {
@@ -29,7 +29,6 @@ const Conversations = () => {
       const conversations = await messengerServices.getConversations();
       setConversations(conversations);
       setLoading(false);
-      setConvId(conversations[0]._id);
     } catch (error) {
       setErrorMessage("Failed to fetch conversations");
       setLoading(false);
@@ -43,12 +42,15 @@ const Conversations = () => {
     const isActive = conversation.users.map(
       (user) => user.status !== "inactive"
     );
-    const hasMessages = conversation.messages[0] ? true : false;
     return (
       (firstName.includes(searchLowerCase) ||
         lastName.includes(searchLowerCase)) &&
-      isActive && hasMessages
+      isActive
     );
+  }).sort((a,b) => {
+    const first = new Date(a.messages[0]?.createdAt)
+    const second = new Date(b.messages[0]?.createdAt);
+    return second - first;
   });
 
   const formatMessageDate = (date) => {
@@ -83,8 +85,8 @@ const Conversations = () => {
     );
   };
 
-  const handleShowConv = (convId) => {
-    setConvId(convId);
+  const handleRefresh = () => {
+    window.location.reload(false);
   }
 
   useEffect(() => {
@@ -106,48 +108,60 @@ const Conversations = () => {
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>
-            {filteredConversations.map((conversation) => {
-              const otherUser = getOtherUser(conversation);
-              return (
-                <div
-                  key={`${conversation._id}2`}
-                  className="conversation"
-                  onClick={() => handleShowConv(conversation._id)}
-                >
-                  <div>
-                    <img
-                      style={style}
-                      src={otherUser.image}
-                      alt="Small avatar"
-                    />
-                  </div>
-                  <div className="conversation-last-message">
-                    <div className="conversation-header">
-                      <p>
-                        <strong>
-                          {otherUser.firstName} {otherUser.lastName}
-                        </strong>
-                      </p>
-                      <p>
-                        {formatMessageDate(conversation.messages[0].createdAt)}
-                      </p>
+            <button type="button" onClick={handleRefresh}><FontAwesomeIcon icon={faArrowsRotate} /> Reload conversations</button>
+            <div className="conv-summary">
+              {filteredConversations.map((conversation) => {
+                const otherUser = getOtherUser(conversation);
+                return (
+                  <Link
+                    to={`/conversations/${conversation._id}`}
+                    key={`${conversation._id}2`}
+                    className="conversation"
+                  >
+                    <div>
+                      <img
+                        style={style}
+                        src={otherUser.image}
+                        alt="Small avatar"
+                      />
                     </div>
-                    <p className="message-preview">
-                      {lastMessageSentByCurrentUser(conversation) && (
-                        <FontAwesomeIcon icon={faCheckDouble} />
-                      )}{" "}
-                      {/* always displays last messsage because of how it is sorted when pulled form DB */}
-                      {conversation.messages[0].content}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
+                    <div className="conversation-last-message">
+                      <div className="conversation-header">
+                        <p>
+                          <strong>
+                            {otherUser.firstName} {otherUser.lastName}
+                          </strong>
+                        </p>
+                        {conversation.messages[0] && (
+                          <p>
+                            {formatMessageDate(
+                              conversation.messages[0].createdAt
+                            )}
+                          </p>
+                        )}
+                      </div>
+                      {conversation.messages[0] && (
+                        <p className="message-preview">
+                          {lastMessageSentByCurrentUser(conversation) && (
+                            <FontAwesomeIcon icon={faCheckDouble} />
+                          )}{" "}
+                          {/* always displays last messsage because of how it is sorted when pulled form DB */}
+                          {conversation.messages[0].content}
+                        </p>
+                      )}
+                      {!conversation.messages[0] && (
+                        <p style={{ fontWeight: "normal" }}>
+                          No message to show.
+                        </p>
+                      )}
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         ) : null}
-        {!loading && filteredConversations.length > 0 && (
-          <ConvMessages convId={convId} />
-        )}
+        <Outlet />
         {filteredConversations && filteredConversations.length < 1 && (
           <p>No conversations to display.</p>
         )}

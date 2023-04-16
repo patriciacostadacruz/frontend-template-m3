@@ -4,21 +4,21 @@ import toast from "react-hot-toast";
 import Message from "./Message";
 import messengerServices from "../../services/messengerServices";
 import { AuthContext } from "../../context/AuthContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
-const ConvMessages = ({ convId }) => {
+const ConvMessages = () => {
   const [messages, setMessages] = useState(null);
   const [newMessage, setNewMessage] = useState("");
   const [isFirstRender, setIsFirstRender] = useState(true);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
-  const paramsConvId = useParams;
+  const { conversationId } = useParams();
   const { user } = useContext(AuthContext);
 
   const getMessages = async () => {
     try {
-      let id;
-      convId ? id = convId : id = paramsConvId;
-      const response = await messengerServices.getConvMessages(id);
+      const response = await messengerServices.getConvMessages(conversationId);
       if (response.error) {
         toast.error(response.error);
       } else {
@@ -52,12 +52,12 @@ const ConvMessages = ({ convId }) => {
     try {
       const conversations = await messengerServices.getConversations();
       const thisConversation = conversations.filter((conversation) => {
-        return conversation._id === convId;
+        return conversation._id === conversationId;
       });
       let recipientId = thisConversation[0].users.find((elem) => {
         return elem._id !== user._id;
       })._id;
-      const response = await messengerServices.sendMessage(convId, {
+      const response = await messengerServices.sendMessage(conversationId, {
         recipientId,
         content: newMessage,
       });
@@ -127,7 +127,7 @@ const ConvMessages = ({ convId }) => {
     if (messages && messages.length > 6 && isFirstRender) {
       scrollToBottom();
     }
-  }, [messages, isFirstRender]);
+  }, [messages, conversationId, isFirstRender]);
 
   return (
     <div className="messages-UI">
@@ -176,7 +176,7 @@ const ConvMessages = ({ convId }) => {
         onKeyDown={handleKeyDown}
         ref={inputRef}
         className="message-input"
-      />
+      /><FontAwesomeIcon icon={faPaperPlane} className="send-icon"/>
     </div>
   );
 }

@@ -95,7 +95,7 @@ const Project = () => {
           toast.success(
             "Start exchanging with this user by sending a message."
           );
-          navigate(`/messages/${conversation._id}`);
+          navigate(`/conversations/${conversation._id}`);
         }
       }
     } catch (error) {

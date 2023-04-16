@@ -73,7 +73,7 @@ const OtherUserProfile = () => {
         return;
        } else {
         toast.success("Start exchanging with this user by sending a message.");
-        navigate(`/messages/${conversation._id}`);
+        navigate(`/conversations/${conversation._id}`);
        }
      } catch (error) {
        toast.error("We cannot create this conversation. The user might be inactive.");

@@ -81,15 +81,16 @@ function App() {
               <Conversations />
             </IsPrivate>
           }
-        />
-        <Route
-          path="/messages/:conversationId"
-          element={
-            <IsPrivate>
-              <ConvMessages />
-            </IsPrivate>
-          }
-        />
+        >
+          <Route
+            path="/conversations/:conversationId"
+            element={
+              <IsPrivate>
+                <ConvMessages />
+              </IsPrivate>
+            }
+          />
+        </Route>
         <Route path="*" element={<ErrorPath />} />
       </Routes>
       <Footer />
