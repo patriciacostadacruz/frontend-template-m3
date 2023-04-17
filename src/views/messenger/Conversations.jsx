@@ -109,7 +109,7 @@ const Conversations = () => {
       {loading && <Loading />}
       <div className="conv-section">
         {errorMessage && <p>{errorMessage}</p>}
-        {!loading && filteredConversations.length > 0 ? (
+        {!loading && (
           <div className="conv-container">
             <div className="search-conv">
               <FontAwesomeIcon icon={faMagnifyingGlass} />{" "}
@@ -174,11 +174,11 @@ const Conversations = () => {
               })}
             </div>
           </div>
-        ) : null}
-        <Outlet />
+        )}
         {filteredConversations && filteredConversations.length < 1 && (
           <p>No conversations to display.</p>
         )}
+        <Outlet />
       </div>
     </>
   );

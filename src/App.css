@@ -643,6 +643,13 @@ label {
   font-weight: normal;
 }
 /* chat itself */
+.chat-text {
+  padding: 40px;
+  text-align: justify;
+  margin-top: 35%;
+  color: var(--base-blue);
+  font-weight: bold;
+}
 .messages-UI {
   display: flex;
   flex-direction: column;

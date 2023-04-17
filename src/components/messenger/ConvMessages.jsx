@@ -164,7 +164,7 @@ const ConvMessages = () => {
             ))}
           </div>
         ) : (
-          "No messages to show. Start typing to exchange with this user."
+          <p className="chat-text">No messages to show. Start typing to exchange with this user.</p>
         )}
         <div ref={messagesEndRef} />
       </div>
