@@ -54,7 +54,6 @@ npm run start
 - User can see a page with all his/her messages listed
 - User can also see a chat UI with all messages per conversation
 - User can see a graph is his/her profile with metrics based on project status
-- App is responsive
 
 ---
 

@@ -420,7 +420,7 @@ label {
 .profile-reviews {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   max-height: 450px;
   overflow: auto;

@@ -172,11 +172,11 @@ const Conversations = () => {
                   </Link>
                 );
               })}
+            {filteredConversations && filteredConversations.length < 1 && (
+              <p>No conversations to display.</p>
+            )}
             </div>
           </div>
-        )}
-        {filteredConversations && filteredConversations.length < 1 && (
-          <p>No conversations to display.</p>
         )}
         <Outlet />
       </div>

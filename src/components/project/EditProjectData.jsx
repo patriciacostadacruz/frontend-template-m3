@@ -249,6 +249,18 @@ const EditProjectData = ({ project, onUpdate, onCancel, investors }) => {
             </select>
           </div>
         </div>
+        <div className="proj-section">
+          <label>Description</label>
+          <textarea
+            type="text"
+            rows="18"
+            cols="30"
+            required
+            name="description"
+            value={formState.description}
+            onChange={handleInputChange}
+          />
+        </div>
         <div>
           <div className="proj-section">
             <label>Investors</label>

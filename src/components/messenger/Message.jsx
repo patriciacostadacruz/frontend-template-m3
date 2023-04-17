@@ -7,8 +7,8 @@ const Message = ({ message, user, onDelete, onUpdate }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [content, setContent] = useState(message.content);
   const style = {
-    height: "50px",
-    width: "50px",
+    height: "40px",
+    width: "40px",
     objectFit: "cover",
     borderRadius: "50px",
   };
