@@ -51,6 +51,7 @@ const Project = () => {
           (investor) => investor._id.toString() === user._id.toString()
         )
       );
+      setErrorMessage(null);
     } catch (error) {
       setErrorMessage("We could not retrieve the investors.");
     }
